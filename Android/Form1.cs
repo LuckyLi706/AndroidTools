@@ -25,10 +25,11 @@ namespace Android
             }
         }
 
+        //第一个选项卡adb命令
         //获取包名
         private void btn_packagename_Click(object sender, EventArgs e)
         {
-            string value = Command_adb.getPhoneInfo(Path.adb_path, "shell dumpsys activity");
+            string value = Command.getPhoneInfo(tb_info,Path.adb_path, "shell dumpsys activity");
             string[] values = value.Split('\n');
             for (int i = 0; i < values.Length; i++) {
                 if (values[i].Contains("mFocusedActivity")) {
@@ -39,7 +40,7 @@ namespace Android
                 }
                 if (values[i].Contains("error"))
                 {
-                    tb_info.Text = showInfo(values[i]);
+                    tb_info.Text = showInfo(values[i])+ "\r\n";
                     return;
                 }
             }
@@ -48,17 +49,17 @@ namespace Android
         //获取顶级Activity
         private void btn_topactivity_Click(object sender, EventArgs e)
         {
-            string value = Command_adb.getPhoneInfo(Path.adb_path, "shell dumpsys activity");
+            string value = Command.getPhoneInfo(tb_info,Path.adb_path, "shell dumpsys activity");
             string[] values = value.Split('\n');
             for (int i = 0; i < values.Length; i++)
             {
                 if (values[i].Contains("mFocusedActivity"))
                 {
-                    tb_info.Text = showInfo(values[i].TrimStart());
+                    tb_info.Text = showInfo(values[i].TrimStart()) + "\r\n";
                     return ;
                 }
                 if (values[i].Contains("error")) {
-                    tb_info.Text = showInfo(values[i]);
+                    tb_info.Text = showInfo(values[i]) + "\r\n";
                     return;
                 }
             }
@@ -80,10 +81,10 @@ namespace Android
             }
             else {
                 tb_apk_path.Text = Path.desktop_path;
-                string value = Command_adb.getPhoneInfo(Path.adb_path, "install "+tb_apk_name.Text+".apk",Path.desktop_path);
-                tb_info.AppendText(showInfo("安装路径:"+Path.desktop_path));
+                string value = Command.getPhoneInfo(tb_info, Path.adb_path, "install "+tb_apk_name.Text+".apk",Path.desktop_path);
+                tb_info.AppendText(showInfo("安装路径:"+Path.desktop_path) + "\r\n");
                 tb_info.AppendText("\r\n");
-                tb_info.AppendText(showInfo(value));
+                tb_info.AppendText(showInfo(value) + "\r\n");
             }
         }
 
@@ -95,8 +96,8 @@ namespace Android
                 MessageBox.Show("请获取包名或手动输入包名");
             }
             else {
-                string value = Command_adb.getPhoneInfo(Path.adb_path, "uninstall " + tb_packagename.Text);
-                tb_info.AppendText(showInfo(value));
+                string value = Command.getPhoneInfo(tb_info, Path.adb_path, "uninstall " + tb_packagename.Text);
+                tb_info.AppendText(showInfo(value) + "\r\n");
             }
         }
 
@@ -109,39 +110,56 @@ namespace Android
             }
             else
             {
-                string value = Command_adb.getPhoneInfo(Path.adb_path, "shell pm clear " + tb_packagename.Text);
-                tb_info.AppendText(showInfo(value));
+                string value = Command.getPhoneInfo(tb_info, Path.adb_path, "shell pm clear " + tb_packagename.Text);
+                tb_info.AppendText(showInfo(value) + "\r\n");
             }
         }
 
         //截屏
         private void btn_screen_shot_Click(object sender, EventArgs e)
         {
-            string value = Command_adb.getPhoneInfo(Path.adb_path, "shell /system/bin/screencap -p /sdcard/screenshot.png");
-            tb_info.AppendText(showInfo(value));
+            string value = Command.getPhoneInfo(tb_info, Path.adb_path, "shell /system/bin/screencap -p /sdcard/screenshot.png");
+            tb_info.AppendText(showInfo(value) + "\r\n");
             tb_info.AppendText("\r\n");
-            string value1 = Command_adb.getPhoneInfo(Path.adb_path, "pull /sdcard/screenshot.png "+ Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory));
-            tb_info.AppendText(showInfo(value1));
+            string value1 = Command.getPhoneInfo(tb_info, Path.adb_path, "pull /sdcard/screenshot.png "+ Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory));
+            tb_info.AppendText(showInfo(value1) + "\r\n");
         }
 
         //重启手机
         private void btn_restart_Click(object sender, EventArgs e)
         {
-            string value = Command_adb.getPhoneInfo(Path.adb_path, "reboot");
-            tb_info.AppendText(showInfo(value));
+            string value = Command.getPhoneInfo(tb_info, Path.adb_path, "reboot");
+            tb_info.AppendText(showInfo(value) + "\r\n");
         }
 
         //重启到fastboot模式
         private void btn_start_fastboot_Click(object sender, EventArgs e)
         {
-            string value = Command_adb.getPhoneInfo(Path.adb_path, "reboot bootloader");
-            tb_info.AppendText(showInfo(value));
+            string value = Command.getPhoneInfo(tb_info, Path.adb_path, "reboot bootloader");
+            tb_info.AppendText(showInfo(value) + "\r\n");
         }
 
         private string showInfo(string info) {
             return ">>>> " + info;
         }
 
-        
+
+        //第三个反编译选项卡
+        //apktool来反编译apk
+        private void btn_apktool_Click(object sender, EventArgs e)
+        {
+            string value = Command.getApkTool(tb_info_3, Path.apktool_path, " d " + tb_apk_name_3.Text + ".apk -o"+Path.app_path+"/work");
+            MessageBox.Show(value);
+        }
+
+        //选项卡切换事件
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab.Name == "tabPage3")
+            {
+                string value=File.ReadAllText(Path.app_path + "introduce.txt");
+                tb_info_3.Text = value;
+            }
+        }
     }
 }

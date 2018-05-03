@@ -13,5 +13,7 @@ namespace Android
         public static string desktop_path= Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 
         public static string adb_path = app_path + "android_adb//adb.exe";
+
+        public static string apktool_path = app_path + "apktool//apktool.bat";
     }
 }
