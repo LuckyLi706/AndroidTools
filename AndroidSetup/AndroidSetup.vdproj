@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_94FC2F2CE55A42DEBE11857E5B8EFB23"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_9EA8534841E0706E538FF3CB09FFF4E9"
         "OwnerKey" = "8:_DB24F80FB9D9415DA184F9C7A5AD7E6C"
         "MsmSig" = "8:_UNDEFINED"
@@ -23,12 +29,6 @@
         {
         "MsmKey" = "8:_A2FCA795B823311D6A8D3069373DC993"
         "OwnerKey" = "8:_9EA8534841E0706E538FF3CB09FFF4E9"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B97F2A3370454ED8BF788E72F939E8F9"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -46,7 +46,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A2FCA795B823311D6A8D3069373DC993"
+        "OwnerKey" = "8:_DB24F80FB9D9415DA184F9C7A5AD7E6C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F810F5E1E24B0EE70CD5FE6CE29084A4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -58,13 +64,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_DB24F80FB9D9415DA184F9C7A5AD7E6C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F810F5E1E24B0EE70CD5FE6CE29084A4"
+        "OwnerKey" = "8:_A2FCA795B823311D6A8D3069373DC993"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -124,6 +124,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
     }
@@ -154,6 +162,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_94FC2F2CE55A42DEBE11857E5B8EFB23"
+            {
+            "SourcePath" = "8:..\\android_adb.zip"
+            "TargetName" = "8:android_adb.zip"
+            "Tag" = "8:"
+            "Folder" = "8:_52CEFB6D0C234F9BA26D212E97B06509"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9EA8534841E0706E538FF3CB09FFF4E9"
             {
             "AssemblyRegister" = "3:1"
@@ -214,26 +242,6 @@
             "Register" = "3:1"
             "Exclude" = "11:TRUE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B97F2A3370454ED8BF788E72F939E8F9"
-            {
-            "SourcePath" = "8:Debug\\android_adb.zip"
-            "TargetName" = "8:android_adb.zip"
-            "Tag" = "8:"
-            "Folder" = "8:_52CEFB6D0C234F9BA26D212E97B06509"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F810F5E1E24B0EE70CD5FE6CE29084A4"
