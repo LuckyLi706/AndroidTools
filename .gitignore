@@ -5,4 +5,7 @@
 /.vs
 /Android/obj/Debug
 /Android/obj/Release
+/Android/bin/Debug
+/AndroidSetup/Debug
+
 

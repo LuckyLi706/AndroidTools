@@ -20,7 +20,8 @@ namespace Android
             tb_apk_path.Text = Path.desktop_path;
 
             if (File.Exists(Path.app_path + "android_adb.zip")) {
-                ZipFile.ExtractToDirectory(@"e:\test\test.zip", @"e:\test"); //解压
+               System.IO.Compression.ZipFile.ExtractToDirectory(Path.app_path+"android_adb.zip", Path.app_path+"android_adb");
+               File.Delete(Path.app_path+"android_adb.zip");
             }
         }
 
