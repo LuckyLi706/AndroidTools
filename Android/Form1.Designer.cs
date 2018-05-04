@@ -51,6 +51,7 @@
             this.tb_apk_name_3 = new System.Windows.Forms.TextBox();
             this.btn_apktool = new System.Windows.Forms.Button();
             this.tb_info_3 = new System.Windows.Forms.TextBox();
+            this.btn_enjarify = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -59,7 +60,6 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Alignment = System.Windows.Forms.TabAlignment.Bottom;
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
@@ -76,7 +76,7 @@
             // 
             this.tabPage1.Controls.Add(this.panel2);
             this.tabPage1.Controls.Add(this.tb_info);
-            this.tabPage1.Location = new System.Drawing.Point(4, 4);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(726, 410);
@@ -242,7 +242,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 4);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(726, 410);
@@ -252,11 +252,12 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.btn_enjarify);
             this.tabPage3.Controls.Add(this.label2);
             this.tabPage3.Controls.Add(this.tb_apk_name_3);
             this.tabPage3.Controls.Add(this.btn_apktool);
             this.tabPage3.Controls.Add(this.tb_info_3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 4);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(726, 410);
             this.tabPage3.TabIndex = 2;
@@ -301,6 +302,16 @@
             this.tb_info_3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tb_info_3.Size = new System.Drawing.Size(487, 403);
             this.tb_info_3.TabIndex = 0;
+            // 
+            // btn_enjarify
+            // 
+            this.btn_enjarify.Location = new System.Drawing.Point(494, 35);
+            this.btn_enjarify.Name = "btn_enjarify";
+            this.btn_enjarify.Size = new System.Drawing.Size(229, 23);
+            this.btn_enjarify.TabIndex = 4;
+            this.btn_enjarify.Text = "enjarify(需要python3)";
+            this.btn_enjarify.UseVisualStyleBackColor = true;
+            this.btn_enjarify.Click += new System.EventHandler(this.btn_enjarify_Click);
             // 
             // Form1
             // 
@@ -349,6 +360,7 @@
         private System.Windows.Forms.TextBox tb_apk_name_3;
         private System.Windows.Forms.Button btn_apktool;
         private System.Windows.Forms.TextBox tb_info_3;
+        private System.Windows.Forms.Button btn_enjarify;
     }
 }
 

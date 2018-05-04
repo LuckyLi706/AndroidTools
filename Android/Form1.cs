@@ -129,15 +129,17 @@ namespace Android
         //重启手机
         private void btn_restart_Click(object sender, EventArgs e)
         {
-            string value = Command.getPhoneInfo(tb_info, Path.adb_path, "reboot");
-            tb_info.AppendText(showInfo(value) + "\r\n");
-        }
+            CommandThread command = new CommandThread(tb_info, Path.adb_path, "reboot");
+            Thread thread = new Thread(command.startTask);
+            thread.Start();
+         }
 
         //重启到fastboot模式
         private void btn_start_fastboot_Click(object sender, EventArgs e)
         {
-            string value = Command.getPhoneInfo(tb_info, Path.adb_path, "reboot bootloader");
-            tb_info.AppendText(showInfo(value) + "\r\n");
+            CommandThread command = new CommandThread(tb_info, Path.adb_path, "reboot bootloader");
+            Thread thread = new Thread(command.startTask);
+            thread.Start();
         }
 
         private string showInfo(string info) {
@@ -155,10 +157,15 @@ namespace Android
         }
 
         public void startThread() {
-             Command.SortInputListText(tb_info_3, Path.apktool_path, " d " + tb_apk_name_3.Text + ".apk -o" + Path.app_path + "/work/"+tb_apk_name_3.Text);
-
+            //Command.getInfoByCommand(tb_info_3, Path.apktool_path, " d " + tb_apk_name_3.Text + ".apk -o" + Path.app_path + "/work/"+tb_apk_name_3.Text);
+            Command.getInfoByCommand(tb_info_3, Path.enjarify_path, "1.apk");
         }
 
+        private void btn_enjarify_Click(object sender, EventArgs e)
+        {
+            Thread thread = new Thread(new ThreadStart(startThread));
+            thread.Start();
+        }
         //选项卡切换事件
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -168,5 +175,7 @@ namespace Android
                 tb_info_3.Text = value;
             }
         }
+
+        
     }
 }

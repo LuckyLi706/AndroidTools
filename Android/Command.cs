@@ -77,7 +77,7 @@ namespace Android
         private static string sortOutput = null;
         private static TextBox textBox;
         private static int numOutputLines = 0;
-        public static void SortInputListText(TextBox textbox, string path, string command, string workpath = "")
+        public static void getInfoByCommand(TextBox textbox, string path, string command, string workpath = "")
         {
             // Initialize the process and its StartInfo properties.
             // The sort command is a console application that

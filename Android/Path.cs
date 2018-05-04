@@ -15,5 +15,7 @@ namespace Android
         public static string adb_path = app_path + "android_adb//adb.exe";
 
         public static string apktool_path = app_path + "apktool//apktool.bat";
+
+        public static string enjarify_path = app_path + "enjarify//enjarify.bat";
     }
 }
