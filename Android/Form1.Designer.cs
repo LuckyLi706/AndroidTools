@@ -297,6 +297,8 @@
             this.tb_info_3.Location = new System.Drawing.Point(0, 4);
             this.tb_info_3.Multiline = true;
             this.tb_info_3.Name = "tb_info_3";
+            this.tb_info_3.ReadOnly = true;
+            this.tb_info_3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tb_info_3.Size = new System.Drawing.Size(487, 403);
             this.tb_info_3.TabIndex = 0;
             // 

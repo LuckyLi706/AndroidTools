@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,7 +19,7 @@ namespace Android
         {
             InitializeComponent();
             tb_apk_path.Text = Path.desktop_path;
-
+            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
             if (File.Exists(Path.app_path + "android_adb.zip")) {
                System.IO.Compression.ZipFile.ExtractToDirectory(Path.app_path+"android_adb.zip", Path.app_path+"android_adb");
                File.Delete(Path.app_path+"android_adb.zip");
@@ -148,8 +149,14 @@ namespace Android
         //apktool来反编译apk
         private void btn_apktool_Click(object sender, EventArgs e)
         {
-            string value = Command.getApkTool(tb_info_3, Path.apktool_path, " d " + tb_apk_name_3.Text + ".apk -o"+Path.app_path+"/work");
-            MessageBox.Show(value);
+            Thread thread = new Thread(new ThreadStart(startThread));
+            thread.Start();
+            //MessageBox.Show(value);
+        }
+
+        public void startThread() {
+             Command.SortInputListText(tb_info_3, Path.apktool_path, " d " + tb_apk_name_3.Text + ".apk -o" + Path.app_path + "/work/"+tb_apk_name_3.Text);
+
         }
 
         //选项卡切换事件
