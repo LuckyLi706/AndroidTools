@@ -47,11 +47,17 @@
             this.tb_info = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tb_dex2jar = new System.Windows.Forms.TextBox();
+            this.btn_dex2jar = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btn_enjarify = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.tb_apk_name_3 = new System.Windows.Forms.TextBox();
             this.btn_apktool = new System.Windows.Forms.Button();
             this.tb_info_3 = new System.Windows.Forms.TextBox();
-            this.btn_enjarify = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -252,6 +258,11 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label4);
+            this.tabPage3.Controls.Add(this.tb_dex2jar);
+            this.tabPage3.Controls.Add(this.btn_dex2jar);
+            this.tabPage3.Controls.Add(this.label3);
+            this.tabPage3.Controls.Add(this.textBox1);
             this.tabPage3.Controls.Add(this.btn_enjarify);
             this.tabPage3.Controls.Add(this.label2);
             this.tabPage3.Controls.Add(this.tb_apk_name_3);
@@ -263,6 +274,58 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "反编译";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(673, 75);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.TabIndex = 9;
+            this.label4.Text = ".jar";
+            // 
+            // tb_dex2jar
+            // 
+            this.tb_dex2jar.Location = new System.Drawing.Point(575, 67);
+            this.tb_dex2jar.Name = "tb_dex2jar";
+            this.tb_dex2jar.Size = new System.Drawing.Size(100, 21);
+            this.tb_dex2jar.TabIndex = 8;
+            // 
+            // btn_dex2jar
+            // 
+            this.btn_dex2jar.Location = new System.Drawing.Point(494, 65);
+            this.btn_dex2jar.Name = "btn_dex2jar";
+            this.btn_dex2jar.Size = new System.Drawing.Size(75, 23);
+            this.btn_dex2jar.TabIndex = 7;
+            this.btn_dex2jar.Text = "dex2jar";
+            this.btn_dex2jar.UseVisualStyleBackColor = true;
+            this.btn_dex2jar.Click += new System.EventHandler(this.btn_dex2jar_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(673, 45);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.TabIndex = 6;
+            this.label3.Text = ".apk";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(575, 37);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.TabIndex = 5;
+            // 
+            // btn_enjarify
+            // 
+            this.btn_enjarify.Location = new System.Drawing.Point(494, 35);
+            this.btn_enjarify.Name = "btn_enjarify";
+            this.btn_enjarify.Size = new System.Drawing.Size(74, 23);
+            this.btn_enjarify.TabIndex = 4;
+            this.btn_enjarify.Text = "enjarify";
+            this.btn_enjarify.UseVisualStyleBackColor = true;
+            this.btn_enjarify.Click += new System.EventHandler(this.btn_enjarify_Click);
             // 
             // label2
             // 
@@ -303,15 +366,9 @@
             this.tb_info_3.Size = new System.Drawing.Size(487, 403);
             this.tb_info_3.TabIndex = 0;
             // 
-            // btn_enjarify
+            // openFileDialog1
             // 
-            this.btn_enjarify.Location = new System.Drawing.Point(494, 35);
-            this.btn_enjarify.Name = "btn_enjarify";
-            this.btn_enjarify.Size = new System.Drawing.Size(229, 23);
-            this.btn_enjarify.TabIndex = 4;
-            this.btn_enjarify.Text = "enjarify(需要python3)";
-            this.btn_enjarify.UseVisualStyleBackColor = true;
-            this.btn_enjarify.Click += new System.EventHandler(this.btn_enjarify_Click);
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -361,6 +418,12 @@
         private System.Windows.Forms.Button btn_apktool;
         private System.Windows.Forms.TextBox tb_info_3;
         private System.Windows.Forms.Button btn_enjarify;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox tb_dex2jar;
+        private System.Windows.Forms.Button btn_dex2jar;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

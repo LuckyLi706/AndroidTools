@@ -1,3 +1,11 @@
 apktool
 版本：2.3.3 
 官网：https://ibotpeaches.github.io/Apktool/documentation/
+
+enjarify(需要电脑装python3)
+谷歌官方将apk或者dex转为jar文件的工具
+地址：https://github.com/google/enjarify.git
+
+dex2jar(2.0)
+将dex转化为jar的工具
+地址：https://sourceforge.net/projects/dex2jar/

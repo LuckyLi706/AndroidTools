@@ -38,12 +38,12 @@ namespace Android
             p.StartInfo.RedirectStandardError = true;
             p.StartInfo.CreateNoWindow = true;
             p.Start();
-            textbox.Text = ">>>> adb " + command+" 命令开始" + "\r\n";
+            //textbox.Text = ">>>> adb " + command+" 命令开始" + "\r\n";
             string value = p.StandardOutput.ReadToEnd()+p.StandardError.ReadToEnd();
             return value;
         }
 
-
+        static Process sortProcess;
         public static string getApkTool(TextBox textbox, string path, string command, string workpath = "1")
         {
 
@@ -83,9 +83,10 @@ namespace Android
             // The sort command is a console application that
             // reads and sorts text input.
 
-            Process sortProcess;
+            //Process sortProcess;
             sortProcess = new Process();
             sortProcess.StartInfo.FileName = path;
+            Console.WriteLine(path);
             sortProcess.StartInfo.Arguments = command;
             sortProcess.StartInfo.WorkingDirectory = Path.desktop_path;
 
@@ -134,6 +135,7 @@ namespace Android
                 sortOutput=(Environment.NewLine +
                     "[" + numOutputLines.ToString() + "] - " + outLine.Data);
                 textBox.AppendText(sortOutput);
+                getPhoneInfo(null, "cmd.exe", "exit");
             }
         }
 
@@ -149,6 +151,7 @@ namespace Android
                 sortOutput = (">> "+Environment.NewLine +
                     "[" + numOutputLines.ToString() + "] - " + outLine.Data);
                 textBox.AppendText(sortOutput);
+
             }
         }
     }

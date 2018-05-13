@@ -13,7 +13,7 @@ namespace Android
         private string command;
         private TextBox tb;
 
-        public CommandThread(TextBox tb,string command,string path) {
+        public CommandThread(TextBox tb,string path,string command) {
             this.tb = tb;
             this.command = command;
             this.path = path;

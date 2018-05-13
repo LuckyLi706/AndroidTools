@@ -69,24 +69,24 @@ namespace Android
         //安装应用
         private void btn_install_apk_Click(object sender, EventArgs e)
         {
-
-            if (tb_apk_name.Text == null || tb_apk_name.Text.Equals(""))
+            openFileDialog1.InitialDirectory = Path.desktop_path;            // 这里是初始的路径名
+            openFileDialog1.Filter = "apk|*.apk|所有文件|*.*";  //设置打开文件的类型
+            openFileDialog1.RestoreDirectory = true;              //设置是否还原当前目录
+            openFileDialog1.FilterIndex = 0;                      //设置打开文件类型的索引
+            string path = "";                                     //用于保存打开文件的路径
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                MessageBox.Show("请输入apk名字");
-                return;
+                path = openFileDialog1.FileName;
+                if (!path.Substring(path.Length - 3).Equals("apk")) {
+                    MessageBox.Show("请选择apk文件");
+                }                           
             }
-            if (tb_apk_path.Text == null || tb_apk_path.Text.Equals(""))
-            {
-                MessageBox.Show("apk路径不能为空");
-                return;
-            }
-            else {
-                tb_apk_path.Text = Path.desktop_path;
-                string value = Command.getPhoneInfo(tb_info, Path.adb_path, "install "+tb_apk_name.Text+".apk",Path.desktop_path);
-                tb_info.AppendText(showInfo("安装路径:"+Path.desktop_path) + "\r\n");
-                tb_info.AppendText("\r\n");
-                tb_info.AppendText(showInfo(value) + "\r\n");
-            }
+            MessageBox.Show(path.Split('/')[path.Split('/').Length - 1]);
+            Command.getInfoByCommand(tb_info, Path.adb_path, "install "+path,"1");
+           // tb_info.AppendText(showInfo("安装路径:"+Path.desktop_path) + "\r\n");
+           // tb_info.AppendText("\r\n");
+           // tb_info.AppendText(showInfo(value) + "\r\n");
+            
         }
 
         //卸载应用
@@ -166,6 +166,13 @@ namespace Android
             Thread thread = new Thread(new ThreadStart(startThread));
             thread.Start();
         }
+
+        private void btn_dex2jar_Click(object sender, EventArgs e)
+        {
+            CommandThread command = new CommandThread(tb_info_3, Path.dex2jar_path, tb_dex2jar.Text+".jar");
+            Thread thread = new Thread(command.startTask);
+            thread.Start();
+        }
         //选项卡切换事件
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -175,7 +182,6 @@ namespace Android
                 tb_info_3.Text = value;
             }
         }
-
         
     }
 }

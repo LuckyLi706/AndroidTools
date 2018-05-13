@@ -17,5 +17,7 @@ namespace Android
         public static string apktool_path = app_path + "apktool//apktool.bat";
 
         public static string enjarify_path = app_path + "enjarify//enjarify.bat";
+
+        public static string dex2jar_path = app_path + "dex2jar//d2j-dex2jar.bat";
     }
 }
