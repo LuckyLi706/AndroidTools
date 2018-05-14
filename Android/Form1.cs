@@ -18,7 +18,6 @@ namespace Android
         public Form1()
         {
             InitializeComponent();
-            tb_apk_path.Text = Path.desktop_path;
             System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
             if (File.Exists(Path.app_path + "android_adb.zip")) {
                System.IO.Compression.ZipFile.ExtractToDirectory(Path.app_path+"android_adb.zip", Path.app_path+"android_adb");
@@ -27,10 +26,40 @@ namespace Android
         }
 
         //第一个选项卡adb命令
+
+        //获取所有设备名
+        private void btn_getdevice_Click(object sender, EventArgs e)
+        {
+            string value = Command.getPhoneInfo(tb_info, Path.adb_path, "devices");
+            string[] values = value.Split('\n');
+            cb_devices.Items.Clear();
+            for (int i = 1; i < values.Length; i++)
+            {
+                if (values[i].Contains("device"))
+                {
+                    value = values[i].Replace("device", "").Replace(" ", "").Trim();
+                    cb_devices.Items.Add(value);
+                }
+            }
+            cb_devices.SelectedIndex = 0;
+        }
+
         //获取包名
         private void btn_packagename_Click(object sender, EventArgs e)
         {
-            string value = Command.getPhoneInfo(tb_info,Path.adb_path, "shell dumpsys activity");
+            int validate_Device = isDevices();
+            string value = "";
+            if (validate_Device == 1)
+            {
+                value = Command.getPhoneInfo(tb_info, Path.adb_path, "shell dumpsys activity");
+            }
+            if (validate_Device == 2) {
+                value = Command.getPhoneInfo(tb_info, Path.adb_path, "-s "+cb_devices.Text+" shell dumpsys activity");
+            }
+            if (validate_Device == 3) {
+                MessageBox.Show("请获取设备名");
+                return;
+            }
             string[] values = value.Split('\n');
             for (int i = 0; i < values.Length; i++) {
                 if (values[i].Contains("mFocusedActivity")) {
@@ -50,7 +79,22 @@ namespace Android
         //获取顶级Activity
         private void btn_topactivity_Click(object sender, EventArgs e)
         {
-            string value = Command.getPhoneInfo(tb_info,Path.adb_path, "shell dumpsys activity");
+            int validate_Device = isDevices();
+            string value = "";
+            if (validate_Device == 1)
+            {
+                value = Command.getPhoneInfo(tb_info, Path.adb_path, "shell dumpsys activity");
+
+            }
+            if (validate_Device == 2)
+            {
+                value = Command.getPhoneInfo(tb_info, Path.adb_path, "-s " + cb_devices.Text + " shell dumpsys activity");
+            }
+            if (validate_Device == 3)
+            {
+                MessageBox.Show("请获取设备名");
+                return;
+            }
             string[] values = value.Split('\n');
             for (int i = 0; i < values.Length; i++)
             {
@@ -74,19 +118,39 @@ namespace Android
             openFileDialog1.RestoreDirectory = true;              //设置是否还原当前目录
             openFileDialog1.FilterIndex = 0;                      //设置打开文件类型的索引
             string path = "";                                     //用于保存打开文件的路径
-            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            DialogResult result = openFileDialog1.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
             {
                 path = openFileDialog1.FileName;
-                if (!path.Substring(path.Length - 3).Equals("apk")) {
+                if (!path.Substring(path.Length - 3).Equals("apk"))
+                {
                     MessageBox.Show("请选择apk文件");
-                }                           
+                    return;
+                }
             }
-            MessageBox.Show(path.Split('/')[path.Split('/').Length - 1]);
-            Command.getInfoByCommand(tb_info, Path.adb_path, "install "+path,"1");
-           // tb_info.AppendText(showInfo("安装路径:"+Path.desktop_path) + "\r\n");
-           // tb_info.AppendText("\r\n");
-           // tb_info.AppendText(showInfo(value) + "\r\n");
-            
+            else if (result == System.Windows.Forms.DialogResult.Cancel) {
+                MessageBox.Show("什么也没选择");
+                return;
+            }
+            int validate_Device = isDevices();
+            if (validate_Device == 1)
+            {
+                CommandThread command = new CommandThread(tb_info, Path.adb_path, "install " + path);
+                Thread thread = new Thread(command.startTask);
+                thread.Start();
+
+            }
+            if (validate_Device == 2)
+            {
+                CommandThread command = new CommandThread(tb_info, Path.adb_path, "-s " + cb_devices.Text+" install " + path);
+                Thread thread = new Thread(command.startTask);
+                thread.Start();
+            }
+            if (validate_Device == 3)
+            {
+                MessageBox.Show("请获取设备名");
+                return;
+            }
         }
 
         //卸载应用
@@ -182,6 +246,29 @@ namespace Android
                 tb_info_3.Text = value;
             }
         }
-        
+
+        private void cbox_devices_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbox_devices.Checked)
+            {
+                btn_getdevice.Enabled = true;
+                cb_devices.Enabled = true;
+            }
+            else {
+                btn_getdevice.Enabled = false;
+                cb_devices.Enabled = false;
+                cb_devices.Items.Clear();
+            }
+        }
+
+        private int isDevices() {
+            if (!cbox_devices.Checked) {
+                return 1;
+            }
+            else if ((cbox_devices.Checked && !cb_devices.Text.Equals(""))) {
+                 return 2;
+            }
+            return 3;
+        }
     }
 }
