@@ -31,6 +31,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btn_push = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cbox_devices = new System.Windows.Forms.CheckBox();
             this.cb_devices = new System.Windows.Forms.ComboBox();
@@ -44,60 +46,74 @@
             this.btn_install_apk = new System.Windows.Forms.Button();
             this.btn_clear_data = new System.Windows.Forms.Button();
             this.btn_unstall_apk = new System.Windows.Forms.Button();
-            this.tb_info = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label4 = new System.Windows.Forms.Label();
-            this.tb_dex2jar = new System.Windows.Forms.TextBox();
-            this.btn_dex2jar = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.btn_enjarify = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tb_apk_name_3 = new System.Windows.Forms.TextBox();
-            this.btn_apktool = new System.Windows.Forms.Button();
-            this.tb_info_3 = new System.Windows.Forms.TextBox();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.tb_info = new System.Windows.Forms.TextBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.其他功能ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cl_screen = new System.Windows.Forms.ToolStripMenuItem();
+            this.opencmd = new System.Windows.Forms.ToolStripMenuItem();
+            this.help = new System.Windows.Forms.ToolStripMenuItem();
+            this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(13, 12);
+            this.tabControl1.Location = new System.Drawing.Point(471, 12);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(760, 437);
+            this.tabControl1.Size = new System.Drawing.Size(319, 437);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.panel2);
-            this.tabPage1.Controls.Add(this.tb_info);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(752, 411);
+            this.tabPage1.Size = new System.Drawing.Size(311, 411);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "ADB命令";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.groupBox3);
             this.panel2.Controls.Add(this.groupBox2);
-            this.panel2.Location = new System.Drawing.Point(456, 6);
+            this.panel2.Location = new System.Drawing.Point(6, 7);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(293, 398);
             this.panel2.TabIndex = 3;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btn_push);
+            this.groupBox3.Location = new System.Drawing.Point(7, 178);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(277, 100);
+            this.groupBox3.TabIndex = 14;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "pull和push";
+            // 
+            // btn_push
+            // 
+            this.btn_push.Location = new System.Drawing.Point(7, 21);
+            this.btn_push.Name = "btn_push";
+            this.btn_push.Size = new System.Drawing.Size(75, 23);
+            this.btn_push.TabIndex = 0;
+            this.btn_push.Text = "push";
+            this.btn_push.UseVisualStyleBackColor = true;
+            this.btn_push.Click += new System.EventHandler(this.btn_push_Click);
             // 
             // groupBox2
             // 
@@ -240,142 +256,76 @@
             this.btn_unstall_apk.UseVisualStyleBackColor = true;
             this.btn_unstall_apk.Click += new System.EventHandler(this.btn_unstall_apk_Click);
             // 
-            // tb_info
-            // 
-            this.tb_info.BackColor = System.Drawing.SystemColors.InfoText;
-            this.tb_info.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_info.ForeColor = System.Drawing.SystemColors.Info;
-            this.tb_info.Location = new System.Drawing.Point(7, 3);
-            this.tb_info.Multiline = true;
-            this.tb_info.Name = "tb_info";
-            this.tb_info.ReadOnly = true;
-            this.tb_info.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tb_info.Size = new System.Drawing.Size(442, 401);
-            this.tb_info.TabIndex = 0;
-            // 
             // tabPage2
             // 
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(752, 410);
+            this.tabPage2.Size = new System.Drawing.Size(311, 411);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "其他命令";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
+            // tb_info
             // 
-            this.tabPage3.Controls.Add(this.label4);
-            this.tabPage3.Controls.Add(this.tb_dex2jar);
-            this.tabPage3.Controls.Add(this.btn_dex2jar);
-            this.tabPage3.Controls.Add(this.label3);
-            this.tabPage3.Controls.Add(this.textBox1);
-            this.tabPage3.Controls.Add(this.btn_enjarify);
-            this.tabPage3.Controls.Add(this.label2);
-            this.tabPage3.Controls.Add(this.tb_apk_name_3);
-            this.tabPage3.Controls.Add(this.btn_apktool);
-            this.tabPage3.Controls.Add(this.tb_info_3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(752, 410);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "反编译";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tb_info.BackColor = System.Drawing.SystemColors.InfoText;
+            this.tb_info.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_info.ForeColor = System.Drawing.SystemColors.Info;
+            this.tb_info.Location = new System.Drawing.Point(2, 34);
+            this.tb_info.Multiline = true;
+            this.tb_info.Name = "tb_info";
+            this.tb_info.ReadOnly = true;
+            this.tb_info.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tb_info.Size = new System.Drawing.Size(467, 411);
+            this.tb_info.TabIndex = 0;
             // 
-            // label4
+            // menuStrip1
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(673, 75);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
-            this.label4.TabIndex = 9;
-            this.label4.Text = ".jar";
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.其他功能ToolStripMenuItem,
+            this.help});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(789, 25);
+            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // tb_dex2jar
+            // 其他功能ToolStripMenuItem
             // 
-            this.tb_dex2jar.Location = new System.Drawing.Point(575, 67);
-            this.tb_dex2jar.Name = "tb_dex2jar";
-            this.tb_dex2jar.Size = new System.Drawing.Size(100, 21);
-            this.tb_dex2jar.TabIndex = 8;
+            this.其他功能ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cl_screen,
+            this.opencmd});
+            this.其他功能ToolStripMenuItem.Name = "其他功能ToolStripMenuItem";
+            this.其他功能ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
+            this.其他功能ToolStripMenuItem.Text = "其他功能";
             // 
-            // btn_dex2jar
+            // cl_screen
             // 
-            this.btn_dex2jar.Location = new System.Drawing.Point(494, 65);
-            this.btn_dex2jar.Name = "btn_dex2jar";
-            this.btn_dex2jar.Size = new System.Drawing.Size(75, 23);
-            this.btn_dex2jar.TabIndex = 7;
-            this.btn_dex2jar.Text = "dex2jar";
-            this.btn_dex2jar.UseVisualStyleBackColor = true;
-            this.btn_dex2jar.Click += new System.EventHandler(this.btn_dex2jar_Click);
+            this.cl_screen.Name = "cl_screen";
+            this.cl_screen.Size = new System.Drawing.Size(152, 22);
+            this.cl_screen.Text = "清屏";
+            this.cl_screen.Click += new System.EventHandler(this.cl_screen_Click);
             // 
-            // label3
+            // opencmd
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(673, 45);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
-            this.label3.TabIndex = 6;
-            this.label3.Text = ".apk";
+            this.opencmd.Name = "opencmd";
+            this.opencmd.Size = new System.Drawing.Size(152, 22);
+            this.opencmd.Text = "打开cmd";
+            this.opencmd.Click += new System.EventHandler(this.opencmd_Click);
             // 
-            // textBox1
+            // help
             // 
-            this.textBox1.Location = new System.Drawing.Point(575, 37);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
-            this.textBox1.TabIndex = 5;
+            this.help.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.关于ToolStripMenuItem});
+            this.help.Name = "help";
+            this.help.Size = new System.Drawing.Size(44, 21);
+            this.help.Text = "帮助";
             // 
-            // btn_enjarify
+            // 关于ToolStripMenuItem
             // 
-            this.btn_enjarify.Location = new System.Drawing.Point(494, 35);
-            this.btn_enjarify.Name = "btn_enjarify";
-            this.btn_enjarify.Size = new System.Drawing.Size(74, 23);
-            this.btn_enjarify.TabIndex = 4;
-            this.btn_enjarify.Text = "enjarify";
-            this.btn_enjarify.UseVisualStyleBackColor = true;
-            this.btn_enjarify.Click += new System.EventHandler(this.btn_enjarify_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(673, 13);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 12);
-            this.label2.TabIndex = 3;
-            this.label2.Text = ".apk";
-            // 
-            // tb_apk_name_3
-            // 
-            this.tb_apk_name_3.Location = new System.Drawing.Point(575, 5);
-            this.tb_apk_name_3.Name = "tb_apk_name_3";
-            this.tb_apk_name_3.Size = new System.Drawing.Size(100, 21);
-            this.tb_apk_name_3.TabIndex = 2;
-            // 
-            // btn_apktool
-            // 
-            this.btn_apktool.Location = new System.Drawing.Point(493, 5);
-            this.btn_apktool.Name = "btn_apktool";
-            this.btn_apktool.Size = new System.Drawing.Size(75, 23);
-            this.btn_apktool.TabIndex = 1;
-            this.btn_apktool.Text = "apktool";
-            this.btn_apktool.UseVisualStyleBackColor = true;
-            this.btn_apktool.Click += new System.EventHandler(this.btn_apktool_Click);
-            // 
-            // tb_info_3
-            // 
-            this.tb_info_3.BackColor = System.Drawing.SystemColors.InfoText;
-            this.tb_info_3.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_info_3.ForeColor = System.Drawing.SystemColors.Window;
-            this.tb_info_3.Location = new System.Drawing.Point(0, 4);
-            this.tb_info_3.Multiline = true;
-            this.tb_info_3.Name = "tb_info_3";
-            this.tb_info_3.ReadOnly = true;
-            this.tb_info_3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tb_info_3.Size = new System.Drawing.Size(487, 403);
-            this.tb_info_3.TabIndex = 0;
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
+            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.关于ToolStripMenuItem.Text = "关于";
             // 
             // Form1
             // 
@@ -383,17 +333,21 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(789, 461);
             this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tb_info);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -416,22 +370,18 @@
         private System.Windows.Forms.Button btn_screen_shot;
         private System.Windows.Forms.Button btn_restart;
         private System.Windows.Forms.Button btn_start_fastboot;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox tb_apk_name_3;
-        private System.Windows.Forms.Button btn_apktool;
-        private System.Windows.Forms.TextBox tb_info_3;
-        private System.Windows.Forms.Button btn_enjarify;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox tb_dex2jar;
-        private System.Windows.Forms.Button btn_dex2jar;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ComboBox cb_devices;
         private System.Windows.Forms.Button btn_getdevice;
         private System.Windows.Forms.CheckBox cbox_devices;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button btn_push;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 其他功能ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cl_screen;
+        private System.Windows.Forms.ToolStripMenuItem opencmd;
+        private System.Windows.Forms.ToolStripMenuItem help;
+        private System.Windows.Forms.ToolStripMenuItem 关于ToolStripMenuItem;
     }
 }
 

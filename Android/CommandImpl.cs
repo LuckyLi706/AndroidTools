@@ -21,7 +21,7 @@ using System.Windows.Forms;
  **/
 namespace Android
 {
-    class Command
+    class CommandImpl
     {
         //获取手机的信息
         public static string getPhoneInfo(TextBox textbox,string path,string command,string workpath="1") {
@@ -135,7 +135,7 @@ namespace Android
                 sortOutput=(Environment.NewLine +
                     "[" + numOutputLines.ToString() + "] - " + outLine.Data);
                 textBox.AppendText(sortOutput);
-                getPhoneInfo(null, "cmd.exe", "exit");
+              //  getPhoneInfo(null, "cmd.exe", "exit");
             }
         }
 

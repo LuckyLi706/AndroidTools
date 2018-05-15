@@ -20,7 +20,7 @@ namespace Android
         }
 
         public void startTask() {
-            Command.getInfoByCommand(tb,path,command);
+            CommandImpl.getInfoByCommand(tb,path,command);
         }
     }
 }
