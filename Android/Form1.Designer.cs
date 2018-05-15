@@ -32,6 +32,8 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cb_root = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.btn_push = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cbox_devices = new System.Windows.Forms.CheckBox();
@@ -54,6 +56,8 @@
             this.opencmd = new System.Windows.Forms.ToolStripMenuItem();
             this.help = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cb_path = new System.Windows.Forms.CheckBox();
+            this.tb_path = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -97,6 +101,10 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.tb_path);
+            this.groupBox3.Controls.Add(this.cb_path);
+            this.groupBox3.Controls.Add(this.cb_root);
+            this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.btn_push);
             this.groupBox3.Location = new System.Drawing.Point(7, 178);
             this.groupBox3.Name = "groupBox3";
@@ -105,9 +113,31 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "pull和push";
             // 
+            // cb_root
+            // 
+            this.cb_root.AutoSize = true;
+            this.cb_root.Location = new System.Drawing.Point(6, 22);
+            this.cb_root.Name = "cb_root";
+            this.cb_root.Size = new System.Drawing.Size(192, 16);
+            this.cb_root.TabIndex = 2;
+            this.cb_root.Text = "开启root（需要手机已经root）";
+            this.cb_root.UseVisualStyleBackColor = true;
+            this.cb_root.CheckedChanged += new System.EventHandler(this.cb_root_CheckedChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Red;
+            this.label1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(87, 48);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(182, 14);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "默认路径：/data/local/tmp";
+            // 
             // btn_push
             // 
-            this.btn_push.Location = new System.Drawing.Point(7, 21);
+            this.btn_push.Location = new System.Drawing.Point(6, 44);
             this.btn_push.Name = "btn_push";
             this.btn_push.Size = new System.Drawing.Size(75, 23);
             this.btn_push.TabIndex = 0;
@@ -302,14 +332,14 @@
             // cl_screen
             // 
             this.cl_screen.Name = "cl_screen";
-            this.cl_screen.Size = new System.Drawing.Size(152, 22);
+            this.cl_screen.Size = new System.Drawing.Size(125, 22);
             this.cl_screen.Text = "清屏";
             this.cl_screen.Click += new System.EventHandler(this.cl_screen_Click);
             // 
             // opencmd
             // 
             this.opencmd.Name = "opencmd";
-            this.opencmd.Size = new System.Drawing.Size(152, 22);
+            this.opencmd.Size = new System.Drawing.Size(125, 22);
             this.opencmd.Text = "打开cmd";
             this.opencmd.Click += new System.EventHandler(this.opencmd_Click);
             // 
@@ -327,6 +357,25 @@
             this.关于ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.关于ToolStripMenuItem.Text = "关于";
             // 
+            // cb_path
+            // 
+            this.cb_path.AutoSize = true;
+            this.cb_path.Location = new System.Drawing.Point(6, 78);
+            this.cb_path.Name = "cb_path";
+            this.cb_path.Size = new System.Drawing.Size(84, 16);
+            this.cb_path.TabIndex = 3;
+            this.cb_path.Text = "自定义路径";
+            this.cb_path.UseVisualStyleBackColor = true;
+            this.cb_path.CheckedChanged += new System.EventHandler(this.cb_path_CheckedChanged);
+            // 
+            // tb_path
+            // 
+            this.tb_path.Enabled = false;
+            this.tb_path.Location = new System.Drawing.Point(90, 72);
+            this.tb_path.Name = "tb_path";
+            this.tb_path.Size = new System.Drawing.Size(179, 21);
+            this.tb_path.TabIndex = 4;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -342,6 +391,7 @@
             this.tabPage1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -382,6 +432,10 @@
         private System.Windows.Forms.ToolStripMenuItem opencmd;
         private System.Windows.Forms.ToolStripMenuItem help;
         private System.Windows.Forms.ToolStripMenuItem 关于ToolStripMenuItem;
+        private System.Windows.Forms.CheckBox cb_root;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tb_path;
+        private System.Windows.Forms.CheckBox cb_path;
     }
 }
 

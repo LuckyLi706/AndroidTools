@@ -74,6 +74,17 @@ namespace Android
         //pull信息
         private void btn_push_Click(object sender, EventArgs e)
         {
+            if (cb_path.Checked) {
+                if (tb_path.Text == null || tb_path.Text.Equals(""))
+                {
+                    MessageBox.Show("请输入路径");
+                    return;
+                }
+                else {
+                    Command.push(isDevices(), tb_info, cb_devices,tb_path.Text);
+                    return;
+                }
+            }
             Command.push(isDevices(), tb_info, cb_devices);
         }
 
@@ -153,6 +164,24 @@ namespace Android
             p.Start();
 
 
+        }
+
+        private void cb_root_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_root.Checked) {
+                Command.root();
+            }
+        }
+
+        private void cb_path_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_path.Checked)
+            {
+                tb_path.Enabled = true;
+            }
+            else {
+                tb_path.Enabled = false;
+            }
         }
     }
 }

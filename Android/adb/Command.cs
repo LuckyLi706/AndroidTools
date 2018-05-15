@@ -213,7 +213,7 @@ namespace Android.adb
             }
         }
 
-        public static void push(int validate_Device, TextBox tb_info, ComboBox cb_devices) {
+        public static void push(int validate_Device, TextBox tb_info, ComboBox cb_devices,String phone_path="") {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.InitialDirectory = Path.desktop_path;            // 这里是初始的路径名
             openFileDialog1.Filter = "所有文件|*.*";  //设置打开文件的类型
@@ -232,13 +232,28 @@ namespace Android.adb
             }
             if (validate_Device == 1)
             {
-                CommandThread command = new CommandThread(tb_info, Path.adb_path, "push " + path+" data/local/tmp");
+                CommandThread command=null;
+                if (phone_path.Equals(""))
+                {
+                    command = new CommandThread(tb_info, Path.adb_path, "push " + path + " data/local/tmp");
+                }
+                else {
+                    command = new CommandThread(tb_info, Path.adb_path, "push " + path +" "+phone_path);
+                }
                 Thread thread = new Thread(command.startTask);
                 thread.Start();
             }
             if (validate_Device == 2)
             {
-                CommandThread command = new CommandThread(tb_info, Path.adb_path, "-s " + cb_devices.Text + "push " + path + " data/local/tmp");
+                CommandThread command = null;
+                if (phone_path.Equals(""))
+                {
+                    command = new CommandThread(tb_info, Path.adb_path, "-s " + cb_devices.Text + "push " + path + " data/local/tmp");
+                }
+                else
+                {
+                    command = new CommandThread(tb_info, Path.adb_path, "-s " + cb_devices.Text + "push " + path + " " + phone_path);
+                }
                 Thread thread = new Thread(command.startTask);
                 thread.Start();
             }
@@ -247,6 +262,10 @@ namespace Android.adb
                 MessageBox.Show("请获取设备名");
                 return;
             }
+        }
+
+        public static void root() {
+            CommandImpl.getPhoneInfo(null,Path.adb_path,"root");
         }
     }
 }
