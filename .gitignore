@@ -9,5 +9,5 @@
 /AndroidSetup/Debug
 /Android.sln
 /Android/.vs
-/Android/bin/Debug
+/Android/bin/Debug/*
 

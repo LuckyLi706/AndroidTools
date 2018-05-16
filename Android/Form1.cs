@@ -71,7 +71,7 @@ namespace Android
             Command.shotScreen(isDevices(), tb_packagename, tb_info, cb_devices);
         }
 
-        //pull信息
+        //push信息
         private void btn_push_Click(object sender, EventArgs e)
         {
             if (cb_path.Checked) {
@@ -86,6 +86,26 @@ namespace Android
                 }
             }
             Command.push(isDevices(), tb_info, cb_devices);
+        }
+
+        //pull信息
+        private void btn_pull_Click(object sender, EventArgs e)
+        {
+            if (tb_pull_path.Text == null || tb_pull_path.Text.Equals(""))
+            {
+                MessageBox.Show("请输入手机路径");
+            }
+            else {
+                if ((cb_file.Text == null || cb_file.Text.Equals("")))
+                {
+                    MessageBox.Show("请选择文件");
+                    Command.getAllFile(isDevices(), tb_pull_path.Text, cb_file, tb_info);
+                }
+                else {
+                    Command.pull(isDevices(), tb_info, cb_devices, tb_pull_path.Text + '/' + cb_file.Text+" ");
+                }
+
+            }
         }
 
         //重启手机
@@ -182,6 +202,11 @@ namespace Android
             else {
                 tb_path.Enabled = false;
             }
+        }
+
+        private void tb_pull_path_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

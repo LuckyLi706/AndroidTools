@@ -264,6 +264,70 @@ namespace Android.adb
             }
         }
 
+        public static void pull(int validate_Device, TextBox tb_info, ComboBox cb_devices, String file_path = "")
+        {
+            
+            if (validate_Device == 1)
+            {
+                CommandThread command = null;
+                string file_paths = file_path.Replace('\n',' ');
+                MessageBox.Show(file_paths);
+                MessageBox.Show("pull " + file_path + Path.desktop_path);
+                MessageBox.Show("pull " + "data/local/tmp/2.apk "  + Path.desktop_path);
+                command = new CommandThread(tb_info, Path.adb_path, ("pull "+file_path));
+                Thread thread = new Thread(command.startTask);
+                thread.Start();
+            }
+            if (validate_Device == 2)
+            {
+                CommandThread command = null;
+                //command = new CommandThread(tb_info, Path.adb_path, "-s " + cb_devices.Text + "push " + path + " " + phone_path);
+                Thread thread = new Thread(command.startTask);
+                thread.Start();
+            }
+            if (validate_Device == 3)
+            {
+                MessageBox.Show("请获取设备名");
+                return;
+            }
+        }
+
+        public static void getAllFile(int validate_Device,String path,ComboBox cb_file,TextBox tb_info) {
+            if (validate_Device == 1)
+            {
+                String files=CommandImpl.getPhoneInfo(null,Path.adb_path,"shell ls "+path);
+                if (files.Contains("error"))
+                {
+                    tb_info.AppendText(files);
+                }
+                else {
+                    if (files.Contains("Permission denied"))
+                    {
+                        tb_info.AppendText(files);
+                    }
+                    else {
+                        string[] values = files.Split('\n');
+                        cb_file.Items.Clear();
+                        for (int i = 1; i < values.Length; i++)
+                        {
+                            cb_file.Items.Add(values[i]);
+                        }
+                        cb_file.SelectedIndex = 0;
+                    }
+                }
+                
+            }
+            if (validate_Device == 2)
+            {
+                //String files = CommandImpl.getPhoneInfo(null, Path.adb_path, "-s " + cb_devices.Text+"shell " + path + " ls");
+            }
+            if (validate_Device == 3)
+            {
+                MessageBox.Show("请获取设备名");
+                return;
+            }
+        }
+
         public static void root() {
             CommandImpl.getPhoneInfo(null,Path.adb_path,"root");
         }

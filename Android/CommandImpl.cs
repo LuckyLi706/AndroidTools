@@ -29,6 +29,7 @@ namespace Android
             Process p = new Process();
             p.StartInfo.FileName = path;
             p.StartInfo.Arguments = command;
+            MessageBox.Show(command);
             if (!workpath.Equals("1")) {
                 p.StartInfo.WorkingDirectory = Path.desktop_path;
             }
@@ -38,7 +39,7 @@ namespace Android
             p.StartInfo.RedirectStandardError = true;
             p.StartInfo.CreateNoWindow = true;
             p.Start();
-            //textbox.Text = ">>>> adb " + command+" 命令开始" + "\r\n";
+            
             string value = p.StandardOutput.ReadToEnd()+p.StandardError.ReadToEnd();
             return value;
         }
@@ -89,7 +90,8 @@ namespace Android
             Console.WriteLine(path);
             sortProcess.StartInfo.Arguments = command;
             sortProcess.StartInfo.WorkingDirectory = Path.desktop_path;
-
+            MessageBox.Show(command);
+            textbox.AppendText(">>>> 开始执行 "+command);
             // Set UseShellExecute to false for redirection.
             sortProcess.StartInfo.UseShellExecute = false;
             sortProcess.StartInfo.CreateNoWindow = true;
