@@ -29,7 +29,15 @@ namespace Android
             Process p = new Process();
             p.StartInfo.FileName = path;
             p.StartInfo.Arguments = command;
-            MessageBox.Show(command);
+            if (textbox.Text == null||textbox.Text.Equals(""))
+            {
+                textbox.AppendText(">>>> 开始执行 adb " + command + "\n");
+            }
+            else
+            {
+                textbox.AppendText("\n");
+                textbox.AppendText(">>>> 开始执行 adb " + command + "\n");
+            }
             if (!workpath.Equals("1")) {
                 p.StartInfo.WorkingDirectory = Path.desktop_path;
             }
@@ -44,7 +52,6 @@ namespace Android
             return value;
         }
 
-        static Process sortProcess;
         public static string getApkTool(TextBox textbox, string path, string command, string workpath = "1")
         {
 
@@ -85,13 +92,20 @@ namespace Android
             // reads and sorts text input.
 
             //Process sortProcess;
-            sortProcess = new Process();
+            Process sortProcess = new Process();
             sortProcess.StartInfo.FileName = path;
             Console.WriteLine(path);
             sortProcess.StartInfo.Arguments = command;
             sortProcess.StartInfo.WorkingDirectory = Path.desktop_path;
-            MessageBox.Show(command);
-            textbox.AppendText(">>>> 开始执行 "+command);
+            if (textbox.Text == null || textbox.Text.Equals(""))
+            {
+                textbox.AppendText(">>>> 开始执行 adb " + command + "\n");
+            }
+            else
+            {
+                textbox.AppendText("\n");
+                textbox.AppendText(">>>> 开始执行 adb " + command + "\n");
+            }
             // Set UseShellExecute to false for redirection.
             sortProcess.StartInfo.UseShellExecute = false;
             sortProcess.StartInfo.CreateNoWindow = true;
@@ -139,6 +153,7 @@ namespace Android
                 textBox.AppendText(sortOutput);
               //  getPhoneInfo(null, "cmd.exe", "exit");
             }
+            //textBox.AppendText("\n");
         }
 
         //异步接受错误信息
@@ -153,8 +168,8 @@ namespace Android
                 sortOutput = (">> "+Environment.NewLine +
                     "[" + numOutputLines.ToString() + "] - " + outLine.Data);
                 textBox.AppendText(sortOutput);
-
             }
+            //textBox.AppendText("\n");
         }
     }
 }

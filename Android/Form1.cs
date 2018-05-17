@@ -21,6 +21,7 @@ namespace Android
         {
             InitializeComponent();
             System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
+            //解压adb工具
             if (File.Exists(Path.app_path + "android_adb.zip")) {
                System.IO.Compression.ZipFile.ExtractToDirectory(Path.app_path+"android_adb.zip", Path.app_path+"android_adb");
                File.Delete(Path.app_path+"android_adb.zip");
@@ -71,7 +72,7 @@ namespace Android
             Command.shotScreen(isDevices(), tb_packagename, tb_info, cb_devices);
         }
 
-        //push信息
+        //push文件
         private void btn_push_Click(object sender, EventArgs e)
         {
             if (cb_path.Checked) {
@@ -88,7 +89,7 @@ namespace Android
             Command.push(isDevices(), tb_info, cb_devices);
         }
 
-        //pull信息
+        //pull文件
         private void btn_pull_Click(object sender, EventArgs e)
         {
             if (tb_pull_path.Text == null || tb_pull_path.Text.Equals(""))
@@ -98,30 +99,46 @@ namespace Android
             else {
                 if ((cb_file.Text == null || cb_file.Text.Equals("")))
                 {
-                    MessageBox.Show("请选择文件");
-                    Command.getAllFile(isDevices(), tb_pull_path.Text, cb_file, tb_info);
-                }
+                    MessageBox.Show("先搜索该手机文件路径的所有文件");
+                 }
                 else {
-                    Command.pull(isDevices(), tb_info, cb_devices, tb_pull_path.Text + '/' + cb_file.Text+" ");
+                    Command.pull(isDevices(), tb_info, cb_devices, tb_pull_path.Text + '/' + cb_file.Text);
                 }
-
             }
         }
 
-        //重启手机
-        private void btn_restart_Click(object sender, EventArgs e)
+        //用于给pull文件时搜索路径下的文件
+        private void btn_search_path_Click(object sender, EventArgs e)
         {
-            CommandThread command = new CommandThread(tb_info, Path.adb_path, "reboot");
-            Thread thread = new Thread(command.startTask);
-            thread.Start();
-         }
+            if (tb_pull_path.Text == null || tb_pull_path.Text.Equals(""))
+            {
+                MessageBox.Show("请输入手机路径");
+            }
+            else {
+                Command.getAllFile(isDevices(), tb_pull_path.Text, cb_file, tb_info,cb_devices);
+            }
+        }
 
-        //重启到fastboot模式
-        private void btn_start_fastboot_Click(object sender, EventArgs e)
+        //adb命令选项是否选中
+        private void cb_root_CheckedChanged(object sender, EventArgs e)
         {
-            CommandThread command = new CommandThread(tb_info, Path.adb_path, "reboot bootloader");
-            Thread thread = new Thread(command.startTask);
-            thread.Start();
+            if (cb_root.Checked)
+            {
+                Command.root();
+            }
+        }
+
+        //push时自定义路径的选项是否选中
+        private void cb_path_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_path.Checked)
+            {
+                tb_path.Enabled = true;
+            }
+            else
+            {
+                tb_path.Enabled = false;
+            }
         }
 
         //选中多设备时，要先获取设备
@@ -140,7 +157,7 @@ namespace Android
             }
         }
 
-        //判断当前当前是多个设备还是单一设备
+        //判断是否多设备选项是否选中
         private int isDevices()
         {
             if (!cbox_devices.Checked)
@@ -154,28 +171,45 @@ namespace Android
             return 3;
         }
 
-        //第三个反编译选项卡
-        //apktool来反编译apk
-        
+        //重启手机
+        private void btn_restart_Click(object sender, EventArgs e)
+        {
+            CommandThread command = new CommandThread(tb_info, Path.adb_path, "reboot");
+            Thread thread = new Thread(command.startTask);
+            thread.Start();
+         }
 
+        //重启到fastboot模式
+        private void btn_start_fastboot_Click(object sender, EventArgs e)
+        {
+            CommandThread command = new CommandThread(tb_info, Path.adb_path, "reboot bootloader");
+            Thread thread = new Thread(command.startTask);
+            thread.Start();
+        }
         
-
         //选项卡切换事件
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControl1.SelectedTab.Name == "tabPage3")
             {
-                string value=File.ReadAllText(Path.app_path + "introduce.txt");
-                //tb_info_3.Text = value;
+                tb_info.Text = "";
+            }
+            else if (tabControl1.SelectedTab.Name == "tabPage2") {
+                tb_info.Text = "";
+            }
+            else if (tabControl1.SelectedTab.Name == "tabPage1")
+            {
+                tb_info.Text = "";
             }
         }
 
-        //清屏功能
+        //菜单栏的清屏功能
         private void cl_screen_Click(object sender, EventArgs e)
         {
             tb_info.Text="";
         }
 
+        //菜单栏的打开系统的dos命令
         private void opencmd_Click(object sender, EventArgs e)
         {
             Process p = new Process();
@@ -185,28 +219,5 @@ namespace Android
 
 
         }
-
-        private void cb_root_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cb_root.Checked) {
-                Command.root();
-            }
-        }
-
-        private void cb_path_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cb_path.Checked)
-            {
-                tb_path.Enabled = true;
-            }
-            else {
-                tb_path.Enabled = false;
-            }
-        }
-
-        private void tb_pull_path_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-    }
+  }
 }

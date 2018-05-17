@@ -32,6 +32,12 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btn_search_path = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cb_file = new System.Windows.Forms.ComboBox();
+            this.tb_pull_path = new System.Windows.Forms.TextBox();
+            this.btn_pull = new System.Windows.Forms.Button();
             this.tb_path = new System.Windows.Forms.TextBox();
             this.cb_path = new System.Windows.Forms.CheckBox();
             this.cb_root = new System.Windows.Forms.CheckBox();
@@ -58,11 +64,7 @@
             this.opencmd = new System.Windows.Forms.ToolStripMenuItem();
             this.help = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_pull = new System.Windows.Forms.Button();
-            this.tb_pull_path = new System.Windows.Forms.TextBox();
-            this.cb_file = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -75,6 +77,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(471, 12);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
@@ -106,6 +109,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.btn_search_path);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.cb_file);
@@ -122,6 +126,62 @@
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "pull和push";
+            // 
+            // btn_search_path
+            // 
+            this.btn_search_path.Location = new System.Drawing.Point(89, 101);
+            this.btn_search_path.Name = "btn_search_path";
+            this.btn_search_path.Size = new System.Drawing.Size(180, 23);
+            this.btn_search_path.TabIndex = 10;
+            this.btn_search_path.Text = "搜索该手机路径的文件";
+            this.btn_search_path.UseVisualStyleBackColor = true;
+            this.btn_search_path.Click += new System.EventHandler(this.btn_search_path_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(22, 158);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(52, 14);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "文件：";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(4, 133);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(82, 14);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "手机路径：";
+            // 
+            // cb_file
+            // 
+            this.cb_file.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_file.FormattingEnabled = true;
+            this.cb_file.Location = new System.Drawing.Point(82, 158);
+            this.cb_file.Name = "cb_file";
+            this.cb_file.Size = new System.Drawing.Size(195, 20);
+            this.cb_file.TabIndex = 7;
+            // 
+            // tb_pull_path
+            // 
+            this.tb_pull_path.Location = new System.Drawing.Point(82, 131);
+            this.tb_pull_path.Name = "tb_pull_path";
+            this.tb_pull_path.Size = new System.Drawing.Size(195, 21);
+            this.tb_pull_path.TabIndex = 6;
+            // 
+            // btn_pull
+            // 
+            this.btn_pull.Location = new System.Drawing.Point(7, 101);
+            this.btn_pull.Name = "btn_pull";
+            this.btn_pull.Size = new System.Drawing.Size(75, 23);
+            this.btn_pull.TabIndex = 5;
+            this.btn_pull.Text = "pull";
+            this.btn_pull.UseVisualStyleBackColor = true;
+            this.btn_pull.Click += new System.EventHandler(this.btn_pull_Click);
             // 
             // tb_path
             // 
@@ -386,52 +446,15 @@
             this.关于ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.关于ToolStripMenuItem.Text = "关于";
             // 
-            // btn_pull
+            // tabPage3
             // 
-            this.btn_pull.Location = new System.Drawing.Point(7, 101);
-            this.btn_pull.Name = "btn_pull";
-            this.btn_pull.Size = new System.Drawing.Size(75, 23);
-            this.btn_pull.TabIndex = 5;
-            this.btn_pull.Text = "pull";
-            this.btn_pull.UseVisualStyleBackColor = true;
-            this.btn_pull.Click += new System.EventHandler(this.btn_pull_Click);
-            // 
-            // tb_pull_path
-            // 
-            this.tb_pull_path.Location = new System.Drawing.Point(82, 131);
-            this.tb_pull_path.Name = "tb_pull_path";
-            this.tb_pull_path.Size = new System.Drawing.Size(195, 21);
-            this.tb_pull_path.TabIndex = 6;
-            this.tb_pull_path.TextChanged += new System.EventHandler(this.tb_pull_path_TextChanged);
-            // 
-            // cb_file
-            // 
-            this.cb_file.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_file.FormattingEnabled = true;
-            this.cb_file.Location = new System.Drawing.Point(82, 158);
-            this.cb_file.Name = "cb_file";
-            this.cb_file.Size = new System.Drawing.Size(195, 20);
-            this.cb_file.TabIndex = 7;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(4, 133);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 14);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "手机路径：";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(22, 158);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 14);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "文件：";
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(311, 411);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "smail";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -441,8 +464,10 @@
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.tb_info);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -498,6 +523,8 @@
         private System.Windows.Forms.ComboBox cb_file;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btn_search_path;
+        private System.Windows.Forms.TabPage tabPage3;
     }
 }
 

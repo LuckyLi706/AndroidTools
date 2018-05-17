@@ -57,7 +57,7 @@ namespace Android.adb
                 }
                 if (values[i].Contains("error"))
                 {
-                    tb_info.Text = showInfo(values[i]) + "\r\n";
+                    tb_info.Text = showInfo(values[i]) + "\n";
                     return;
                 }
             }
@@ -83,12 +83,12 @@ namespace Android.adb
             {
                 if (values[i].Contains("mFocusedActivity"))
                 {
-                    tb_info.Text = showInfo(values[i].TrimStart()) + "\r\n";
+                    tb_info.AppendText(showInfo(values[i].TrimStart()) + "\n");
                     return;
                 }
                 if (values[i].Contains("error"))
                 {
-                    tb_info.Text = showInfo(values[i]) + "\r\n";
+                    tb_info.AppendText(showInfo(values[i]) + "\n");
                     return;
                 }
             }
@@ -177,7 +177,7 @@ namespace Android.adb
                 }
                 if (validate_Device == 2)
                 {
-                    CommandThread command = new CommandThread(tb_info, Path.adb_path, "-s " + cb_devices.Text + "shell pm clear " + tb_packagename.Text);
+                    CommandThread command = new CommandThread(tb_info, Path.adb_path, "-s " + cb_devices.Text + " shell pm clear " + tb_packagename.Text);
                     Thread thread = new Thread(command.startTask);
                     thread.Start();
                 }
@@ -193,18 +193,16 @@ namespace Android.adb
             if (validate_Device == 1)
             {
                 string value = CommandImpl.getPhoneInfo(tb_info, Path.adb_path, "shell /system/bin/screencap -p /sdcard/screenshot.png");
-                tb_info.AppendText(showInfo(value) + "\r\n");
-                tb_info.AppendText("\r\n");
+                tb_info.AppendText(value);
                 string value1 = CommandImpl.getPhoneInfo(tb_info, Path.adb_path, "pull /sdcard/screenshot.png " + Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory));
-                tb_info.AppendText(showInfo(value1) + "\r\n");
+                tb_info.AppendText(value1);
             }
             if (validate_Device == 2)
             {
-                string value = CommandImpl.getPhoneInfo(tb_info, Path.adb_path, "-s " + cb_devices.Text+"shell /system/bin/screencap -p /sdcard/screenshot.png");
-                tb_info.AppendText(showInfo(value) + "\r\n");
-                tb_info.AppendText("\r\n");
-                string value1 = CommandImpl.getPhoneInfo(tb_info, Path.adb_path, "-s " + cb_devices.Text+"pull /sdcard/screenshot.png " + Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory));
-                tb_info.AppendText(showInfo(value1) + "\r\n"); 
+                string value = CommandImpl.getPhoneInfo(tb_info, Path.adb_path, "-s " + cb_devices.Text+" shell /system/bin/screencap -p /sdcard/screenshot.png");
+                tb_info.AppendText(value);
+                string value1 = CommandImpl.getPhoneInfo(tb_info, Path.adb_path, "-s " + cb_devices.Text+" pull /sdcard/screenshot.png " + Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory));
+                tb_info.AppendText(value1); 
             }
             if (validate_Device == 3)
             {
@@ -248,11 +246,11 @@ namespace Android.adb
                 CommandThread command = null;
                 if (phone_path.Equals(""))
                 {
-                    command = new CommandThread(tb_info, Path.adb_path, "-s " + cb_devices.Text + "push " + path + " data/local/tmp");
+                    command = new CommandThread(tb_info, Path.adb_path, "-s " + cb_devices.Text + " push " + path + " data/local/tmp");
                 }
                 else
                 {
-                    command = new CommandThread(tb_info, Path.adb_path, "-s " + cb_devices.Text + "push " + path + " " + phone_path);
+                    command = new CommandThread(tb_info, Path.adb_path, "-s " + cb_devices.Text + " push " + path + " " + phone_path);
                 }
                 Thread thread = new Thread(command.startTask);
                 thread.Start();
@@ -270,18 +268,15 @@ namespace Android.adb
             if (validate_Device == 1)
             {
                 CommandThread command = null;
-                string file_paths = file_path.Replace('\n',' ');
-                MessageBox.Show(file_paths);
-                MessageBox.Show("pull " + file_path + Path.desktop_path);
-                MessageBox.Show("pull " + "data/local/tmp/2.apk "  + Path.desktop_path);
-                command = new CommandThread(tb_info, Path.adb_path, ("pull "+file_path));
+                command = new CommandThread(tb_info, Path.adb_path, ("pull "+ file_path.Substring(0, file_path.Length-1)+" "+Path.desktop_path));
                 Thread thread = new Thread(command.startTask);
                 thread.Start();
             }
             if (validate_Device == 2)
             {
                 CommandThread command = null;
-                //command = new CommandThread(tb_info, Path.adb_path, "-s " + cb_devices.Text + "push " + path + " " + phone_path);
+                MessageBox.Show(cb_devices.Text);
+                command = new CommandThread(tb_info, Path.adb_path, ("-s "+cb_devices.Text+" pull " + file_path.Substring(0, file_path.Length - 1) + " " + Path.desktop_path));
                 Thread thread = new Thread(command.startTask);
                 thread.Start();
             }
@@ -292,10 +287,10 @@ namespace Android.adb
             }
         }
 
-        public static void getAllFile(int validate_Device,String path,ComboBox cb_file,TextBox tb_info) {
+        public static void getAllFile(int validate_Device,String path,ComboBox cb_file,TextBox tb_info,ComboBox cb_devices) {
             if (validate_Device == 1)
             {
-                String files=CommandImpl.getPhoneInfo(null,Path.adb_path,"shell ls "+path);
+                String files=CommandImpl.getPhoneInfo(tb_info,Path.adb_path,"shell ls "+path);
                 if (files.Contains("error"))
                 {
                     tb_info.AppendText(files);
@@ -308,7 +303,7 @@ namespace Android.adb
                     else {
                         string[] values = files.Split('\n');
                         cb_file.Items.Clear();
-                        for (int i = 1; i < values.Length; i++)
+                        for (int i = 0; i < values.Length; i++)
                         {
                             cb_file.Items.Add(values[i]);
                         }
@@ -319,7 +314,28 @@ namespace Android.adb
             }
             if (validate_Device == 2)
             {
-                //String files = CommandImpl.getPhoneInfo(null, Path.adb_path, "-s " + cb_devices.Text+"shell " + path + " ls");
+                String files = CommandImpl.getPhoneInfo(tb_info, Path.adb_path, "-s "+cb_devices.Text+" shell ls " + path);
+                if (files.Contains("error"))
+                {
+                    tb_info.AppendText(files);
+                }
+                else
+                {
+                    if (files.Contains("Permission denied"))
+                    {
+                        tb_info.AppendText(files);
+                    }
+                    else
+                    {
+                        string[] values = files.Split('\n');
+                        cb_file.Items.Clear();
+                        for (int i = 0; i < values.Length; i++)
+                        {
+                            cb_file.Items.Add(values[i]);
+                        }
+                        cb_file.SelectedIndex = 0;
+                    }
+                }
             }
             if (validate_Device == 3)
             {
