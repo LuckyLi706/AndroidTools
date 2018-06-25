@@ -46,9 +46,11 @@ namespace Android.adb
                 return;
             }
             string[] values = value.Split('\n');
+            Console.WriteLine(value+"123");
             for (int i = 0; i < values.Length; i++)
             {
-                if (values[i].Contains("mFocusedActivity"))
+                //处理9.0版本手机顶级activity信息过滤改为mResumedActivity
+                if (values[i].Contains("mFocusedActivity")|| values[i].Contains("mResumedActivity"))
                 {
                     int a = values[i].IndexOf("u0");
                     int b = values[i].IndexOf('/');
@@ -81,7 +83,7 @@ namespace Android.adb
             string[] values = value.Split('\n');
             for (int i = 0; i < values.Length; i++)
             {
-                if (values[i].Contains("mFocusedActivity"))
+                if (values[i].Contains("mFocusedActivity") || values[i].Contains("mResumedActivity"))
                 {
                     tb_info.AppendText(showInfo(values[i].TrimStart()) + "\n");
                     return;
