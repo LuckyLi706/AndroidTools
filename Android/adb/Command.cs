@@ -346,8 +346,8 @@ namespace Android.adb
             }
         }
 
-        public static void root() {
-            CommandImpl.getPhoneInfo(null,Path.adb_path,"root");
+        public static void root(TextBox tb_info) {
+            CommandImpl.getPhoneInfo(tb_info, Path.adb_path,"root");
         }
     }
 }

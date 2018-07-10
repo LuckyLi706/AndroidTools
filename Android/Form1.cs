@@ -124,7 +124,7 @@ namespace Android
         {
             if (cb_root.Checked)
             {
-                Command.root();
+                Command.root(tb_info);
             }
         }
 
