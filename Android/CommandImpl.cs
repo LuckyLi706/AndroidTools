@@ -39,7 +39,7 @@ namespace Android
                 textbox.AppendText(">>>> 开始执行 adb " + command + "\n");
             }
             if (!workpath.Equals("1")) {
-                p.StartInfo.WorkingDirectory = Path.desktop_path;
+                p.StartInfo.WorkingDirectory = PathConstants.desktop_path;
             }
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardOutput = true;
@@ -58,7 +58,7 @@ namespace Android
             Process p = new Process();
             p.StartInfo.FileName = path;
             p.StartInfo.Arguments = command;
-            p.StartInfo.WorkingDirectory = Path.desktop_path;
+            p.StartInfo.WorkingDirectory = PathConstants.desktop_path;
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardInput = true;
@@ -96,7 +96,7 @@ namespace Android
             sortProcess.StartInfo.FileName = path;
             Console.WriteLine(path);
             sortProcess.StartInfo.Arguments = command;
-            sortProcess.StartInfo.WorkingDirectory = Path.desktop_path;
+            sortProcess.StartInfo.WorkingDirectory = PathConstants.desktop_path;
             if (textbox.Text == null || textbox.Text.Equals(""))
             {
                 textbox.AppendText(">>>> 开始执行 adb " + command + "\n");

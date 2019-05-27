@@ -11,7 +11,7 @@ namespace Android.adb
     class Command
     {
         public static void getDevices(TextBox tb_info,ComboBox cb_devices) {
-            string value = CommandImpl.getPhoneInfo(tb_info, Path.adb_path, "devices");
+            string value = CommandImpl.getPhoneInfo(tb_info, PathConstants.adb_path, "devices");
             string[] values = value.Split('\n');
             cb_devices.Items.Clear();
             for (int i = 1; i < values.Length; i++)
@@ -34,11 +34,11 @@ namespace Android.adb
             string value = "";
             if (validate_Device == 1)
             {
-                value = CommandImpl.getPhoneInfo(tb_info, Path.adb_path, "shell dumpsys activity");
+                value = CommandImpl.getPhoneInfo(tb_info, PathConstants.adb_path, "shell dumpsys activity");
             }
             if (validate_Device == 2)
             {
-                value = CommandImpl.getPhoneInfo(tb_info, Path.adb_path, "-s " + cb_devices.Text + " shell dumpsys activity");
+                value = CommandImpl.getPhoneInfo(tb_info, PathConstants.adb_path, "-s " + cb_devices.Text + " shell dumpsys activity");
             }
             if (validate_Device == 3)
             {
@@ -69,11 +69,11 @@ namespace Android.adb
             string value = "";
             if (validate_Device == 1)
             {
-                value = CommandImpl.getPhoneInfo(tb_info, Path.adb_path, "shell dumpsys activity");
+                value = CommandImpl.getPhoneInfo(tb_info, PathConstants.adb_path, "shell dumpsys activity");
             }
             if (validate_Device == 2)
             {
-                value = CommandImpl.getPhoneInfo(tb_info, Path.adb_path, "-s " + cb_devices.Text + " shell dumpsys activity");
+                value = CommandImpl.getPhoneInfo(tb_info, PathConstants.adb_path, "-s " + cb_devices.Text + " shell dumpsys activity");
             }
             if (validate_Device == 3)
             {
@@ -98,7 +98,7 @@ namespace Android.adb
 
         public static void install_Apk(int validate_Device,TextBox tb_info,ComboBox cb_devices) {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.InitialDirectory = Path.desktop_path;            // 这里是初始的路径名
+            openFileDialog1.InitialDirectory = PathConstants.desktop_path;            // 这里是初始的路径名
             openFileDialog1.Filter = "apk|*.apk|所有文件|*.*";  //设置打开文件的类型
             openFileDialog1.RestoreDirectory = true;              //设置是否还原当前目录
             openFileDialog1.FilterIndex = 0;                      //设置打开文件类型的索引
@@ -120,13 +120,13 @@ namespace Android.adb
             }
             if (validate_Device == 1)
             {
-                CommandThread command = new CommandThread(tb_info, Path.adb_path, "install " + path);
+                CommandThread command = new CommandThread(tb_info, PathConstants.adb_path, "install " + path);
                 Thread thread = new Thread(command.startTask);
                 thread.Start();
             }
             if (validate_Device == 2)
             {
-                CommandThread command = new CommandThread(tb_info, Path.adb_path, "-s " + cb_devices.Text + " install " + path);
+                CommandThread command = new CommandThread(tb_info, PathConstants.adb_path, "-s " + cb_devices.Text + " install " + path);
                 Thread thread = new Thread(command.startTask);
                 thread.Start();
             }
@@ -146,13 +146,13 @@ namespace Android.adb
             {
                 if (validate_Device == 1)
                 {
-                    CommandThread command = new CommandThread(tb_info, Path.adb_path, "uninstall " + tb_packagename.Text);
+                    CommandThread command = new CommandThread(tb_info, PathConstants.adb_path, "uninstall " + tb_packagename.Text);
                     Thread thread = new Thread(command.startTask);
                     thread.Start();
                 }
                 if (validate_Device == 2)
                 {
-                    CommandThread command = new CommandThread(tb_info, Path.adb_path, "-s " + cb_devices.Text + " uninstall " + tb_packagename.Text);
+                    CommandThread command = new CommandThread(tb_info, PathConstants.adb_path, "-s " + cb_devices.Text + " uninstall " + tb_packagename.Text);
                     Thread thread = new Thread(command.startTask);
                     thread.Start();
                 }
@@ -173,13 +173,13 @@ namespace Android.adb
             {
                 if (validate_Device == 1)
                 {
-                    CommandThread command = new CommandThread(tb_info, Path.adb_path, "shell pm clear " + tb_packagename.Text);
+                    CommandThread command = new CommandThread(tb_info, PathConstants.adb_path, "shell pm clear " + tb_packagename.Text);
                     Thread thread = new Thread(command.startTask);
                     thread.Start();
                 }
                 if (validate_Device == 2)
                 {
-                    CommandThread command = new CommandThread(tb_info, Path.adb_path, "-s " + cb_devices.Text + " shell pm clear " + tb_packagename.Text);
+                    CommandThread command = new CommandThread(tb_info, PathConstants.adb_path, "-s " + cb_devices.Text + " shell pm clear " + tb_packagename.Text);
                     Thread thread = new Thread(command.startTask);
                     thread.Start();
                 }
@@ -194,16 +194,16 @@ namespace Android.adb
         public static void shotScreen(int validate_Device, TextBox tb_packagename, TextBox tb_info, ComboBox cb_devices) {
             if (validate_Device == 1)
             {
-                string value = CommandImpl.getPhoneInfo(tb_info, Path.adb_path, "shell /system/bin/screencap -p /sdcard/screenshot.png");
+                string value = CommandImpl.getPhoneInfo(tb_info, PathConstants.adb_path, "shell /system/bin/screencap -p /sdcard/screenshot.png");
                 tb_info.AppendText(value);
-                string value1 = CommandImpl.getPhoneInfo(tb_info, Path.adb_path, "pull /sdcard/screenshot.png " + Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory));
+                string value1 = CommandImpl.getPhoneInfo(tb_info, PathConstants.adb_path, "pull /sdcard/screenshot.png " + Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory));
                 tb_info.AppendText(value1);
             }
             if (validate_Device == 2)
             {
-                string value = CommandImpl.getPhoneInfo(tb_info, Path.adb_path, "-s " + cb_devices.Text+" shell /system/bin/screencap -p /sdcard/screenshot.png");
+                string value = CommandImpl.getPhoneInfo(tb_info, PathConstants.adb_path, "-s " + cb_devices.Text+" shell /system/bin/screencap -p /sdcard/screenshot.png");
                 tb_info.AppendText(value);
-                string value1 = CommandImpl.getPhoneInfo(tb_info, Path.adb_path, "-s " + cb_devices.Text+" pull /sdcard/screenshot.png " + Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory));
+                string value1 = CommandImpl.getPhoneInfo(tb_info, PathConstants.adb_path, "-s " + cb_devices.Text+" pull /sdcard/screenshot.png " + Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory));
                 tb_info.AppendText(value1); 
             }
             if (validate_Device == 3)
@@ -215,7 +215,7 @@ namespace Android.adb
 
         public static void push(int validate_Device, TextBox tb_info, ComboBox cb_devices,String phone_path="") {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.InitialDirectory = Path.desktop_path;            // 这里是初始的路径名
+            openFileDialog1.InitialDirectory = PathConstants.desktop_path;            // 这里是初始的路径名
             openFileDialog1.Filter = "所有文件|*.*";  //设置打开文件的类型
             openFileDialog1.RestoreDirectory = true;              //设置是否还原当前目录
             openFileDialog1.FilterIndex = 0;                      //设置打开文件类型的索引
@@ -235,10 +235,10 @@ namespace Android.adb
                 CommandThread command=null;
                 if (phone_path.Equals(""))
                 {
-                    command = new CommandThread(tb_info, Path.adb_path, "push " + path + " data/local/tmp");
+                    command = new CommandThread(tb_info, PathConstants.adb_path, "push " + path + " data/local/tmp");
                 }
                 else {
-                    command = new CommandThread(tb_info, Path.adb_path, "push " + path +" "+phone_path);
+                    command = new CommandThread(tb_info, PathConstants.adb_path, "push " + path +" "+phone_path);
                 }
                 Thread thread = new Thread(command.startTask);
                 thread.Start();
@@ -248,11 +248,11 @@ namespace Android.adb
                 CommandThread command = null;
                 if (phone_path.Equals(""))
                 {
-                    command = new CommandThread(tb_info, Path.adb_path, "-s " + cb_devices.Text + " push " + path + " data/local/tmp");
+                    command = new CommandThread(tb_info, PathConstants.adb_path, "-s " + cb_devices.Text + " push " + path + " data/local/tmp");
                 }
                 else
                 {
-                    command = new CommandThread(tb_info, Path.adb_path, "-s " + cb_devices.Text + " push " + path + " " + phone_path);
+                    command = new CommandThread(tb_info, PathConstants.adb_path, "-s " + cb_devices.Text + " push " + path + " " + phone_path);
                 }
                 Thread thread = new Thread(command.startTask);
                 thread.Start();
@@ -270,7 +270,7 @@ namespace Android.adb
             if (validate_Device == 1)
             {
                 CommandThread command = null;
-                command = new CommandThread(tb_info, Path.adb_path, ("pull "+ file_path.Substring(0, file_path.Length-1)+" "+Path.desktop_path));
+                command = new CommandThread(tb_info, PathConstants.adb_path, ("pull "+ file_path.Substring(0, file_path.Length-1)+" "+PathConstants.desktop_path));
                 Thread thread = new Thread(command.startTask);
                 thread.Start();
             }
@@ -278,7 +278,7 @@ namespace Android.adb
             {
                 CommandThread command = null;
                 MessageBox.Show(cb_devices.Text);
-                command = new CommandThread(tb_info, Path.adb_path, ("-s "+cb_devices.Text+" pull " + file_path.Substring(0, file_path.Length - 1) + " " + Path.desktop_path));
+                command = new CommandThread(tb_info, PathConstants.adb_path, ("-s "+cb_devices.Text+" pull " + file_path.Substring(0, file_path.Length - 1) + " " + PathConstants.desktop_path));
                 Thread thread = new Thread(command.startTask);
                 thread.Start();
             }
@@ -292,7 +292,7 @@ namespace Android.adb
         public static void getAllFile(int validate_Device,String path,ComboBox cb_file,TextBox tb_info,ComboBox cb_devices) {
             if (validate_Device == 1)
             {
-                String files=CommandImpl.getPhoneInfo(tb_info,Path.adb_path,"shell ls "+path);
+                String files=CommandImpl.getPhoneInfo(tb_info,PathConstants.adb_path,"shell ls "+path);
                 if (files.Contains("error"))
                 {
                     tb_info.AppendText(files);
@@ -316,7 +316,7 @@ namespace Android.adb
             }
             if (validate_Device == 2)
             {
-                String files = CommandImpl.getPhoneInfo(tb_info, Path.adb_path, "-s "+cb_devices.Text+" shell ls " + path);
+                String files = CommandImpl.getPhoneInfo(tb_info, PathConstants.adb_path, "-s "+cb_devices.Text+" shell ls " + path);
                 if (files.Contains("error"))
                 {
                     tb_info.AppendText(files);
@@ -347,7 +347,7 @@ namespace Android.adb
         }
 
         public static void root(TextBox tb_info) {
-            CommandImpl.getPhoneInfo(tb_info, Path.adb_path,"root");
+            CommandImpl.getPhoneInfo(tb_info, PathConstants.adb_path,"root");
         }
     }
 }

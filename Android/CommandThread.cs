@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AndroidSmallTools.utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,8 +20,21 @@ namespace Android
             this.path = path;
         }
 
+        public CommandThread(string command, TextBox tb)
+        {
+            this.tb = tb;
+            this.command = command;
+        }
+
         public void startTask() {
-            CommandImpl.getInfoByCommand(tb,path,command);
+            if (path == null || path.Equals(""))
+            {
+                CommandUtil.StartCmdProcess(command, tb);
+            }
+            else
+            {
+                CommandImpl.getInfoByCommand(tb, path, command);
+            }
         }
     }
 }
