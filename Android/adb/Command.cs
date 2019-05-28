@@ -11,18 +11,8 @@ namespace Android.adb
     class Command
     {
         public static void getDevices(TextBox tb_info,ComboBox cb_devices) {
-            string value = CommandImpl.getPhoneInfo(tb_info, PathConstants.adb_path, "devices");
-            string[] values = value.Split('\n');
-            cb_devices.Items.Clear();
-            for (int i = 1; i < values.Length; i++)
-            {
-                if (values[i].Contains("device"))
-                {
-                    value = values[i].Replace("device", "").Replace(" ", "").Trim();
-                    cb_devices.Items.Add(value);
-                }
-            }
-            cb_devices.SelectedIndex = 0;
+            CommandImpl.getInfoByCommand(tb_info, PathConstants.adb_path, "devices","");
+            
         }
 
         private static string showInfo(string info)

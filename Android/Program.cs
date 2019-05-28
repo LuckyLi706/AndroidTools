@@ -83,7 +83,7 @@ namespace Android
                 Directory.CreateDirectory("ErrLog");
             }
 
-            using (var sw = new StreamWriter(@"ErrLog\ErrLog.txt", true))
+            using (var sw = new StreamWriter(PathConstants.app_path+@"\ErrLog\ErrLog.txt", true))
             {
                 sw.WriteLine(str);
                 sw.WriteLine("---------------------------------------------------------");
