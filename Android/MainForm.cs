@@ -23,9 +23,14 @@ namespace Android
             InitializeComponent();
             System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
             //解压adb工具
-            if (File.Exists(PathConstants.app_path + "android_adb.zip")) {
+            if (!Directory.Exists(PathConstants.app_path + "android_adb")&&File.Exists(PathConstants.app_path + "android_adb.zip")) {
                System.IO.Compression.ZipFile.ExtractToDirectory(PathConstants.app_path+"android_adb.zip", PathConstants.app_path+"android_adb");
-               File.Delete(PathConstants.app_path+"android_adb.zip");
+               //File.Delete(PathConstants.app_path+"android_adb.zip");
+            }
+            if (!Directory.Exists(PathConstants.app_path + "tools")&&File.Exists(PathConstants.app_path + "tools.zip"))
+            {
+                System.IO.Compression.ZipFile.ExtractToDirectory(PathConstants.app_path + "tools.zip", PathConstants.app_path + "tools");
+                //File.Delete(PathConstants.app_path + "tools.zip");
             }
         }
 
