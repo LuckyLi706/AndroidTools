@@ -35,6 +35,7 @@ namespace Android
 
             cb_emul.SelectedIndex = 0;
             cb_getinfo.SelectedIndex = 0;
+            cb_getInfo2.SelectedIndex = 0;
         }
 
         //第一个选项卡adb命令
