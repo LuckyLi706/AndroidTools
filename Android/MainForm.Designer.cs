@@ -32,6 +32,11 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.btn_getinfo2 = new System.Windows.Forms.Button();
+            this.cb_getInfo2 = new System.Windows.Forms.ComboBox();
+            this.btn_getinfo = new System.Windows.Forms.Button();
+            this.cb_getinfo = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btn_search_path = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -57,6 +62,11 @@
             this.btn_install_apk = new System.Windows.Forms.Button();
             this.btn_clear_data = new System.Windows.Forms.Button();
             this.btn_unstall_apk = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tb_ipport = new System.Windows.Forms.TextBox();
+            this.cb_ipport = new System.Windows.Forms.CheckBox();
+            this.btn_connect = new System.Windows.Forms.Button();
+            this.cb_emul = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.sign_apk = new System.Windows.Forms.Button();
@@ -76,8 +86,10 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.groupBox7.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -111,12 +123,79 @@
             // 
             // panel2
             // 
+            this.panel2.AutoScroll = true;
+            this.panel2.Controls.Add(this.groupBox7);
             this.panel2.Controls.Add(this.groupBox3);
             this.panel2.Controls.Add(this.groupBox2);
-            this.panel2.Location = new System.Drawing.Point(6, 7);
+            this.panel2.Controls.Add(this.groupBox1);
+            this.panel2.Location = new System.Drawing.Point(6, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(293, 398);
+            this.panel2.Size = new System.Drawing.Size(309, 405);
             this.panel2.TabIndex = 3;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.btn_getinfo2);
+            this.groupBox7.Controls.Add(this.cb_getInfo2);
+            this.groupBox7.Controls.Add(this.btn_getinfo);
+            this.groupBox7.Controls.Add(this.cb_getinfo);
+            this.groupBox7.Location = new System.Drawing.Point(3, 467);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(287, 110);
+            this.groupBox7.TabIndex = 11;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "其他信息获取";
+            // 
+            // btn_getinfo2
+            // 
+            this.btn_getinfo2.Location = new System.Drawing.Point(198, 59);
+            this.btn_getinfo2.Name = "btn_getinfo2";
+            this.btn_getinfo2.Size = new System.Drawing.Size(75, 23);
+            this.btn_getinfo2.TabIndex = 3;
+            this.btn_getinfo2.Text = "获取基础信息";
+            this.btn_getinfo2.UseVisualStyleBackColor = true;
+            this.btn_getinfo2.Click += new System.EventHandler(this.btn_getinfo2_Click);
+            // 
+            // cb_getInfo2
+            // 
+            this.cb_getInfo2.FormattingEnabled = true;
+            this.cb_getInfo2.Items.AddRange(new object[] {
+            "ip",
+            "WifiMac",
+            "IMEI",
+            "/system/build.prop",
+            "Android_id",
+            "BlueMac"});
+            this.cb_getInfo2.Location = new System.Drawing.Point(10, 61);
+            this.cb_getInfo2.Name = "cb_getInfo2";
+            this.cb_getInfo2.Size = new System.Drawing.Size(175, 20);
+            this.cb_getInfo2.TabIndex = 2;
+            // 
+            // btn_getinfo
+            // 
+            this.btn_getinfo.Location = new System.Drawing.Point(198, 21);
+            this.btn_getinfo.Name = "btn_getinfo";
+            this.btn_getinfo.Size = new System.Drawing.Size(75, 26);
+            this.btn_getinfo.TabIndex = 1;
+            this.btn_getinfo.Text = "获取";
+            this.btn_getinfo.UseVisualStyleBackColor = true;
+            this.btn_getinfo.Click += new System.EventHandler(this.btn_getinfo_Click);
+            // 
+            // cb_getinfo
+            // 
+            this.cb_getinfo.FormattingEnabled = true;
+            this.cb_getinfo.Items.AddRange(new object[] {
+            "内存信息",
+            "CPU信息",
+            "帧率信息",
+            "显示信息",
+            "电池信息",
+            "闹钟信息",
+            "位置信息"});
+            this.cb_getinfo.Location = new System.Drawing.Point(11, 21);
+            this.cb_getinfo.Name = "cb_getinfo";
+            this.cb_getinfo.Size = new System.Drawing.Size(174, 20);
+            this.cb_getinfo.TabIndex = 0;
             // 
             // groupBox3
             // 
@@ -131,7 +210,7 @@
             this.groupBox3.Controls.Add(this.cb_root);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.btn_push);
-            this.groupBox3.Location = new System.Drawing.Point(7, 178);
+            this.groupBox3.Location = new System.Drawing.Point(7, 283);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(283, 184);
             this.groupBox3.TabIndex = 14;
@@ -386,6 +465,66 @@
             this.btn_unstall_apk.UseVisualStyleBackColor = true;
             this.btn_unstall_apk.Click += new System.EventHandler(this.btn_unstall_apk_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.tb_ipport);
+            this.groupBox1.Controls.Add(this.cb_ipport);
+            this.groupBox1.Controls.Add(this.btn_connect);
+            this.groupBox1.Controls.Add(this.cb_emul);
+            this.groupBox1.Location = new System.Drawing.Point(7, 177);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(292, 100);
+            this.groupBox1.TabIndex = 15;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "无线连接";
+            // 
+            // tb_ipport
+            // 
+            this.tb_ipport.Enabled = false;
+            this.tb_ipport.Location = new System.Drawing.Point(7, 70);
+            this.tb_ipport.Name = "tb_ipport";
+            this.tb_ipport.Size = new System.Drawing.Size(174, 21);
+            this.tb_ipport.TabIndex = 3;
+            // 
+            // cb_ipport
+            // 
+            this.cb_ipport.AutoSize = true;
+            this.cb_ipport.Location = new System.Drawing.Point(7, 47);
+            this.cb_ipport.Name = "cb_ipport";
+            this.cb_ipport.Size = new System.Drawing.Size(72, 16);
+            this.cb_ipport.TabIndex = 2;
+            this.cb_ipport.Text = "自定义ip";
+            this.cb_ipport.UseVisualStyleBackColor = true;
+            this.cb_ipport.CheckedChanged += new System.EventHandler(this.cb_ipport_CheckedChanged);
+            // 
+            // btn_connect
+            // 
+            this.btn_connect.Location = new System.Drawing.Point(194, 20);
+            this.btn_connect.Name = "btn_connect";
+            this.btn_connect.Size = new System.Drawing.Size(75, 60);
+            this.btn_connect.TabIndex = 1;
+            this.btn_connect.Text = "连接";
+            this.btn_connect.UseVisualStyleBackColor = true;
+            this.btn_connect.Click += new System.EventHandler(this.btn_connect_Click);
+            // 
+            // cb_emul
+            // 
+            this.cb_emul.FormattingEnabled = true;
+            this.cb_emul.Items.AddRange(new object[] {
+            "逍遥模拟器",
+            "网易MuMu模拟器",
+            "蓝叠模拟器",
+            "天天模拟器",
+            "51模拟器",
+            "雷电模拟器",
+            "夜神模拟器",
+            "海马玩模拟器",
+            "iTools模拟器"});
+            this.cb_emul.Location = new System.Drawing.Point(6, 20);
+            this.cb_emul.Name = "cb_emul";
+            this.cb_emul.Size = new System.Drawing.Size(175, 20);
+            this.cb_emul.TabIndex = 0;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.groupBox6);
@@ -501,7 +640,7 @@
             this.help});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(789, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(801, 25);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -546,23 +685,27 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(789, 461);
+            this.ClientSize = new System.Drawing.Size(801, 456);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.tb_info);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "安卓小工具v1.1";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
@@ -620,6 +763,16 @@
         private System.Windows.Forms.Button s_decompile;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button sign_apk;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ComboBox cb_emul;
+        private System.Windows.Forms.Button btn_connect;
+        private System.Windows.Forms.CheckBox cb_ipport;
+        private System.Windows.Forms.TextBox tb_ipport;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Button btn_getinfo;
+        private System.Windows.Forms.ComboBox cb_getinfo;
+        private System.Windows.Forms.Button btn_getinfo2;
+        private System.Windows.Forms.ComboBox cb_getInfo2;
     }
 }
 

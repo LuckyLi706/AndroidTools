@@ -32,6 +32,9 @@ namespace Android
                 System.IO.Compression.ZipFile.ExtractToDirectory(PathConstants.app_path + "tools.zip", PathConstants.app_path + "tools");
                 //File.Delete(PathConstants.app_path + "tools.zip");
             }
+
+            cb_emul.SelectedIndex = 0;
+            cb_getinfo.SelectedIndex = 0;
         }
 
         //第一个选项卡adb命令
@@ -334,6 +337,79 @@ namespace Android
             p.StartInfo.FileName = "cmd.exe";
             p.StartInfo.WorkingDirectory = PathConstants.desktop_path;
             p.Start();
+        }
+
+        //连接
+        private void btn_connect_Click(object sender, EventArgs e)
+        {
+            String ipport = "";
+            int index=cb_emul.SelectedIndex;
+            if (cb_ipport.Checked) {
+                if (tb_ipport.Equals(""))
+                {
+                    MessageBox.Show("ip和port不能为空");
+                }
+                else {
+                    Command.connect(tb_info, tb_ipport.Text+":5555");
+                }
+            }
+            switch (index) {
+                case 0:
+                    ipport = "127.0.0.1:21503";
+                    break;
+                case 1:
+                    ipport = "127.0.0.1:7555";
+                    break;
+                case 2:
+                    ipport = "127.0.0.1:5555";
+                    break;
+                case 3:
+                    ipport = "127.0.0.1:6555";
+                    break;
+                case 4:
+                    ipport = "127.0.0.1:5555";
+                    break;
+                case 5:
+                    ipport = "127.0.0.1:5555";
+                    break;
+                case 6:
+                    ipport = "127.0.0.1:62001";
+                    break;
+                case 7:
+                    ipport = "127.0.0.1:26944";
+                    break;
+                case 8:
+                    ipport = "127.0.0.1:62001";
+                    break;
+
+
+            }
+            Command.connect(tb_info, ipport);
+        }
+
+        private void cb_ipport_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_ipport.Checked)
+            {
+                
+                    tb_ipport.Enabled = true;
+                
+            }
+            else {
+                tb_ipport.Enabled = false;
+            }
+        }
+
+        private void btn_getinfo_Click(object sender, EventArgs e)
+        {
+            int index = cb_getinfo.SelectedIndex;
+            Command.getInfo(tb_info, index);
+        }
+
+        private void btn_getinfo2_Click(object sender, EventArgs e)
+        {
+            int index = cb_getInfo2.SelectedIndex;
+            Command.getInfo2(tb_info, index);
         }
     }
 }
