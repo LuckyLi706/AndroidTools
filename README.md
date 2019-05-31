@@ -1,5 +1,6 @@
 # AndroidTools
-（说明，从v1.3版本开始，只需要替换之前版本的exe就行了）
+说明:从v1.3版本开始，只需要替换之前版本的exe就行了
+
 安卓的小工具，方便操作，就是一些简单的命令，用c#写的
 基本命令：
 获取设备（如果有多个手机连接电脑，可以通过获取设备来区分）
@@ -17,7 +18,7 @@ push：从本地向手机传输某些文件
 
 ADB命令截图：
 
-![ADB命令截图](https://github.com/LuckyLi706/AndroidTools/blob/master/adb%E5%91%BD%E4%BB%A4.png)
+![ADB命令截图](https://github.com/LuckyLi706/AndroidTools/blob/master/adb_1.png)(https://github.com/LuckyLi706/AndroidTools/blob/master/adb_2.png)
 
 反编译命令截图：
 
