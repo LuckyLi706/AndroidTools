@@ -18,7 +18,8 @@ push：从本地向手机传输某些文件
 
 ADB命令截图：
 
-![ADB命令截图](https://github.com/LuckyLi706/AndroidTools/blob/master/adb_1.png)(https://github.com/LuckyLi706/AndroidTools/blob/master/adb_2.png)
+![ADB命令截图](https://github.com/LuckyLi706/AndroidTools/blob/master/adb_1.png)
+![ADB命令截图](https://github.com/LuckyLi706/AndroidTools/blob/master/adb_2.png)
 
 反编译命令截图：
 
