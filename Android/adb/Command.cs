@@ -60,7 +60,7 @@ namespace Android.adb
                     string packageName = values[i].Substring(a + 3, b - a - 3);
                     tb_packagename.Text = packageName;
                 }
-                if (values[i].Contains("error"))
+                if (values[i].Contains("error:"))
                 {
                     tb_info.Text = showInfo(values[i]) + "\n";
                     return;
@@ -91,7 +91,7 @@ namespace Android.adb
                     tb_info.AppendText(showInfo(values[i].TrimStart()) + "\n");
                     return;
                 }
-                if (values[i].Contains("error"))
+                if (values[i].Contains("error:"))
                 {
                     tb_info.AppendText(showInfo(values[i]) + "\n");
                     return;
@@ -223,76 +223,156 @@ namespace Android.adb
         }
 
         //获取其他信息
-        public static void getInfo(TextBox tb_info, int index)
+        public static void getInfo(int validate_Device,TextBox tb_info, int index, ComboBox cb_devices)
         {
-            String command = "";
-            if (index == 0)
+            if (validate_Device == 1)
             {
-                command = "shell cat /proc/meminfo";
+                String command = "";
+                if (index == 0)
+                {
+                    command = "shell cat /proc/meminfo";
+                }
+                else if (index == 1)
+                {
+                    command = "shell cat /proc/cpuinfo";
+                }
+                else if (index == 2)
+                {
+                    command = "shell dumpsys gfxinfo";
+                }
+                else if (index == 3)
+                {
+                    command = "shell dumpsys display";
+                }
+                else if (index == 4)
+                {
+                    command = "shell dumpsys battery";
+                }
+                else if (index == 5)
+                {
+                    command = "shell dumpsys alarm";
+                }
+                else if (index == 6)
+                {
+                    command = "shell dumpsys location";
+                }
+                string value = CommandImpl.getPhoneInfo(tb_info, PathConstants.adb_path, "-s " + cb_devices.Text +" "+ command);
+                tb_info.AppendText(value);
             }
-            else if (index == 1) {
-                command = "shell cat /proc/cpuinfo";
-            }
-            else if (index == 2)
+            else if (validate_Device == 2)
             {
-                command = "shell dumpsys gfxinfo";
+                String command = "";
+                if (index == 0)
+                {
+                    command = "shell cat /proc/meminfo";
+                }
+                else if (index == 1)
+                {
+                    command = "shell cat /proc/cpuinfo";
+                }
+                else if (index == 2)
+                {
+                    command = "shell dumpsys gfxinfo";
+                }
+                else if (index == 3)
+                {
+                    command = "shell dumpsys display";
+                }
+                else if (index == 4)
+                {
+                    command = "shell dumpsys battery";
+                }
+                else if (index == 5)
+                {
+                    command = "shell dumpsys alarm";
+                }
+                else if (index == 6)
+                {
+                    command = "shell dumpsys location";
+                }
+                string value = CommandImpl.getPhoneInfo(tb_info, PathConstants.adb_path, "-s " + cb_devices.Text + " " + command);
+                tb_info.AppendText(value);
             }
-            else if (index == 3)
-            {
-                command = "shell dumpsys display";
-            }
-            else if (index == 4)
-            {
-                command = "shell dumpsys battery";
-            }
-            else if (index == 5)
-            {
-                command = "shell dumpsys alarm";
-            }
-            else if (index == 6)
-            {
-                command = "shell dumpsys location";
-            }
-            string value = CommandImpl.getPhoneInfo(tb_info, PathConstants.adb_path, command);
-            tb_info.AppendText(value);
+
         }
 
         //获取其他信息
-        public static void getInfo2(TextBox tb_info, int index)
+        public static void getInfo2(int validate_Device,TextBox tb_info, int index, ComboBox cb_devices)
         {
-            String command = "";
-            if (index == 0)
+            if (validate_Device == 2)
             {
-                command = "shell netcfg";
-            }
-            else if (index == 1)
-            {
-                command = "shell cat /sys/class/net/wlan0/address";
-            }
-            else if (index == 2)
-            {
-                string[] commands = { "shell dumpsys iphonesubinfo", "shell getprop gsm.baseband.imei", "service call iphonesubinfo 1" };
-                for (int i = 0; i < commands.Length; i++) {
-                    string value1 = CommandImpl.getPhoneInfo(tb_info, PathConstants.adb_path, commands[i]);
-                    tb_info.AppendText(value1);
+                String command = "";
+                if (index == 0)
+                {
+                    command = "shell netcfg";
                 }
-                return;
-            }
-            else if (index == 3)
-            {
-                command = "shell cat /system/build.prop";
-            }
-            else if (index == 4)
-            {
-                command = "shell settings get secure android_id";
-            }
-            else if (index == 5)
-            {
-                command = "shell settings get secure bluetooth_address";
-            }
+                else if (index == 1)
+                {
+                    command = "shell cat /sys/class/net/wlan0/address";
+                }
+                else if (index == 2)
+                {
+                    string[] commands = { "shell dumpsys iphonesubinfo", "shell getprop gsm.baseband.imei", "service call iphonesubinfo 1" };
+                    for (int i = 0; i < commands.Length; i++)
+                    {
+                        string value1 = CommandImpl.getPhoneInfo(tb_info, PathConstants.adb_path, "-s " + cb_devices.Text + " " + commands[i]);
+                        tb_info.AppendText(value1);
+                    }
+                    return;
+                }
+                else if (index == 3)
+                {
+                    command = "shell cat /system/build.prop";
+                }
+                else if (index == 4)
+                {
+                    command = "shell settings get secure android_id";
+                }
+                else if (index == 5)
+                {
+                    command = "shell settings get secure bluetooth_address";
+                }
 
-            string value = CommandImpl.getPhoneInfo(tb_info, PathConstants.adb_path, command);
-            tb_info.AppendText(value);
+                string value = CommandImpl.getPhoneInfo(tb_info, PathConstants.adb_path, "-s " + cb_devices.Text + " " + command);
+                tb_info.AppendText(value);
+            }
+            else if (validate_Device == 1)
+            {
+                String command = "";
+                if (index == 0)
+                {
+                    command = "shell netcfg";
+                }
+                else if (index == 1)
+                {
+                    command = "shell cat /sys/class/net/wlan0/address";
+                }
+                else if (index == 2)
+                {
+                    string[] commands = { "shell dumpsys iphonesubinfo", "shell getprop gsm.baseband.imei", "service call iphonesubinfo 1" };
+                    for (int i = 0; i < commands.Length; i++)
+                    {
+                        string value1 = CommandImpl.getPhoneInfo(tb_info, PathConstants.adb_path, commands[i]);
+                        tb_info.AppendText(value1);
+                    }
+                    return;
+                }
+                else if (index == 3)
+                {
+                    command = "shell cat /system/build.prop";
+                }
+                else if (index == 4)
+                {
+                    command = "shell settings get secure android_id";
+                }
+                else if (index == 5)
+                {
+                    command = "shell settings get secure bluetooth_address";
+                }
+
+                string value = CommandImpl.getPhoneInfo(tb_info, PathConstants.adb_path, command);
+                tb_info.AppendText(value);
+            }
         }
 
         public static void push(int validate_Device, TextBox tb_info, ComboBox cb_devices,String phone_path="") {
@@ -375,7 +455,7 @@ namespace Android.adb
             if (validate_Device == 1)
             {
                 String files=CommandImpl.getPhoneInfo(tb_info,PathConstants.adb_path,"shell ls "+path);
-                if (files.Contains("error"))
+                if (files.Contains("error:"))
                 {
                     tb_info.AppendText(files);
                 }

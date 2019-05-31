@@ -99,12 +99,13 @@ namespace Android
             sortProcess.StartInfo.WorkingDirectory = PathConstants.desktop_path;
             if (textbox.Text == null || textbox.Text.Equals(""))
             {
-                textbox.AppendText(">>>> 开始执行 adb " + command + "\n");
+                textbox.AppendText("\n");
+                textbox.AppendText(">>>> 开始执行 adb " + command);
             }
             else
             {
                 textbox.AppendText("\n");
-                textbox.AppendText(">>>> 开始执行 adb " + command + "\n");
+                textbox.AppendText(">>>> 开始执行 adb " + command);
             }
             // Set UseShellExecute to false for redirection.
             sortProcess.StartInfo.UseShellExecute = false;

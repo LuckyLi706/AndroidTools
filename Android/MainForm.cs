@@ -404,13 +404,13 @@ namespace Android
         private void btn_getinfo_Click(object sender, EventArgs e)
         {
             int index = cb_getinfo.SelectedIndex;
-            Command.getInfo(tb_info, index);
+            Command.getInfo(isDevices(),tb_info, index,cb_devices);
         }
 
         private void btn_getinfo2_Click(object sender, EventArgs e)
         {
             int index = cb_getInfo2.SelectedIndex;
-            Command.getInfo2(tb_info, index);
+            Command.getInfo2(isDevices(),tb_info, index,cb_devices);
         }
     }
 }
