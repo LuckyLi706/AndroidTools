@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="adb\Command.cs" />
+    <Compile Include="ApkDecoder.cs" />
     <Compile Include="CommandImpl.cs" />
     <Compile Include="CommandThread.cs" />
     <Compile Include="MainForm.cs">

@@ -31,12 +31,12 @@ namespace Android
             p.StartInfo.Arguments = command;
             if (textbox.Text == null||textbox.Text.Equals(""))
             {
-                textbox.AppendText(">>>> 开始执行 adb " + command + "\n");
+                textbox.AppendText(">>>> 开始执行 "+path + command + "\n");
             }
             else
             {
                 textbox.AppendText("\n");
-                textbox.AppendText(">>>> 开始执行 adb " + command + "\n");
+                textbox.AppendText(">>>> 开始执行 " +path+ command + "\n");
             }
             if (!workpath.Equals("1")) {
                 p.StartInfo.WorkingDirectory = PathConstants.desktop_path;

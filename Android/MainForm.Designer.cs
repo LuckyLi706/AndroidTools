@@ -67,6 +67,21 @@
             this.cb_ipport = new System.Windows.Forms.CheckBox();
             this.btn_connect = new System.Windows.Forms.Button();
             this.cb_emul = new System.Windows.Forms.ComboBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btn_jiagu = new System.Windows.Forms.Button();
+            this.tb_jiagu = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tb_appVersion = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tb_startAct = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.tb_appName = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tb_package = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btn_search = new System.Windows.Forms.Button();
+            this.tb_file = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.sign_apk = new System.Windows.Forms.Button();
@@ -90,6 +105,7 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -100,6 +116,7 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(471, 12);
             this.tabControl1.Multiline = true;
@@ -525,6 +542,145 @@
             this.cb_emul.Size = new System.Drawing.Size(175, 20);
             this.cb_emul.TabIndex = 0;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.btn_jiagu);
+            this.tabPage3.Controls.Add(this.tb_jiagu);
+            this.tabPage3.Controls.Add(this.label9);
+            this.tabPage3.Controls.Add(this.tb_appVersion);
+            this.tabPage3.Controls.Add(this.label8);
+            this.tabPage3.Controls.Add(this.tb_startAct);
+            this.tabPage3.Controls.Add(this.label7);
+            this.tabPage3.Controls.Add(this.tb_appName);
+            this.tabPage3.Controls.Add(this.label6);
+            this.tabPage3.Controls.Add(this.tb_package);
+            this.tabPage3.Controls.Add(this.label5);
+            this.tabPage3.Controls.Add(this.btn_search);
+            this.tabPage3.Controls.Add(this.tb_file);
+            this.tabPage3.Controls.Add(this.label4);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(311, 411);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "apk信息";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // btn_jiagu
+            // 
+            this.btn_jiagu.Location = new System.Drawing.Point(259, 155);
+            this.btn_jiagu.Name = "btn_jiagu";
+            this.btn_jiagu.Size = new System.Drawing.Size(49, 23);
+            this.btn_jiagu.TabIndex = 14;
+            this.btn_jiagu.Text = "获取";
+            this.btn_jiagu.UseVisualStyleBackColor = true;
+            this.btn_jiagu.Click += new System.EventHandler(this.btn_jiagu_Click);
+            // 
+            // tb_jiagu
+            // 
+            this.tb_jiagu.Location = new System.Drawing.Point(73, 155);
+            this.tb_jiagu.Name = "tb_jiagu";
+            this.tb_jiagu.Size = new System.Drawing.Size(180, 21);
+            this.tb_jiagu.TabIndex = 13;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(3, 158);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(65, 12);
+            this.label9.TabIndex = 12;
+            this.label9.Text = "加固信息：";
+            // 
+            // tb_appVersion
+            // 
+            this.tb_appVersion.Location = new System.Drawing.Point(73, 128);
+            this.tb_appVersion.Name = "tb_appVersion";
+            this.tb_appVersion.Size = new System.Drawing.Size(180, 21);
+            this.tb_appVersion.TabIndex = 11;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 131);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(53, 12);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "版本号：";
+            // 
+            // tb_startAct
+            // 
+            this.tb_startAct.Location = new System.Drawing.Point(73, 101);
+            this.tb_startAct.Name = "tb_startAct";
+            this.tb_startAct.Size = new System.Drawing.Size(180, 21);
+            this.tb_startAct.TabIndex = 9;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 104);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(53, 12);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "启动类：";
+            // 
+            // tb_appName
+            // 
+            this.tb_appName.Location = new System.Drawing.Point(73, 37);
+            this.tb_appName.Name = "tb_appName";
+            this.tb_appName.Size = new System.Drawing.Size(180, 21);
+            this.tb_appName.TabIndex = 7;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 40);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(53, 12);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "应用名：";
+            // 
+            // tb_package
+            // 
+            this.tb_package.Location = new System.Drawing.Point(73, 69);
+            this.tb_package.Name = "tb_package";
+            this.tb_package.Size = new System.Drawing.Size(180, 21);
+            this.tb_package.TabIndex = 4;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 72);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 12);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "包名：";
+            // 
+            // btn_search
+            // 
+            this.btn_search.Location = new System.Drawing.Point(259, 6);
+            this.btn_search.Name = "btn_search";
+            this.btn_search.Size = new System.Drawing.Size(49, 23);
+            this.btn_search.TabIndex = 2;
+            this.btn_search.Text = "浏览";
+            this.btn_search.UseVisualStyleBackColor = true;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
+            // 
+            // tb_file
+            // 
+            this.tb_file.Location = new System.Drawing.Point(73, 8);
+            this.tb_file.Name = "tb_file";
+            this.tb_file.Size = new System.Drawing.Size(180, 21);
+            this.tb_file.TabIndex = 1;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 11);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 12);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "文件地址：";
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.groupBox6);
@@ -695,7 +851,7 @@
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "安卓小工具v1.3";
+            this.Text = "安卓小工具v2.0.0";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -706,6 +862,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
@@ -773,6 +931,21 @@
         private System.Windows.Forms.ComboBox cb_getinfo;
         private System.Windows.Forms.Button btn_getinfo2;
         private System.Windows.Forms.ComboBox cb_getInfo2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btn_search;
+        private System.Windows.Forms.TextBox tb_file;
+        private System.Windows.Forms.TextBox tb_appName;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox tb_package;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox tb_startAct;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox tb_appVersion;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btn_jiagu;
+        private System.Windows.Forms.TextBox tb_jiagu;
+        private System.Windows.Forms.Label label9;
     }
 }
 

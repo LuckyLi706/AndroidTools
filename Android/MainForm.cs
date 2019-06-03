@@ -9,6 +9,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,33 +18,41 @@ namespace Android
 {
     public partial class MainForm : Form
     {
-        
+
         public MainForm()
         {
             InitializeComponent();
             System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
             //解压adb工具
-            if (!Directory.Exists(PathConstants.app_path + "android_adb")&&File.Exists(PathConstants.app_path + "android_adb.zip")) {
-               System.IO.Compression.ZipFile.ExtractToDirectory(PathConstants.app_path+"android_adb.zip", PathConstants.app_path+"android_adb");
-               //File.Delete(PathConstants.app_path+"android_adb.zip");
+            if (!Directory.Exists(PathConstants.app_path + "android_adb") && File.Exists(PathConstants.app_path + "android_adb.zip"))
+            {
+                System.IO.Compression.ZipFile.ExtractToDirectory(PathConstants.app_path + "android_adb.zip", PathConstants.app_path + "android_adb");
+                //File.Delete(PathConstants.app_path+"android_adb.zip");
             }
-            if (!Directory.Exists(PathConstants.app_path + "tools")&&File.Exists(PathConstants.app_path + "tools.zip"))
+            if (!Directory.Exists(PathConstants.app_path + "tools") && File.Exists(PathConstants.app_path + "tools.zip"))
             {
                 System.IO.Compression.ZipFile.ExtractToDirectory(PathConstants.app_path + "tools.zip", PathConstants.app_path + "tools");
                 //File.Delete(PathConstants.app_path + "tools.zip");
             }
-
+            FileStream fs = new FileStream("jiagu_info.txt", FileMode.Open, FileAccess.Read);
+            StreamReader sr = new StreamReader(fs);
+            string s;
+            while ((s = sr.ReadLine()) != null)
+            {
+                list.Add(s);
+            }
             cb_emul.SelectedIndex = 0;
             cb_getinfo.SelectedIndex = 0;
             cb_getInfo2.SelectedIndex = 0;
         }
 
+        private List<String> list=new List<String>();
         //第一个选项卡adb命令
 
         //获取所有设备名
         private void btn_getdevice_Click(object sender, EventArgs e)
         {
-            Command.getDevices(tb_info,cb_devices);
+            Command.getDevices(tb_info, cb_devices);
         }
 
         //获取包名
@@ -61,7 +70,7 @@ namespace Android
         //安装应用
         private void btn_install_apk_Click(object sender, EventArgs e)
         {
-            Command.install_Apk(isDevices(),tb_info,cb_devices);
+            Command.install_Apk(isDevices(), tb_info, cb_devices);
         }
 
         //卸载应用
@@ -85,14 +94,16 @@ namespace Android
         //push文件
         private void btn_push_Click(object sender, EventArgs e)
         {
-            if (cb_path.Checked) {
+            if (cb_path.Checked)
+            {
                 if (tb_path.Text == null || tb_path.Text.Equals(""))
                 {
                     MessageBox.Show("请输入路径");
                     return;
                 }
-                else {
-                    Command.push(isDevices(), tb_info, cb_devices,tb_path.Text);
+                else
+                {
+                    Command.push(isDevices(), tb_info, cb_devices, tb_path.Text);
                     return;
                 }
             }
@@ -106,12 +117,14 @@ namespace Android
             {
                 MessageBox.Show("请输入手机路径");
             }
-            else {
+            else
+            {
                 if ((cb_file.Text == null || cb_file.Text.Equals("")))
                 {
                     MessageBox.Show("先搜索该手机文件路径的所有文件");
-                 }
-                else {
+                }
+                else
+                {
                     Command.pull(isDevices(), tb_info, cb_devices, tb_pull_path.Text + '/' + cb_file.Text);
                 }
             }
@@ -124,8 +137,9 @@ namespace Android
             {
                 MessageBox.Show("请输入手机路径");
             }
-            else {
-                Command.getAllFile(isDevices(), tb_pull_path.Text, cb_file, tb_info,cb_devices);
+            else
+            {
+                Command.getAllFile(isDevices(), tb_pull_path.Text, cb_file, tb_info, cb_devices);
             }
         }
 
@@ -187,7 +201,7 @@ namespace Android
             CommandThread command = new CommandThread(tb_info, PathConstants.adb_path, "reboot");
             Thread thread = new Thread(command.startTask);
             thread.Start();
-         }
+        }
 
         //重启到fastboot模式
         private void btn_start_fastboot_Click(object sender, EventArgs e)
@@ -196,7 +210,7 @@ namespace Android
             Thread thread = new Thread(command.startTask);
             thread.Start();
         }
-        
+
         //选项卡切换事件
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -204,7 +218,8 @@ namespace Android
             {
                 tb_info.Text = "";
             }
-            else if (tabControl1.SelectedTab.Name == "tabPage2") {
+            else if (tabControl1.SelectedTab.Name == "tabPage2")
+            {
                 tb_info.Text = "";
             }
             else if (tabControl1.SelectedTab.Name == "tabPage1")
@@ -236,7 +251,8 @@ namespace Android
         {
             tb_info.Text = "";
             String apkFolderPath = chooseFolder();
-            if (apkFolderPath.Equals("")) {
+            if (apkFolderPath.Equals(""))
+            {
                 return;
             }
             string apkName = Path.GetFileNameWithoutExtension(apkFolderPath);
@@ -328,7 +344,7 @@ namespace Android
         //菜单栏的清屏功能
         private void cl_screen_Click(object sender, EventArgs e)
         {
-            tb_info.Text="";
+            tb_info.Text = "";
         }
 
         //菜单栏的打开系统的dos命令
@@ -344,17 +360,22 @@ namespace Android
         private void btn_connect_Click(object sender, EventArgs e)
         {
             String ipport = "";
-            int index=cb_emul.SelectedIndex;
-            if (cb_ipport.Checked) {
+            int index = cb_emul.SelectedIndex;
+            if (cb_ipport.Checked)
+            {
                 if (tb_ipport.Equals(""))
                 {
                     MessageBox.Show("ip和port不能为空");
+                    return;
                 }
-                else {
-                    Command.connect(tb_info, tb_ipport.Text+":5555");
+                else
+                {
+                    Command.connect(tb_info, tb_ipport.Text + ":5555");
+                    return;
                 }
             }
-            switch (index) {
+            switch (index)
+            {
                 case 0:
                     ipport = "127.0.0.1:21503";
                     break;
@@ -392,11 +413,12 @@ namespace Android
         {
             if (cb_ipport.Checked)
             {
-                
-                    tb_ipport.Enabled = true;
-                
+
+                tb_ipport.Enabled = true;
+
             }
-            else {
+            else
+            {
                 tb_ipport.Enabled = false;
             }
         }
@@ -404,13 +426,155 @@ namespace Android
         private void btn_getinfo_Click(object sender, EventArgs e)
         {
             int index = cb_getinfo.SelectedIndex;
-            Command.getInfo(isDevices(),tb_info, index,cb_devices);
+            Command.getInfo(isDevices(), tb_info, index, cb_devices);
         }
 
         private void btn_getinfo2_Click(object sender, EventArgs e)
         {
             int index = cb_getInfo2.SelectedIndex;
-            Command.getInfo2(isDevices(),tb_info, index,cb_devices);
+            Command.getInfo2(isDevices(), tb_info, index, cb_devices);
         }
+
+        //获取apk信息
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "Apk文件(*.apk)|*.apk|所有文件(*.*)|*.*";
+            if (dlg.ShowDialog(this) == DialogResult.OK)
+            {
+                // DecodeApk(dlg.FileName);
+                tb_file.Text = System.IO.Path.GetFullPath(dlg.FileName);
+                DecodeApk(dlg.FileName);
+            }
+        }
+
+        private void DecodeApk(string apkPath)
+        {
+            if (!File.Exists(apkPath))
+                return;
+
+            String value = CommandImpl.getPhoneInfo(tb_info, PathConstants.aapt_path, " d badging " + apkPath);
+            //MessageBox.Show(value);
+            String[] line = value.Replace("\'", "").Split('\n');
+            for (int i = 0; i < line.Length; i++)
+            {
+                //package: name='me.weishu.exp' versionCode='341' versionName='鏄嗕粦闀溌?.4.1' platformBuildVersionName='鏄嗕粦闀溌?.4.1' compileSdkVersion='28' compileSdkVersionCodename='9'
+                //如果想不存在乱码，先重定向到txt里面去。
+                if (line[i].StartsWith("package"))
+                {
+                    String[] apkInfo = line[i].Substring(8).Split(' ');
+                    tb_package.Text = apkInfo[1].Substring(5);
+                    tb_appVersion.Text = apkInfo[2].Split('=')[1];
+                    continue;
+                }
+                else if (line[i].StartsWith("application-label:"))
+                {
+                    tb_appName.Text = line[i].Split(':')[1];
+                    continue;
+                }
+                else if (line[i].StartsWith("launchable-activity"))
+                {
+                    tb_startAct.Text = line[i].Substring(20).Split(' ')[1].Split('=')[1];
+                    continue;
+                }
+            }
+        }
+
+        private void btn_jiagu_Click(object sender, EventArgs e)
+        {
+            String value = CommandImpl.getPhoneInfo(tb_info, PathConstants.unzip_path, " -j " + tb_file.Text + " lib/armeabi-v7a/*.so -d so");
+            if (value.Contains("filename not matched:"))
+            {
+                value = CommandImpl.getPhoneInfo(tb_info, PathConstants.unzip_path, " -j " + tb_file.Text + " lib/armeabi/*.so -d so");
+                if (value.Contains("filename not matched:"))
+                {
+                    tb_jiagu.Text = "无加固信息";
+                    return;
+                }
+                else {
+                    //MessageBox.Show(value);
+                    List<String> list_info = new List<string>();
+                    String[] info = value.Split('\n');
+                    for (int i = 1; i < info.Length-1; i++) {
+                        list_info.Add(info[i].Split('/')[1]);
+                    }
+                    
+                    getjiaguInfo(list_info);
+                }
+            }
+            else {
+                List<String> list_info = new List<string>();
+                String[] info = value.Split('\n');
+                for (int i = 1; i < info.Length; i++)
+                {
+                    list_info.Add(info[i].Split('/')[1]);
+                }
+
+                getjiaguInfo(list_info);
+            }
+            
+        }
+
+
+        private void getjiaguInfo(List<String> list_info)
+        {
+           
+            for (int i = 0; i < list_info.Count; i++)
+            {
+                String name = list_info[i].Substring(0, 7);
+                //MessageBox.Show(name);
+                for (int j = 0; j < list.Count; j++)
+                {
+                    //MessageBox.Show(list[j]);
+                    if (list[j].Contains(name))
+                    {
+                        tb_jiagu.Text=list[j];
+                        FileUtil.deleteDirectory("so");
+                        return;
+                    }
+                }
+            }
+            FileUtil.deleteDirectory("so");
+        }
+        //ApkDecoder apkDecoder = new ApkDecoder(apkPath);
+        //apkDecoder.InfoParsedEvent += new Action<ApkDecoder>(apkDecoder_InfoParsed);
+        //apkDecoder.AaptNotFoundEvent += new MethodInvoker(apkDecoder_AaptNotFound);
     }
+
+    //private void apkDecoder_InfoParsed(ApkDecoder apkDecoder)
+    //{
+    //    this.Invoke(new Action<ApkDecoder>(SafeInfoParsed), apkDecoder);
+    //}
+
+    //private void apkDecoder_AaptNotFound()
+    //{
+    //    this.Invoke(new MethodInvoker(ShowAaptNotFoundInfo));
+    //}
+
+    //private void ShowAaptNotFoundInfo()
+    //{
+    //    MessageBox.Show(this, "解析apk文件所需要的组件aapt.exe遗失，请下载此程序完整组件然后再试。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+    //}
+
+    //private void SafeInfoParsed(ApkDecoder apkDecoder)
+    //{
+    //    tb_appName.Text = apkDecoder.AppName;
+    //    //txtVersion.Text = apkDecoder.AppVersion;
+    //    //txtVersionCode.Text = apkDecoder.AppVersionCode;
+    //    tb_package.Text = apkDecoder.PkgName;
+    //    //txtIconPath.Text = apkDecoder.IconPath;
+    //    //txtMinSdk.Text = apkDecoder.MinSdk;
+    //    //txtMinVersion.Text = apkDecoder.MinVersion;
+    //    //txtScreenSize.Text = apkDecoder.ScreenSupport;
+    //    //txtScreenSolution.Text = apkDecoder.ScreenSolutions;
+    //    //txtPermission.Text = apkDecoder.Permissions;
+    //    //txtFeature.Text = apkDecoder.Features;
+    //    //imgIcon.Image = (apkDecoder.AppIcon != null) ? apkDecoder.AppIcon : this.Icon.ToBitmap();
+
+    //    //txtApkPath.Text = apkDecoder.ApkPath;
+    //    //txtApkSize.Text = apkDecoder.ApkSize;
+
+    //    //this.btnPlayStore.Enabled = !string.IsNullOrEmpty(txtPackage.Text);
+    //}
+    //}
 }
