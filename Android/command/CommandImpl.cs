@@ -23,69 +23,45 @@ namespace Android
 {
     class CommandImpl
     {
-        //获取手机的信息
-        public static string getPhoneInfo(TextBox textbox,string path,string command,string workpath="1") {
-
-            Process p = new Process();
-            p.StartInfo.FileName = path;
-            p.StartInfo.Arguments = command;
-            if (textbox.Text == null||textbox.Text.Equals(""))
-            {
-                textbox.AppendText(">>>> 开始执行 "+path + command + "\n");
-            }
-            else
-            {
-                textbox.AppendText("\n");
-                textbox.AppendText(">>>> 开始执行 " +path+ command + "\n");
-            }
-            if (!workpath.Equals("1")) {
-                p.StartInfo.WorkingDirectory = PathConstants.desktop_path;
-            }
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.RedirectStandardOutput = true;
-            p.StartInfo.RedirectStandardInput = true;
-            p.StartInfo.RedirectStandardError = true;
-            p.StartInfo.CreateNoWindow = true;
-            p.Start();
-            
-            string value = p.StandardOutput.ReadToEnd()+p.StandardError.ReadToEnd();
-            return value;
-        }
-
-        public static string getApkTool(TextBox textbox, string path, string command, string workpath = "1")
+        //同步阻塞线程获取信息，只能用于一些耗时较短的命令
+        public static string getSyncInfo(TextBox textbox, string path, string command, string workpath = "1")
         {
 
             Process p = new Process();
             p.StartInfo.FileName = path;
             p.StartInfo.Arguments = command;
-            p.StartInfo.WorkingDirectory = PathConstants.desktop_path;
+            if (textbox.Text == null || textbox.Text.Equals(""))
+            {
+                textbox.AppendText(Environment.NewLine);
+                textbox.AppendText(">>>> 开始执行 " + Path.GetFileNameWithoutExtension(path) + " " + command);
+                // textbox.AppendText("\n");
+            }
+            else
+            {
+                textbox.AppendText(Environment.NewLine);
+                textbox.AppendText(">>>> 开始执行 " + Path.GetFileNameWithoutExtension(path) + " " + command);
+                //  textbox.AppendText("\n");
+            }
+            if (!workpath.Equals("1"))
+            {
+                p.StartInfo.WorkingDirectory = PathUtil.desktop_path;
+            }
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardInput = true;
             p.StartInfo.RedirectStandardError = true;
             p.StartInfo.CreateNoWindow = true;
-            
             p.Start();
 
-            p.BeginOutputReadLine();
-            p.BeginErrorReadLine();
-            // textbox.Text = ">>>> apktool " + command + " 命令开始" + "\r\n";
-            string line = null;
-            while (!p.StandardOutput.EndOfStream||!p.StandardError.EndOfStream)
-            {
-
-                line = p.StandardOutput.ReadLine()+p.StandardError.ReadLine();
-                Console.WriteLine(line);
-            }
-            //string value = p.StandardOutput.ReadToEnd() + p.StandardError.ReadToEnd();
-            return "";
+            string value = p.StandardOutput.ReadToEnd() + p.StandardError.ReadToEnd();
+            return value;
         }
 
 
         private static string sortOutput = null;
         private static TextBox textBox;
         private static int numOutputLines = 0;
-        public static void getInfoByCommand(TextBox textbox, string path, string command, string workpath = "")
+        public static void getAsynInfo(TextBox textbox, string path, string command, string workpath = "")
         {
             // Initialize the process and its StartInfo properties.
             // The sort command is a console application that
@@ -93,19 +69,45 @@ namespace Android
 
             //Process sortProcess;
             Process sortProcess = new Process();
-            sortProcess.StartInfo.FileName = path;
-            Console.WriteLine(path);
-            sortProcess.StartInfo.Arguments = command;
-            sortProcess.StartInfo.WorkingDirectory = PathConstants.desktop_path;
-            if (textbox.Text == null || textbox.Text.Equals(""))
+            //如果path为空，就直接执行cmd命令，如果不为空，按照命令路径执行
+            if (path != null && !path.Equals(""))
             {
-                textbox.AppendText("\n");
-                textbox.AppendText(">>>> 开始执行 adb " + command);
+                sortProcess.StartInfo.FileName = path;
             }
             else
             {
-                textbox.AppendText("\n");
-                textbox.AppendText(">>>> 开始执行 adb " + command);
+                sortProcess.StartInfo.FileName = "cmd.exe";
+            }
+            sortProcess.StartInfo.Arguments = command;
+            //定位当前所在的目录，默认是在当前app的目录下，
+            //sortProcess.StartInfo.WorkingDirectory = PathUtil.desktop_path;
+            if (textbox.Text == null || textbox.Text.Equals(""))
+            {
+                if (path != null && !path.Equals(""))
+                {
+                    textbox.AppendText(Environment.NewLine);
+                    textbox.AppendText(">>>> 开始执行 " + Path.GetFileNameWithoutExtension(path) + " " + command);
+                }
+                //处理几个path为空，需要本地jdk才能运行的命令
+                else
+                {
+                    textbox.AppendText(Environment.NewLine);
+                    textbox.AppendText(">>>> 开始执行 " + command);
+                }
+            }
+            else
+            {
+                if (path != null && !path.Equals(""))
+                {
+                    textbox.AppendText(Environment.NewLine);
+                    textbox.AppendText(">>>> 开始执行 " + Path.GetFileNameWithoutExtension(path) + " " + command);
+                }
+                //处理几个path为空，需要本地jdk才能运行的命令
+                else
+                {
+                    textbox.AppendText(Environment.NewLine);
+                    textbox.AppendText(">>>> 开始执行 " + command);
+                }
             }
             // Set UseShellExecute to false for redirection.
             sortProcess.StartInfo.UseShellExecute = false;
@@ -114,7 +116,7 @@ namespace Android
             // This stream is read asynchronously using an event handler.
             sortProcess.StartInfo.RedirectStandardOutput = true;
             textBox = textbox;
-           // sortOutput = new StringBuilder("");
+            // sortOutput = new StringBuilder("");
 
             // Set our event handler to asynchronously read the sort output.
             sortProcess.OutputDataReceived += new DataReceivedEventHandler(SortOutputHandler);
@@ -129,7 +131,8 @@ namespace Android
 
             // Use a stream writer to synchronously write the sort input.
             StreamWriter sortStreamWriter = sortProcess.StandardInput;
-
+            sortStreamWriter.AutoFlush = true;
+            sortStreamWriter.WriteLine(command);
             // Start the asynchronous read of the sort output stream.
             sortProcess.BeginOutputReadLine();
             sortProcess.BeginErrorReadLine();
@@ -149,10 +152,10 @@ namespace Android
             {
                 numOutputLines++;
                 // Add the text to the collected output.
-                sortOutput=(Environment.NewLine +
+                sortOutput = (Environment.NewLine +
                     "[" + numOutputLines.ToString() + "] - " + outLine.Data);
                 textBox.AppendText(sortOutput);
-              //  getPhoneInfo(null, "cmd.exe", "exit");
+                //  getPhoneInfo(null, "cmd.exe", "exit");
             }
             //textBox.AppendText("\n");
         }
@@ -166,7 +169,7 @@ namespace Android
             {
                 numOutputLines++;
                 // Add the text to the collected output.
-                sortOutput = (">> "+Environment.NewLine +
+                sortOutput = (">> " + Environment.NewLine +
                     "[" + numOutputLines.ToString() + "] - " + outLine.Data);
                 textBox.AppendText(sortOutput);
             }

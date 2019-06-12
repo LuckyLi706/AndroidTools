@@ -12,6 +12,7 @@ namespace AndroidSmallTools.utils
         public static String DESKTOP_DIR = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
         public static String CURRENT_DIR = Application.StartupPath;
 
+        //删除目录
         public static void deleteDirectory(String path)
         {
             try
@@ -50,6 +51,25 @@ namespace AndroidSmallTools.utils
             {
                 Console.WriteLine(ex.Message.ToString());// 异常信息
             }
+        }
+
+        public static void writeFile(String path, String text)
+        {
+            //防止写文件乱码，使用GB2312编码
+            StreamWriter sw1 = new StreamWriter(path, false, Encoding.GetEncoding("GB2312"));
+            sw1.WriteLine(text);
+            sw1.Close();
+        }
+
+        public static String readFile(String path)
+        {
+            if (File.Exists(path))
+            {
+                String value = File.ReadAllText(path);
+                File.Delete(path);
+                return value;
+            }
+            return "";
         }
     }
 }

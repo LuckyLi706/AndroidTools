@@ -1,17 +1,12 @@
 ﻿using Android.adb;
+using Android.dialog;
 using AndroidSmallTools.utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Android
@@ -23,18 +18,13 @@ namespace Android
         {
             InitializeComponent();
             System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
-            //解压adb工具
-            if (!Directory.Exists(PathConstants.app_path + "android_adb") && File.Exists(PathConstants.app_path + "android_adb.zip"))
+            //解压tools文件夹
+            if (!Directory.Exists(PathUtil.app_path + "tools") && File.Exists(PathUtil.app_path + "tools.zip"))
             {
-                System.IO.Compression.ZipFile.ExtractToDirectory(PathConstants.app_path + "android_adb.zip", PathConstants.app_path + "android_adb");
-                //File.Delete(PathConstants.app_path+"android_adb.zip");
+                System.IO.Compression.ZipFile.ExtractToDirectory(PathUtil.app_path + "tools.zip", PathUtil.app_path + "tools");
+                File.Delete(PathUtil.app_path + "tools.zip");
             }
-            if (!Directory.Exists(PathConstants.app_path + "tools") && File.Exists(PathConstants.app_path + "tools.zip"))
-            {
-                System.IO.Compression.ZipFile.ExtractToDirectory(PathConstants.app_path + "tools.zip", PathConstants.app_path + "tools");
-                //File.Delete(PathConstants.app_path + "tools.zip");
-            }
-            FileStream fs = new FileStream("jiagu_info.txt", FileMode.Open, FileAccess.Read);
+            FileStream fs = new FileStream("config/jiagu_config", FileMode.Open, FileAccess.Read);
             StreamReader sr = new StreamReader(fs);
             string s;
             while ((s = sr.ReadLine()) != null)
@@ -198,7 +188,7 @@ namespace Android
         //重启手机
         private void btn_restart_Click(object sender, EventArgs e)
         {
-            CommandThread command = new CommandThread(tb_info, PathConstants.adb_path, "reboot");
+            CommandThread command = new CommandThread(tb_info, PathUtil.adb_path, "reboot");
             Thread thread = new Thread(command.startTask);
             thread.Start();
         }
@@ -206,7 +196,7 @@ namespace Android
         //重启到fastboot模式
         private void btn_start_fastboot_Click(object sender, EventArgs e)
         {
-            CommandThread command = new CommandThread(tb_info, PathConstants.adb_path, "reboot bootloader");
+            CommandThread command = new CommandThread(tb_info, PathUtil.adb_path, "reboot bootloader");
             Thread thread = new Thread(command.startTask);
             thread.Start();
         }
@@ -240,7 +230,7 @@ namespace Android
                 return;
             }
             string apkName = Path.GetFileNameWithoutExtension(apkPath);
-            String apktoolPath = @"tools\apktool_2.3.4.jar";
+            String apktoolPath = @"tools\apktool.jar";
             CommandThread command = new CommandThread("java -jar " + apktoolPath + " d " + apkPath + " -f -o " + apkPath.Substring(0, apkPath.Length - apkName.Length - 4) + "\\" + apkName, tb_info);
             Thread thread = new Thread(command.startTask);
             thread.Start();
@@ -256,9 +246,8 @@ namespace Android
                 return;
             }
             string apkName = Path.GetFileNameWithoutExtension(apkFolderPath);
-            String apktoolPath = @"tools\apktool_2.3.4.jar";
+            String apktoolPath = @"tools\apktool.jar";
             CommandThread command = new CommandThread("java -jar " + apktoolPath + " b " + apkFolderPath + " -o " + apkFolderPath.Substring(0, apkFolderPath.Length - apkName.Length) + "\\" + apkName + ".unsigned.apk", tb_info);
-            //String info = CommandUtil.StartCmdProcess("java -jar " + apktoolPath + " b " + apkFolderPath + " -o " + apkFolderPath.Substring(0, apkFolderPath.Length - apkName.Length) + "\\" + apkName + "_unsigned.apk");
             Thread thread = new Thread(command.startTask);
             thread.Start();
         }
@@ -272,8 +261,10 @@ namespace Android
                 return;
             }
             string apkName = Path.GetFileNameWithoutExtension(apkPath);
-            String apktoolPath = @"tools\ShakaApktool_3.0.0-20170503-release.jar";
-            CommandUtil.StartCmdProcess("java -jar " + apktoolPath + " d " + apkPath + " -f -o " + apkPath.Substring(0, apkPath.Length - apkName.Length - 4) + "\\" + apkName, tb_info);
+            String apktoolPath = @"tools\ShakaApktool.jar";
+            CommandThread command = new CommandThread("java -jar " + apktoolPath + " d " + apkPath + " -f -o " + apkPath.Substring(0, apkPath.Length - apkName.Length - 4) + "\\" + apkName, tb_info);
+            Thread thread = new Thread(command.startTask);
+            thread.Start();
             //tb_info.Text = info;
         }
 
@@ -287,9 +278,11 @@ namespace Android
                 return;
             }
             string apkName = Path.GetFileNameWithoutExtension(apkFolderPath);
-            String apktoolPath = @"tools\ShakaApktool_3.0.0-20170503-release.jar";
+            String apktoolPath = @"tools\ShakaApktool.jar";
             Console.WriteLine("java -jar " + apktoolPath + " b " + apkFolderPath + " -o " + apkFolderPath.Substring(0, apkFolderPath.Length - apkName.Length) + "\\" + apkName + ".unsigned.apk");
-            CommandUtil.StartCmdProcess("java -jar " + apktoolPath + " b " + apkFolderPath + " --o " + apkFolderPath.Substring(0, apkFolderPath.Length - apkName.Length) + "\\" + apkName + "_unsigned.apk", tb_info);
+            CommandThread command = new CommandThread("java -jar " + apktoolPath + " b " + apkFolderPath + " --o " + apkFolderPath.Substring(0, apkFolderPath.Length - apkName.Length) + "\\" + apkName + "_unsigned.apk", tb_info);
+            Thread thread = new Thread(command.startTask);
+            thread.Start();
         }
 
         private void sign_apk_Click(object sender, EventArgs e)
@@ -302,9 +295,10 @@ namespace Android
             }
             string apkName = Path.GetFileNameWithoutExtension(apkPath);
             String signPath = @"tools\apksigner.jar";
-            String jksPath = @"lijie.jks";
-            CommandUtil.StartCmdProcess("java -jar " + signPath + " sign --ks " + jksPath + " --ks-key-alias key0 --ks-pass pass:lj940706 --key-pass pass:lj940706" + " --in " + apkPath + " --out " + apkPath.Substring(0, apkPath.Length - apkName.Length - 4) + "\\" + apkName + "_signed.apk", tb_info);
-            //tb_info.Text = info;
+            String jksPath = @"tools\lijie.jks";
+            CommandThread command = new CommandThread("java -jar " + signPath + " sign --ks " + jksPath + " --ks-key-alias key0 --ks-pass pass:lj940706 --key-pass pass:lj940706" + " --in " + apkPath + " --out " + apkPath.Substring(0, apkPath.Length - apkName.Length - 4) + "\\" + apkName + "_signed.apk", tb_info);
+            Thread thread = new Thread(command.startTask);
+            thread.Start();
         }
 
         private String chooseFile()
@@ -352,7 +346,7 @@ namespace Android
         {
             Process p = new Process();
             p.StartInfo.FileName = "cmd.exe";
-            p.StartInfo.WorkingDirectory = PathConstants.desktop_path;
+            p.StartInfo.WorkingDirectory = PathUtil.desktop_path;
             p.Start();
         }
 
@@ -453,8 +447,9 @@ namespace Android
             if (!File.Exists(apkPath))
                 return;
 
-            String value = CommandImpl.getPhoneInfo(tb_info, PathConstants.aapt_path, " d badging " + apkPath);
-            //MessageBox.Show(value);
+            String value = CommandImpl.getSyncInfo(tb_info, PathUtil.aapt_path, " d badging " + apkPath);
+            FileUtil.writeFile("1.txt",value);
+            value = FileUtil.readFile("1.txt");
             String[] line = value.Replace("\'", "").Split('\n');
             for (int i = 0; i < line.Length; i++)
             {
@@ -469,7 +464,9 @@ namespace Android
                 }
                 else if (line[i].StartsWith("application-label:"))
                 {
+                    
                     tb_appName.Text = line[i].Split(':')[1];
+                    //tb_appName.Text = line[i].Split(':')[1];
                     continue;
                 }
                 else if (line[i].StartsWith("launchable-activity"))
@@ -482,10 +479,10 @@ namespace Android
 
         private void btn_jiagu_Click(object sender, EventArgs e)
         {
-            String value = CommandImpl.getPhoneInfo(tb_info, PathConstants.unzip_path, " -j " + tb_file.Text + " lib/armeabi-v7a/*.so -d so");
+            String value = CommandImpl.getSyncInfo(tb_info, PathUtil.unzip_path, " -j " + tb_file.Text + " lib/armeabi-v7a/*.so -d so");
             if (value.Contains("filename not matched:"))
             {
-                value = CommandImpl.getPhoneInfo(tb_info, PathConstants.unzip_path, " -j " + tb_file.Text + " lib/armeabi/*.so -d so");
+                value = CommandImpl.getSyncInfo(tb_info, PathUtil.unzip_path, " -j " + tb_file.Text + " lib/armeabi/*.so -d so");
                 if (value.Contains("filename not matched:"))
                 {
                     tb_jiagu.Text = "无加固信息";
@@ -503,13 +500,20 @@ namespace Android
                 }
             }
             else {
+                //MessageBox.Show(value);
                 List<String> list_info = new List<string>();
                 String[] info = value.Split('\n');
                 for (int i = 1; i < info.Length; i++)
                 {
-                    list_info.Add(info[i].Split('/')[1]);
+                    if (!info[i].Equals(""))
+                    {
+                        //MessageBox.Show(info[i].Split('/')[1]);
+                        list_info.Add(info[i].Split('/')[1]);
+                    }
+                    else {
+                        list_info.Add("");
+                    }
                 }
-
                 getjiaguInfo(list_info);
             }
             
@@ -521,6 +525,9 @@ namespace Android
            
             for (int i = 0; i < list_info.Count; i++)
             {
+                if (list_info[i].Equals("")) {
+                    continue;
+                }
                 String name = list_info[i].Substring(0, 7);
                 //MessageBox.Show(name);
                 for (int j = 0; j < list.Count; j++)
@@ -535,6 +542,14 @@ namespace Android
                 }
             }
             FileUtil.deleteDirectory("so");
+            tb_jiagu.Text = "无加固信息";
+        }
+
+
+        private void 关于ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutDialog aboutDialog = new AboutDialog();
+            aboutDialog.ShowDialog();
         }
         //ApkDecoder apkDecoder = new ApkDecoder(apkPath);
         //apkDecoder.InfoParsedEvent += new Action<ApkDecoder>(apkDecoder_InfoParsed);

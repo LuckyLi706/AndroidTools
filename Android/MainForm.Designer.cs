@@ -754,7 +754,7 @@
             this.groupBox4.Size = new System.Drawing.Size(295, 55);
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "apktool";
+            this.groupBox4.Text = "apktool(需要java环境，下面都一样)";
             // 
             // a_backcompile
             // 
@@ -836,6 +836,7 @@
             this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
             this.关于ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.关于ToolStripMenuItem.Text = "关于";
+            this.关于ToolStripMenuItem.Click += new System.EventHandler(this.关于ToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -851,7 +852,7 @@
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "安卓小工具v2.0.0";
+            this.Text = "安卓小工具v3.0.0";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);

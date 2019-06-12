@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Android
+{
+    class PathUtil
+    {
+        //当前app路径
+        public static string app_path= System.AppDomain.CurrentDomain.BaseDirectory;
+
+        //桌面路径
+        public static string desktop_path= Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+
+        public static string adb_path = app_path + "tools//adb.exe";
+
+        public static string aapt_path = app_path + "tools//aapt.exe";
+
+        public static string unzip_path = app_path + "tools//unzip.exe";
+
+        public static string apktool_path = app_path + "tools//apktool";
+    }
+}

@@ -27,14 +27,8 @@ namespace Android
         }
 
         public void startTask() {
-            if (path == null || path.Equals(""))
-            {
-                CommandUtil.StartCmdProcess(command, tb);
-            }
-            else
-            {
-                CommandImpl.getInfoByCommand(tb, path, command);
-            }
+            
+            CommandImpl.getAsynInfo(tb, path, command);
         }
     }
 }
