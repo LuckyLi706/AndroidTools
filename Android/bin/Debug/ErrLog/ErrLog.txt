@@ -1,0 +1,89 @@
+出现应用程序未处理的异常：2019/6/12 7:51:55
+异常类型：FileNotFoundException
+异常消息：未能找到文件“D:\Visual Studio\Projects\AndroidTools\Android\bin\Debug\jiagu_info.txt”。
+异常信息：   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access)
+   在 Android.MainForm..ctor() 位置 D:\Visual Studio\Projects\AndroidTools\Android\MainForm.cs:行号 37
+   在 Android.Program.Main() 位置 D:\Visual Studio\Projects\AndroidTools\Android\Program.cs:行号 28
+
+---------------------------------------------------------
+出现应用程序未处理的异常：2019/6/12 7:55:47
+异常类型：IndexOutOfRangeException
+异常消息：索引超出了数组界限。
+异常信息：   在 Android.MainForm.btn_jiagu_Click(Object sender, EventArgs e) 位置 D:\Visual Studio\Projects\AndroidTools\Android\MainForm.cs:行号 510
+   在 System.Windows.Forms.Control.OnClick(EventArgs e)
+   在 System.Windows.Forms.Button.OnClick(EventArgs e)
+   在 System.Windows.Forms.Button.OnMouseUp(MouseEventArgs mevent)
+   在 System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   在 System.Windows.Forms.Control.WndProc(Message& m)
+   在 System.Windows.Forms.ButtonBase.WndProc(Message& m)
+   在 System.Windows.Forms.Button.WndProc(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+
+---------------------------------------------------------
+出现应用程序未处理的异常：2019/6/12 8:48:09
+异常类型：FileNotFoundException
+异常消息：未能找到文件“D:\Visual Studio\Projects\AndroidTools\Android\bin\Debug\jiagu_info.txt”。
+异常信息：   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access)
+   在 Android.MainForm..ctor() 位置 D:\Visual Studio\Projects\AndroidTools\Android\MainForm.cs:行号 37
+   在 Android.Program.Main() 位置 D:\Visual Studio\Projects\AndroidTools\Android\Program.cs:行号 28
+
+---------------------------------------------------------
+出现应用程序未处理的异常：2019/6/12 8:48:55
+异常类型：FileNotFoundException
+异常消息：未能找到文件“D:\Visual Studio\Projects\AndroidTools\Android\bin\Debug\config\jiagu_info”。
+异常信息：   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access)
+   在 Android.MainForm..ctor() 位置 D:\Visual Studio\Projects\AndroidTools\Android\MainForm.cs:行号 37
+   在 Android.Program.Main() 位置 D:\Visual Studio\Projects\AndroidTools\Android\Program.cs:行号 28
+
+---------------------------------------------------------
+出现应用程序未处理的异常：2019/6/12 9:33:40
+Application UnhandledException:未将对象引用设置到对象的实例。;
+堆栈信息:   在 Android.CommandImpl.getAsynInfo(TextBox textbox, String path, String command, String workpath) 位置 D:\Visual Studio\Projects\AndroidTools\Android\CommandImpl.cs:行号 105
+   在 Android.CommandThread.startTask() 位置 D:\Visual Studio\Projects\AndroidTools\Android\CommandThread.cs:行号 31
+   在 System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   在 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   在 System.Threading.ThreadHelper.ThreadStart()
+---------------------------------------------------------
+出现应用程序未处理的异常：2019/6/12 9:35:11
+Application UnhandledException:尚未提供文件名，因此无法启动进程。;
+堆栈信息:   在 System.Diagnostics.Process.Start()
+   在 Android.CommandImpl.getAsynInfo(TextBox textbox, String path, String command, String workpath) 位置 D:\Visual Studio\Projects\AndroidTools\Android\CommandImpl.cs:行号 148
+   在 Android.CommandThread.startTask() 位置 D:\Visual Studio\Projects\AndroidTools\Android\CommandThread.cs:行号 31
+   在 System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   在 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   在 System.Threading.ThreadHelper.ThreadStart()
+---------------------------------------------------------
+出现应用程序未处理的异常：2019/6/12 9:37:34
+Application UnhandledException:尚未提供文件名，因此无法启动进程。;
+堆栈信息:   在 System.Diagnostics.Process.Start()
+   在 Android.CommandImpl.getAsynInfo(TextBox textbox, String path, String command, String workpath) 位置 D:\Visual Studio\Projects\AndroidTools\Android\CommandImpl.cs:行号 149
+   在 Android.CommandThread.startTask() 位置 D:\Visual Studio\Projects\AndroidTools\Android\CommandThread.cs:行号 31
+   在 System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   在 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   在 System.Threading.ThreadHelper.ThreadStart()
+---------------------------------------------------------
+出现应用程序未处理的异常：2019/6/12 9:42:06
+Application UnhandledException:尚未提供文件名，因此无法启动进程。;
+堆栈信息:   在 System.Diagnostics.Process.Start()
+   在 Android.CommandImpl.getAsynInfo(TextBox textbox, String path, String command, String workpath) 位置 D:\Visual Studio\Projects\AndroidTools\Android\CommandImpl.cs:行号 158
+   在 Android.CommandThread.startTask() 位置 D:\Visual Studio\Projects\AndroidTools\Android\CommandThread.cs:行号 31
+   在 System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   在 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   在 System.Threading.ThreadHelper.ThreadStart()
+---------------------------------------------------------
