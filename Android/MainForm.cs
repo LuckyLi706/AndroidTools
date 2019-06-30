@@ -218,88 +218,88 @@ namespace Android
             }
         }
 
-        /**
-         *    第二个选项卡的事件
-         */
-        private void a_decompile_Click(object sender, EventArgs e)
-        {
-            tb_info.Text = "";
-            String apkPath = chooseFile();
-            if (apkPath.Equals(""))
-            {
-                return;
-            }
-            string apkName = Path.GetFileNameWithoutExtension(apkPath);
-            String apktoolPath = @"tools\apktool.jar";
-            CommandThread command = new CommandThread("java -jar " + apktoolPath + " d " + apkPath + " -f -o " + apkPath.Substring(0, apkPath.Length - apkName.Length - 4) + "\\" + apkName, tb_info);
-            Thread thread = new Thread(command.startTask);
-            thread.Start();
-            //tb_info.Text = info;
-        }
+        ///**
+        // *    第二个选项卡的事件
+        // */
+        //private void a_decompile_Click(object sender, EventArgs e)
+        //{
+        //    tb_info.Text = "";
+        //    String apkPath = chooseFile();
+        //    if (apkPath.Equals(""))
+        //    {
+        //        return;
+        //    }
+        //    string apkName = Path.GetFileNameWithoutExtension(apkPath);
+        //    String apktoolPath = @"tools\apktool.jar";
+        //    CommandThread command = new CommandThread("java -jar " + apktoolPath + " d " + apkPath + " -f -o " + apkPath.Substring(0, apkPath.Length - apkName.Length - 4) + "\\" + apkName, tb_info);
+        //    Thread thread = new Thread(command.startTask);
+        //    thread.Start();
+        //    //tb_info.Text = info;
+        //}
 
-        private void a_backcompile_Click(object sender, EventArgs e)
-        {
-            tb_info.Text = "";
-            String apkFolderPath = chooseFolder();
-            if (apkFolderPath.Equals(""))
-            {
-                return;
-            }
-            string apkName = Path.GetFileNameWithoutExtension(apkFolderPath);
-            String apktoolPath = @"tools\apktool.jar";
-            CommandThread command = new CommandThread("java -jar " + apktoolPath + " b " + apkFolderPath + " -o " + apkFolderPath.Substring(0, apkFolderPath.Length - apkName.Length) + "\\" + apkName + ".unsigned.apk", tb_info);
-            Thread thread = new Thread(command.startTask);
-            thread.Start();
-        }
+        //private void a_backcompile_Click(object sender, EventArgs e)
+        //{
+        //    tb_info.Text = "";
+        //    String apkFolderPath = chooseFolder();
+        //    if (apkFolderPath.Equals(""))
+        //    {
+        //        return;
+        //    }
+        //    string apkName = Path.GetFileNameWithoutExtension(apkFolderPath);
+        //    String apktoolPath = @"tools\apktool.jar";
+        //    CommandThread command = new CommandThread("java -jar " + apktoolPath + " b " + apkFolderPath + " -o " + apkFolderPath.Substring(0, apkFolderPath.Length - apkName.Length) + "\\" + apkName + ".unsigned.apk", tb_info);
+        //    Thread thread = new Thread(command.startTask);
+        //    thread.Start();
+        //}
 
-        private void s_decompile_Click(object sender, EventArgs e)
-        {
-            tb_info.Text = "";
-            String apkPath = chooseFile();
-            if (apkPath.Equals(""))
-            {
-                return;
-            }
-            string apkName = Path.GetFileNameWithoutExtension(apkPath);
-            String apktoolPath = @"tools\ShakaApktool.jar";
-            CommandThread command = new CommandThread("java -jar " + apktoolPath + " d " + apkPath + " -f -o " + apkPath.Substring(0, apkPath.Length - apkName.Length - 4) + "\\" + apkName, tb_info);
-            Thread thread = new Thread(command.startTask);
-            thread.Start();
-            //tb_info.Text = info;
-        }
+        //private void s_decompile_Click(object sender, EventArgs e)
+        //{
+        //    tb_info.Text = "";
+        //    String apkPath = chooseFile();
+        //    if (apkPath.Equals(""))
+        //    {
+        //        return;
+        //    }
+        //    string apkName = Path.GetFileNameWithoutExtension(apkPath);
+        //    String apktoolPath = @"tools\ShakaApktool.jar";
+        //    CommandThread command = new CommandThread("java -jar " + apktoolPath + " d " + apkPath + " -f -o " + apkPath.Substring(0, apkPath.Length - apkName.Length - 4) + "\\" + apkName, tb_info);
+        //    Thread thread = new Thread(command.startTask);
+        //    thread.Start();
+        //    //tb_info.Text = info;
+        //}
 
 
-        private void s_backcompile_Click(object sender, EventArgs e)
-        {
-            tb_info.Text = "";
-            String apkFolderPath = chooseFolder();
-            if (apkFolderPath.Equals(""))
-            {
-                return;
-            }
-            string apkName = Path.GetFileNameWithoutExtension(apkFolderPath);
-            String apktoolPath = @"tools\ShakaApktool.jar";
-            Console.WriteLine("java -jar " + apktoolPath + " b " + apkFolderPath + " -o " + apkFolderPath.Substring(0, apkFolderPath.Length - apkName.Length) + "\\" + apkName + ".unsigned.apk");
-            CommandThread command = new CommandThread("java -jar " + apktoolPath + " b " + apkFolderPath + " --o " + apkFolderPath.Substring(0, apkFolderPath.Length - apkName.Length) + "\\" + apkName + "_unsigned.apk", tb_info);
-            Thread thread = new Thread(command.startTask);
-            thread.Start();
-        }
+        //private void s_backcompile_Click(object sender, EventArgs e)
+        //{
+        //    tb_info.Text = "";
+        //    String apkFolderPath = chooseFolder();
+        //    if (apkFolderPath.Equals(""))
+        //    {
+        //        return;
+        //    }
+        //    string apkName = Path.GetFileNameWithoutExtension(apkFolderPath);
+        //    String apktoolPath = @"tools\ShakaApktool.jar";
+        //    Console.WriteLine("java -jar " + apktoolPath + " b " + apkFolderPath + " -o " + apkFolderPath.Substring(0, apkFolderPath.Length - apkName.Length) + "\\" + apkName + ".unsigned.apk");
+        //    CommandThread command = new CommandThread("java -jar " + apktoolPath + " b " + apkFolderPath + " --o " + apkFolderPath.Substring(0, apkFolderPath.Length - apkName.Length) + "\\" + apkName + "_unsigned.apk", tb_info);
+        //    Thread thread = new Thread(command.startTask);
+        //    thread.Start();
+        //}
 
-        private void sign_apk_Click(object sender, EventArgs e)
-        {
-            tb_info.Text = "";
-            String apkPath = chooseFile();
-            if (apkPath.Equals(""))
-            {
-                return;
-            }
-            string apkName = Path.GetFileNameWithoutExtension(apkPath);
-            String signPath = @"tools\apksigner.jar";
-            String jksPath = @"tools\lijie.jks";
-            CommandThread command = new CommandThread("java -jar " + signPath + " sign --ks " + jksPath + " --ks-key-alias key0 --ks-pass pass:lj940706 --key-pass pass:lj940706" + " --in " + apkPath + " --out " + apkPath.Substring(0, apkPath.Length - apkName.Length - 4) + "\\" + apkName + "_signed.apk", tb_info);
-            Thread thread = new Thread(command.startTask);
-            thread.Start();
-        }
+        //private void sign_apk_Click(object sender, EventArgs e)
+        //{
+        //    tb_info.Text = "";
+        //    String apkPath = chooseFile();
+        //    if (apkPath.Equals(""))
+        //    {
+        //        return;
+        //    }
+        //    string apkName = Path.GetFileNameWithoutExtension(apkPath);
+        //    String signPath = @"tools\apksigner.jar";
+        //    String jksPath = @"tools\lijie.jks";
+        //    CommandThread command = new CommandThread("java -jar " + signPath + " sign --ks " + jksPath + " --ks-key-alias key0 --ks-pass pass:lj940706 --key-pass pass:lj940706" + " --in " + apkPath + " --out " + apkPath.Substring(0, apkPath.Length - apkName.Length - 4) + "\\" + apkName + "_signed.apk", tb_info);
+        //    Thread thread = new Thread(command.startTask);
+        //    thread.Start();
+        //}
 
         private String chooseFile()
         {

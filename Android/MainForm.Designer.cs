@@ -82,15 +82,6 @@
             this.btn_search = new System.Windows.Forms.Button();
             this.tb_file = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.sign_apk = new System.Windows.Forms.Button();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.s_backcompile = new System.Windows.Forms.Button();
-            this.s_decompile = new System.Windows.Forms.Button();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.a_backcompile = new System.Windows.Forms.Button();
-            this.a_decompile = new System.Windows.Forms.Button();
             this.tb_info = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.其他功能ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -106,10 +97,6 @@
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -117,7 +104,6 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(471, 12);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
@@ -681,101 +667,6 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "文件地址：";
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.groupBox6);
-            this.tabPage2.Controls.Add(this.groupBox5);
-            this.tabPage2.Controls.Add(this.groupBox4);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(311, 411);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "反编译";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.sign_apk);
-            this.groupBox6.Location = new System.Drawing.Point(7, 129);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(295, 55);
-            this.groupBox6.TabIndex = 2;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "签名";
-            // 
-            // sign_apk
-            // 
-            this.sign_apk.Location = new System.Drawing.Point(6, 20);
-            this.sign_apk.Name = "sign_apk";
-            this.sign_apk.Size = new System.Drawing.Size(75, 23);
-            this.sign_apk.TabIndex = 0;
-            this.sign_apk.Text = "签名";
-            this.sign_apk.UseVisualStyleBackColor = true;
-            this.sign_apk.Click += new System.EventHandler(this.sign_apk_Click);
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.s_backcompile);
-            this.groupBox5.Controls.Add(this.s_decompile);
-            this.groupBox5.Location = new System.Drawing.Point(6, 68);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(295, 55);
-            this.groupBox5.TabIndex = 1;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "ShakaApktool";
-            // 
-            // s_backcompile
-            // 
-            this.s_backcompile.Location = new System.Drawing.Point(88, 20);
-            this.s_backcompile.Name = "s_backcompile";
-            this.s_backcompile.Size = new System.Drawing.Size(75, 23);
-            this.s_backcompile.TabIndex = 1;
-            this.s_backcompile.Text = "回编译";
-            this.s_backcompile.UseVisualStyleBackColor = true;
-            this.s_backcompile.Click += new System.EventHandler(this.s_backcompile_Click);
-            // 
-            // s_decompile
-            // 
-            this.s_decompile.Location = new System.Drawing.Point(6, 20);
-            this.s_decompile.Name = "s_decompile";
-            this.s_decompile.Size = new System.Drawing.Size(75, 23);
-            this.s_decompile.TabIndex = 0;
-            this.s_decompile.Text = "反编译";
-            this.s_decompile.UseVisualStyleBackColor = true;
-            this.s_decompile.Click += new System.EventHandler(this.s_decompile_Click);
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.a_backcompile);
-            this.groupBox4.Controls.Add(this.a_decompile);
-            this.groupBox4.Location = new System.Drawing.Point(7, 7);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(295, 55);
-            this.groupBox4.TabIndex = 0;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "apktool(需要java环境，下面都一样)";
-            // 
-            // a_backcompile
-            // 
-            this.a_backcompile.Location = new System.Drawing.Point(88, 20);
-            this.a_backcompile.Name = "a_backcompile";
-            this.a_backcompile.Size = new System.Drawing.Size(75, 23);
-            this.a_backcompile.TabIndex = 1;
-            this.a_backcompile.Text = "回编译";
-            this.a_backcompile.UseVisualStyleBackColor = true;
-            this.a_backcompile.Click += new System.EventHandler(this.a_backcompile_Click);
-            // 
-            // a_decompile
-            // 
-            this.a_decompile.Location = new System.Drawing.Point(6, 20);
-            this.a_decompile.Name = "a_decompile";
-            this.a_decompile.Size = new System.Drawing.Size(75, 23);
-            this.a_decompile.TabIndex = 0;
-            this.a_decompile.Text = "反编译";
-            this.a_decompile.UseVisualStyleBackColor = true;
-            this.a_decompile.Click += new System.EventHandler(this.a_decompile_Click);
-            // 
             // tb_info
             // 
             this.tb_info.BackColor = System.Drawing.SystemColors.InfoText;
@@ -865,10 +756,6 @@
             this.groupBox1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -884,7 +771,6 @@
         private System.Windows.Forms.Button btn_packagename;
         private System.Windows.Forms.TextBox tb_packagename;
         private System.Windows.Forms.TextBox tb_info;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button btn_topactivity;
         private System.Windows.Forms.Button btn_install_apk;
         private System.Windows.Forms.Button btn_unstall_apk;
@@ -914,14 +800,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btn_search_path;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Button a_decompile;
-        private System.Windows.Forms.Button a_backcompile;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Button s_backcompile;
-        private System.Windows.Forms.Button s_decompile;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.Button sign_apk;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox cb_emul;
         private System.Windows.Forms.Button btn_connect;

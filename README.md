@@ -1,5 +1,7 @@
 # AndroidTools
 
+现把该项目结合到AndroidKiller去，移除部分路径，移除部分功能
+
 安卓的小工具，方便操作，就是一些简单的命令，用c#写的
 
 <font color=#FF0000 size=72>基本命令：</font>
@@ -22,6 +24,6 @@ ADB命令截图：
 ![ADB命令截图](https://github.com/LuckyLi706/AndroidTools/blob/master/adb_1.png)
 ![ADB命令截图](https://github.com/LuckyLi706/AndroidTools/blob/master/adb_2.png)
 
-反编译命令截图：
+apk信息以及查壳截图：
 
-![简单反编译](https://github.com/LuckyLi706/AndroidTools/blob/master/%E5%8F%8D%E7%BC%96%E8%AF%91.png)
+![简单反编译](https://github.com/LuckyLi706/AndroidTools/blob/master/apk_info.png)
