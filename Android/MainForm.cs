@@ -24,6 +24,7 @@ namespace Android
                 System.IO.Compression.ZipFile.ExtractToDirectory(PathUtil.app_path + "tools.zip", PathUtil.app_path + "tools");
                 File.Delete(PathUtil.app_path + "tools.zip");
             }
+            //解析加固的信息
             FileStream fs = new FileStream("config/jiagu_config", FileMode.Open, FileAccess.Read);
             StreamReader sr = new StreamReader(fs);
             string s;
