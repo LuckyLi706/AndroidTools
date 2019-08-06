@@ -441,6 +441,12 @@ namespace Android.adb
 
             if (validate_Device == 1)
             {
+                String sdkVersion = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "shell getprop ro.build.version.sdk");
+                if (Int16.Parse(sdkVersion) <= 23)
+                {
+                    MessageBox.Show("6.0及其以下版本不支持");
+                    return;
+                }
                 CommandThread command = null;
                 command = new CommandThread(tb_info, PathUtil.adb_path, ("pull " + file_path.Substring(0, file_path.Length - 1) + " " + PathUtil.desktop_path));
                 Thread thread = new Thread(command.startTask);
@@ -448,6 +454,12 @@ namespace Android.adb
             }
             if (validate_Device == 2)
             {
+                String sdkVersion = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "shell getprop ro.build.version.sdk");
+                if (Int16.Parse(sdkVersion) <= 23)
+                {
+                    MessageBox.Show("6.0及其以下版本不支持");
+                    return;
+                }
                 CommandThread command = null;
                 MessageBox.Show(cb_devices.Text);
                 command = new CommandThread(tb_info, PathUtil.adb_path, ("-s " + cb_devices.Text + " pull " + file_path.Substring(0, file_path.Length - 1) + " " + PathUtil.desktop_path));
@@ -463,8 +475,10 @@ namespace Android.adb
 
         public static void getAllFile(int validate_Device, String path, ComboBox cb_file, TextBox tb_info, ComboBox cb_devices)
         {
+            //adb shell getprop ro.build.version.sdk
             if (validate_Device == 1)
             {
+                
                 String files = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "shell ls " + path);
                 if (files.Contains("error:"))
                 {
@@ -472,12 +486,19 @@ namespace Android.adb
                 }
                 else
                 {
+
                     if (files.Contains("Permission denied"))
                     {
                         tb_info.AppendText(files);
                     }
                     else
                     {
+                        String sdkVersion = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "shell getprop ro.build.version.sdk");
+                        if (Int16.Parse(sdkVersion) <= 23)
+                        {
+                            MessageBox.Show("6.0及其以下版本不支持");
+                            return;
+                        }
                         string[] values = files.Split('\n');
                         cb_file.Items.Clear();
                         for (int i = 0; i < values.Length; i++)
@@ -504,6 +525,12 @@ namespace Android.adb
                     }
                     else
                     {
+                        String sdkVersion = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " shell getprop ro.build.version.sdk");
+                        if (Int16.Parse(sdkVersion) <= 23)
+                        {
+                            MessageBox.Show("6.0及其以下版本不支持");
+                            return;
+                        }
                         string[] values = files.Split('\n');
                         cb_file.Items.Clear();
                         for (int i = 0; i < values.Length; i++)

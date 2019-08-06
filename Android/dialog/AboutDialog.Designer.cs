@@ -61,7 +61,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 12);
             this.label2.TabIndex = 2;
-            this.label2.Text = "版本:3.0.0";
+            this.label2.Text = "版本:3.0.1";
             // 
             // AboutDialog
             // 
