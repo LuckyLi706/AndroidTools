@@ -29,4 +29,4 @@ ADB命令截图：
 
 apk信息以及查壳截图（添加AndroidKiller多个dex不能定位到源码的问题）：
 
-![简单反编译](apk_info.png)
+![简单反编译](apkinfo.png)
