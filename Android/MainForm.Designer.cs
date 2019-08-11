@@ -89,6 +89,7 @@
             this.opencmd = new System.Windows.Forms.ToolStripMenuItem();
             this.help = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_dex = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -530,6 +531,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.btn_dex);
             this.tabPage3.Controls.Add(this.btn_jiagu);
             this.tabPage3.Controls.Add(this.tb_jiagu);
             this.tabPage3.Controls.Add(this.label9);
@@ -729,6 +731,16 @@
             this.关于ToolStripMenuItem.Text = "关于";
             this.关于ToolStripMenuItem.Click += new System.EventHandler(this.关于ToolStripMenuItem_Click);
             // 
+            // btn_dex
+            // 
+            this.btn_dex.Location = new System.Drawing.Point(5, 182);
+            this.btn_dex.Name = "btn_dex";
+            this.btn_dex.Size = new System.Drawing.Size(303, 23);
+            this.btn_dex.TabIndex = 16;
+            this.btn_dex.Text = "处理多个dex无法查看源码问题";
+            this.btn_dex.UseVisualStyleBackColor = true;
+            this.btn_dex.Click += new System.EventHandler(this.Btn_dex_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -825,6 +837,7 @@
         private System.Windows.Forms.Button btn_jiagu;
         private System.Windows.Forms.TextBox tb_jiagu;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btn_dex;
     }
 }
 

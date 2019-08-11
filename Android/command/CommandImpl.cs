@@ -68,6 +68,7 @@ namespace Android
             // reads and sorts text input.
 
             //Process sortProcess;
+            //MessageBox.Show(workpath);
             Process sortProcess = new Process();
             //如果path为空，就直接执行cmd命令，如果不为空，按照命令路径执行
             if (path != null && !path.Equals(""))
@@ -78,9 +79,9 @@ namespace Android
             {
                 sortProcess.StartInfo.FileName = "cmd.exe";
             }
-            sortProcess.StartInfo.Arguments = command;
+            sortProcess.StartInfo.Arguments = "\"" + command + "\"";
             //定位当前所在的目录，默认是在当前app的目录下，
-            //sortProcess.StartInfo.WorkingDirectory = PathUtil.desktop_path;
+            sortProcess.StartInfo.WorkingDirectory = workpath;
             if (textbox.Text == null || textbox.Text.Equals(""))
             {
                 if (path != null && !path.Equals(""))
@@ -99,8 +100,8 @@ namespace Android
             {
                 if (path != null && !path.Equals(""))
                 {
-                    textbox.AppendText(Environment.NewLine);
-                    textbox.AppendText(">>>> 开始执行 " + Path.GetFileNameWithoutExtension(path) + " " + command);
+                    //textbox.AppendText(Environment.NewLine);
+                    //textbox.AppendText(">>>> 开始执行 " + Path.GetFileNameWithoutExtension(path) + " " + command);
                 }
                 //处理几个path为空，需要本地jdk才能运行的命令
                 else

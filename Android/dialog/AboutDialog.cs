@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Android.utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,7 +17,7 @@ namespace Android.dialog
         public AboutDialog()
         {
             InitializeComponent();
-            
+            this.label2.Text = "版本:"+Constans.APP_VERSION;
         }
 
         

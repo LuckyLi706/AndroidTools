@@ -87,3 +87,19 @@ Application UnhandledException:尚未提供文件名，因此无法启动进程�
    在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
    在 System.Threading.ThreadHelper.ThreadStart()
 ---------------------------------------------------------
+出现应用程序未处理的异常：2019/8/10 18:46:27
+Application UnhandledException:无法访问已释放的对象。
+对象名:“TextBox”。;
+堆栈信息:   在 System.Windows.Forms.Control.CreateHandle()
+   在 System.Windows.Forms.TextBoxBase.CreateHandle()
+   在 System.Windows.Forms.TextBoxBase.SetSelectedTextInternal(String text, Boolean clearUndo)
+   在 System.Windows.Forms.TextBoxBase.set_SelectedText(String value)
+   在 System.Windows.Forms.TextBoxBase.AppendText(String text)
+   在 Android.CommandImpl.getAsynInfo(TextBox textbox, String path, String command, String workpath) 位置 D:\Visual Studio\Projects\AndroidTools\Android\command\CommandImpl.cs:行号 89
+   在 Android.CommandThread.startTask() 位置 D:\Visual Studio\Projects\AndroidTools\Android\command\CommandThread.cs:行号 40
+   在 System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   在 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   在 System.Threading.ThreadHelper.ThreadStart()
+---------------------------------------------------------

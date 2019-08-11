@@ -78,9 +78,9 @@ namespace Android
 
         static void WriteLog(string str)
         {
-            if (!Directory.Exists("ErrLog"))
+            if (!Directory.Exists(PathUtil.app_path + @"\ErrLog\ErrLog.txt"))
             {
-                Directory.CreateDirectory("ErrLog");
+                Directory.CreateDirectory(PathUtil.app_path + @"\ErrLog\ErrLog.txt");
             }
 
             using (var sw = new StreamWriter(PathUtil.app_path+@"\ErrLog\ErrLog.txt", true))

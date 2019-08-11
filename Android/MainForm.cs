@@ -1,5 +1,6 @@
 ﻿using Android.adb;
 using Android.dialog;
+using Android.utils;
 using AndroidSmallTools.utils;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace Android
         public MainForm()
         {
             InitializeComponent();
+            this.Text = "安卓小工具"+Constans.APP_VERSION;
             System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
             //解压tools文件夹
             if (!Directory.Exists(PathUtil.app_path + "tools") && File.Exists(PathUtil.app_path + "tools.zip"))
@@ -478,8 +480,54 @@ namespace Android
             }
         }
 
+        private void Btn_dex_Click(object sender, EventArgs e)
+        {
+            if (tb_file.Text.Equals(""))
+            {
+                MessageBox.Show("请先选择apk");
+                return;
+            }
+            String apkName=Path.GetFileNameWithoutExtension(tb_file.Text);
+            DirectoryInfo directoryDecode = new DirectoryInfo("projects/" + apkName + "/ProjectSrc");
+            if (!directoryDecode.Exists)
+            {
+                MessageBox.Show("请先使用AndroidKiller反编译该apk");
+                return;
+            }
+            DirectoryInfo directoryInfo = new DirectoryInfo("projects/" + apkName + "/ProjectSrc/dex");
+            if (directoryInfo.Exists)
+            {
+                FileUtil.deleteDirectory(@"projects/" + apkName + "/ProjectSrc/dex");
+            }
+            if (!directoryInfo.Exists) {
+                directoryInfo.Create();
+            }
+            string path =  Path.GetFullPath(".")+"/projects/" + apkName + "/ProjectSrc";
+           // MessageBox.Show();
+            String value = CommandImpl.getSyncInfo(tb_info, PathUtil.unzip_path, " -j " + tb_file.Text + " *.dex -d projects/"+apkName+"/ProjectSrc/dex");
+            directoryInfo = new DirectoryInfo(PathUtil.app_path+"../projects/" + apkName + "/ProjectSrc/dex");
+            FileInfo[] fileInfos =directoryInfo.GetFiles();
+            for (int i=1;i<fileInfos.Length;i++) {
+                // CommandImpl.getSyncInfo(tb_info, PathUtil.dex2jar_path, fileInfos[i].FullName);
+                
+                CommandThread command = new CommandThread(tb_info, PathUtil.dex2jar_path, @fileInfos[i].FullName,path);
+                command.startTask();
+                if (!Directory.Exists(path + "/smali_classes" + (i + 1))) {
+                    Directory.CreateDirectory(path + "/smali_classes" + (i + 1));
+                }
+                CommandThread commandCopy = new CommandThread(tb_info, PathUtil.unzip_path, "../classes"+(i+1)+"-dex"+(i+1)+ "jar.jar", path+"/smali_classes" + (i + 1));
+                Thread thread = new Thread(commandCopy.startTask);
+                thread.Start();
+                //command.startTask();
+            }
+        }
+
         private void btn_jiagu_Click(object sender, EventArgs e)
         {
+            if (tb_file.Text.Equals("")) {
+                MessageBox.Show("请先选择apk");
+                return;
+            }
             String value = CommandImpl.getSyncInfo(tb_info, PathUtil.unzip_path, " -j " + tb_file.Text + " lib/armeabi-v7a/*.so -d so");
             if (value.Contains("filename not matched:"))
             {
@@ -552,6 +600,8 @@ namespace Android
             AboutDialog aboutDialog = new AboutDialog();
             aboutDialog.ShowDialog();
         }
+
+        
         //ApkDecoder apkDecoder = new ApkDecoder(apkPath);
         //apkDecoder.InfoParsedEvent += new Action<ApkDecoder>(apkDecoder_InfoParsed);
         //apkDecoder.AaptNotFoundEvent += new MethodInvoker(apkDecoder_AaptNotFound);

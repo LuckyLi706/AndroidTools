@@ -19,5 +19,9 @@ namespace Android
         public static string aapt_path = app_path + "adb//aapt.exe";
 
         public static string unzip_path = app_path + "adb//unzip.exe";
+
+        public static string dex2jar_path = @app_path + "dex2jar//d2j-dex2jar.bat";
+
+        //public static string projectsrc_path=@app_path+@"../projects/" + apkName + "/ProjectSrc";
     }
 }
