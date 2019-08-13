@@ -128,13 +128,13 @@ namespace Android.adb
             }
             if (validate_Device == 1)
             {
-                CommandThread command = new CommandThread(tb_info, PathUtil.adb_path, "install " + path);
+                CommandThread command = new CommandThread(tb_info, PathUtil.adb_path, "install " +repairSpace(path));
                 Thread thread = new Thread(command.startTask);
                 thread.Start();
             }
             if (validate_Device == 2)
             {
-                CommandThread command = new CommandThread(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " install " + path);
+                CommandThread command = new CommandThread(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " install " + repairSpace(path));
                 Thread thread = new Thread(command.startTask);
                 thread.Start();
             }
@@ -207,14 +207,14 @@ namespace Android.adb
             {
                 string value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "shell /system/bin/screencap -p /sdcard/screenshot.png");
                 showInfo(tb_info, value);
-                string value1 = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "pull /sdcard/screenshot.png " + Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory));
+                string value1 = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "pull /sdcard/screenshot.png " + repairSpace(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)));
                 showInfo(tb_info, value1);
             }
             if (validate_Device == 2)
             {
                 string value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " shell /system/bin/screencap -p /sdcard/screenshot.png");
                 showInfo(tb_info, value);
-                string value1 = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " pull /sdcard/screenshot.png " + Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory));
+                string value1 = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " pull /sdcard/screenshot.png " + repairSpace(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)));
                 showInfo(tb_info, value1);
             }
             if (validate_Device == 3)
@@ -406,11 +406,11 @@ namespace Android.adb
                 CommandThread command = null;
                 if (phone_path.Equals(""))
                 {
-                    command = new CommandThread(tb_info, PathUtil.adb_path, "push " + path + " data/local/tmp");
+                    command = new CommandThread(tb_info, PathUtil.adb_path, "push " + repairSpace(path) + " data/local/tmp");
                 }
                 else
                 {
-                    command = new CommandThread(tb_info, PathUtil.adb_path, "push " + path + " " + phone_path);
+                    command = new CommandThread(tb_info, PathUtil.adb_path, "push " + repairSpace(path) + " " + phone_path);
                 }
                 Thread thread = new Thread(command.startTask);
                 thread.Start();
@@ -420,11 +420,11 @@ namespace Android.adb
                 CommandThread command = null;
                 if (phone_path.Equals(""))
                 {
-                    command = new CommandThread(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " push " + path + " data/local/tmp");
+                    command = new CommandThread(tb_info, PathUtil.adb_path, "-s " + repairSpace(cb_devices.Text) + " push " + path + " data/local/tmp");
                 }
                 else
                 {
-                    command = new CommandThread(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " push " + path + " " + phone_path);
+                    command = new CommandThread(tb_info, PathUtil.adb_path, "-s " + repairSpace(cb_devices.Text) + " push " + path + " " + phone_path);
                 }
                 Thread thread = new Thread(command.startTask);
                 thread.Start();
@@ -448,7 +448,7 @@ namespace Android.adb
                     return;
                 }
                 CommandThread command = null;
-                command = new CommandThread(tb_info, PathUtil.adb_path, ("pull " + file_path.Substring(0, file_path.Length - 1) + " " + PathUtil.desktop_path));
+                command = new CommandThread(tb_info, PathUtil.adb_path, ("pull " + file_path.Substring(0, file_path.Length - 1) + " " + repairSpace(PathUtil.desktop_path)));
                 Thread thread = new Thread(command.startTask);
                 thread.Start();
             }
@@ -462,7 +462,7 @@ namespace Android.adb
                 }
                 CommandThread command = null;
                 MessageBox.Show(cb_devices.Text);
-                command = new CommandThread(tb_info, PathUtil.adb_path, ("-s " + cb_devices.Text + " pull " + file_path.Substring(0, file_path.Length - 1) + " " + PathUtil.desktop_path));
+                command = new CommandThread(tb_info, PathUtil.adb_path, ("-s " + cb_devices.Text + " pull " + file_path.Substring(0, file_path.Length - 1) + " " + repairSpace(PathUtil.desktop_path)));
                 Thread thread = new Thread(command.startTask);
                 thread.Start();
             }
@@ -551,6 +551,14 @@ namespace Android.adb
         public static void root(TextBox tb_info)
         {
             CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "root");
+        }
+
+        /**
+         *    处理路径中带有空格的问题
+         *
+         */
+        private static string repairSpace(string path) {
+            return "\"" + path + "\"";
         }
     }
 }

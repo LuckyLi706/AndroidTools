@@ -79,9 +79,12 @@ namespace Android
             {
                 sortProcess.StartInfo.FileName = "cmd.exe";
             }
-            sortProcess.StartInfo.Arguments = "\"" + command + "\"";
-            //定位当前所在的目录，默认是在当前app的目录下，
-            sortProcess.StartInfo.WorkingDirectory = workpath;
+            sortProcess.StartInfo.Arguments = command;
+            if (workpath!=null&&!workpath.Equals(""))
+            {
+                //定位当前所在的目录，默认是在当前app的目录下，
+                sortProcess.StartInfo.WorkingDirectory = workpath;
+            }
             if (textbox.Text == null || textbox.Text.Equals(""))
             {
                 if (path != null && !path.Equals(""))
@@ -100,8 +103,8 @@ namespace Android
             {
                 if (path != null && !path.Equals(""))
                 {
-                    //textbox.AppendText(Environment.NewLine);
-                    //textbox.AppendText(">>>> 开始执行 " + Path.GetFileNameWithoutExtension(path) + " " + command);
+                    textbox.AppendText(Environment.NewLine);
+                    textbox.AppendText(">>>> 开始执行 " + Path.GetFileNameWithoutExtension(path) + " " + command);
                 }
                 //处理几个path为空，需要本地jdk才能运行的命令
                 else
