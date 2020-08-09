@@ -68,6 +68,7 @@
             this.btn_connect = new System.Windows.Forms.Button();
             this.cb_emul = new System.Windows.Forms.ComboBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btn_dex = new System.Windows.Forms.Button();
             this.btn_jiagu = new System.Windows.Forms.Button();
             this.tb_jiagu = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -89,7 +90,6 @@
             this.opencmd = new System.Windows.Forms.ToolStripMenuItem();
             this.help = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_dex = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -515,6 +515,7 @@
             // 
             this.cb_emul.FormattingEnabled = true;
             this.cb_emul.Items.AddRange(new object[] {
+            "真机",
             "逍遥模拟器",
             "网易MuMu模拟器",
             "蓝叠模拟器",
@@ -552,6 +553,16 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "apk信息";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // btn_dex
+            // 
+            this.btn_dex.Location = new System.Drawing.Point(5, 182);
+            this.btn_dex.Name = "btn_dex";
+            this.btn_dex.Size = new System.Drawing.Size(303, 23);
+            this.btn_dex.TabIndex = 16;
+            this.btn_dex.Text = "处理多个dex无法查看源码问题";
+            this.btn_dex.UseVisualStyleBackColor = true;
+            this.btn_dex.Click += new System.EventHandler(this.Btn_dex_Click);
             // 
             // btn_jiagu
             // 
@@ -730,16 +741,6 @@
             this.关于ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.关于ToolStripMenuItem.Text = "关于";
             this.关于ToolStripMenuItem.Click += new System.EventHandler(this.关于ToolStripMenuItem_Click);
-            // 
-            // btn_dex
-            // 
-            this.btn_dex.Location = new System.Drawing.Point(5, 182);
-            this.btn_dex.Name = "btn_dex";
-            this.btn_dex.Size = new System.Drawing.Size(303, 23);
-            this.btn_dex.TabIndex = 16;
-            this.btn_dex.Text = "处理多个dex无法查看源码问题";
-            this.btn_dex.UseVisualStyleBackColor = true;
-            this.btn_dex.Click += new System.EventHandler(this.Btn_dex_Click);
             // 
             // MainForm
             // 
