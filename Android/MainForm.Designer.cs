@@ -259,6 +259,7 @@
             this.cb_file.Name = "cb_file";
             this.cb_file.Size = new System.Drawing.Size(195, 20);
             this.cb_file.TabIndex = 7;
+            this.cb_file.SelectedIndexChanged += new System.EventHandler(this.cb_file_SelectedIndexChanged);
             // 
             // tb_pull_path
             // 
@@ -495,9 +496,9 @@
             this.cb_ipport.AutoSize = true;
             this.cb_ipport.Location = new System.Drawing.Point(7, 47);
             this.cb_ipport.Name = "cb_ipport";
-            this.cb_ipport.Size = new System.Drawing.Size(72, 16);
+            this.cb_ipport.Size = new System.Drawing.Size(108, 16);
             this.cb_ipport.TabIndex = 2;
-            this.cb_ipport.Text = "自定义ip";
+            this.cb_ipport.Text = "自定义ip和port";
             this.cb_ipport.UseVisualStyleBackColor = true;
             this.cb_ipport.CheckedChanged += new System.EventHandler(this.cb_ipport_CheckedChanged);
             // 

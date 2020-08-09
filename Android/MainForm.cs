@@ -118,7 +118,7 @@ namespace Android
                 }
                 else
                 {
-                    Command.pull(isDevices(), tb_info, cb_devices, tb_pull_path.Text + '/' + cb_file.Text);
+                    Command.pull(isDevices(), tb_info, cb_devices, tb_pull_path.Text);
                 }
             }
         }
@@ -358,6 +358,42 @@ namespace Android
         {
             String ipport = "";
             int index = cb_emul.SelectedIndex;
+            ipport = tb_ipport.Text;
+            switch (index)
+            {
+                case 0:
+                    Command.wirelessConnect(isDevices(), tb_info, index, cb_devices, ipport);
+                    return;
+
+                case 1:
+                    ipport = "127.0.0.1:21503";
+                    break;
+                case 2:
+                    ipport = "127.0.0.1:7555";
+                    break;
+                case 3:
+                    ipport = "127.0.0.1:5555";
+                    break;
+                case 4:
+                    ipport = "127.0.0.1:6555";
+                    break;
+                case 5:
+                    ipport = "127.0.0.1:5555";
+                    break;
+                case 6:
+                    ipport = "127.0.0.1:5555";
+                    break;
+                case 7:
+                    ipport = "127.0.0.1:62001";
+                    break;
+                case 8:
+                    ipport = "127.0.0.1:26944";
+                    break;
+                case 9:
+                    ipport = "127.0.0.1:62001";
+                    break;
+            }
+
             if (cb_ipport.Checked)
             {
                 if (tb_ipport.Equals(""))
@@ -365,43 +401,7 @@ namespace Android
                     MessageBox.Show("ip和port不能为空");
                     return;
                 }
-                else
-                {
-                    Command.connect(tb_info, tb_ipport.Text + ":5555");
-                    return;
-                }
-            }
-            switch (index)
-            {
-                case 0:
-                    ipport = "127.0.0.1:21503";
-                    break;
-                case 1:
-                    ipport = "127.0.0.1:7555";
-                    break;
-                case 2:
-                    ipport = "127.0.0.1:5555";
-                    break;
-                case 3:
-                    ipport = "127.0.0.1:6555";
-                    break;
-                case 4:
-                    ipport = "127.0.0.1:5555";
-                    break;
-                case 5:
-                    ipport = "127.0.0.1:5555";
-                    break;
-                case 6:
-                    ipport = "127.0.0.1:62001";
-                    break;
-                case 7:
-                    ipport = "127.0.0.1:26944";
-                    break;
-                case 8:
-                    ipport = "127.0.0.1:62001";
-                    break;
-
-
+                
             }
             Command.connect(tb_info, ipport);
         }
@@ -601,7 +601,23 @@ namespace Android
             aboutDialog.ShowDialog();
         }
 
-        
+
+        private String currentPath;
+
+        private void cb_file_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (currentPath.Equals("/"))
+            {
+                tb_pull_path.Text = currentPath + cb_file.Text;
+            }
+            else
+            {
+                tb_pull_path.Text = currentPath +"/"+ cb_file.Text;
+            }
+        }
+
+
         //ApkDecoder apkDecoder = new ApkDecoder(apkPath);
         //apkDecoder.InfoParsedEvent += new Action<ApkDecoder>(apkDecoder_InfoParsed);
         //apkDecoder.AaptNotFoundEvent += new MethodInvoker(apkDecoder_AaptNotFound);

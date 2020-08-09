@@ -230,6 +230,82 @@ namespace Android.adb
             showInfo(tb_info,value);
         }
 
+        public static void wirelessConnect(int validate_Device, TextBox tb_info, int index, ComboBox cb_devices, String ipport) {
+            if (validate_Device == 2)
+            {
+                if (ipport.Equals(""))
+                {
+                    String command = "";
+                    command = "shell ifconfig | grep 192.168";
+                    string value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " " + command);
+
+                    String[] ips = value.Split(':');
+                    String ip = ips[1].Split(' ')[0];
+                    command = "tcpip " + ip;
+                    value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " " + command);
+                    showInfo(tb_info, value);
+                    command = "connect " + ip + ":5555";
+                    value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " " + command);
+                    showInfo(tb_info, value);
+                }
+                else {
+                    String[] ip_port = ipport.Split(':');
+                    if (ip_port.Length == 2)
+                    {
+                        String ip = ip_port[0];
+                        String port = ip_port[1];
+                        String command = "tcpip " + ip;
+                        String value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " " + command);
+                        showInfo(tb_info, value);
+                        command = "connect " + ip + ":"+port;
+                        value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " " + command);
+                        showInfo(tb_info, value);
+                    }
+                    else {
+                        MessageBox.Show("请输入格式为ip:port");
+                    }
+                }
+            }
+            else if (validate_Device == 1)
+            {
+                if (ipport.Equals(""))
+                {
+                    String command = "";
+                    command = "shell ifconfig | grep 192.168";
+                    string value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, command);
+
+                    String[] ips = value.Split(':');
+                    String ip = ips[1].Split(' ')[0];
+                    command = "tcpip " + ip;
+                    value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, command);
+                    showInfo(tb_info, value);
+                    command = "connect " + ip + ":5555";
+                    value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, command);
+                    showInfo(tb_info, value);
+                }
+
+                else
+                {
+                    String[] ip_port = ipport.Split(':');
+                    if (ip_port.Length == 2)
+                    {
+                        String ip = ip_port[0];
+                        String port = ip_port[1];
+                        String command = "tcpip " + ip;
+                        String value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, command);
+                        showInfo(tb_info, value);
+                        command = "connect " + ip + ":" + port;
+                        value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path,command);
+                        showInfo(tb_info, value);
+                    }
+                    else
+                    {
+                        MessageBox.Show("请输入格式为ip:port");
+                    }
+                }
+            }
+        }
+
         //获取其他信息
         public static void getInfo(int validate_Device, TextBox tb_info, int index, ComboBox cb_devices)
         {
@@ -441,28 +517,28 @@ namespace Android.adb
 
             if (validate_Device == 1)
             {
-                String sdkVersion = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "shell getprop ro.build.version.sdk");
-                if (Int16.Parse(sdkVersion) <= 23)
-                {
-                    MessageBox.Show("6.0及其以下版本不支持");
-                    return;
-                }
+                //String sdkVersion = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "shell getprop ro.build.version.sdk");
+                //if (Int16.Parse(sdkVersion) <= 23)
+                //{
+                //    MessageBox.Show("6.0及其以下版本不支持");
+                //    return;
+                //}
                 CommandThread command = null;
-                command = new CommandThread(tb_info, PathUtil.adb_path, ("pull " + file_path.Substring(0, file_path.Length - 1) + " " + repairSpace(PathUtil.desktop_path)));
+                command = new CommandThread(tb_info, PathUtil.adb_path, ("pull " + file_path.Substring(0, file_path.Length) + " " + repairSpace(PathUtil.desktop_path)));
                 Thread thread = new Thread(command.startTask);
                 thread.Start();
             }
             if (validate_Device == 2)
             {
-                String sdkVersion = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "shell getprop ro.build.version.sdk");
-                if (Int16.Parse(sdkVersion) <= 23)
-                {
-                    MessageBox.Show("6.0及其以下版本不支持");
-                    return;
-                }
+                //String sdkVersion = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "shell getprop ro.build.version.sdk");
+                //if (Int16.Parse(sdkVersion) <= 23)
+                //{
+                //    MessageBox.Show("6.0及其以下版本不支持");
+                //    return;
+                //}
                 CommandThread command = null;
                 MessageBox.Show(cb_devices.Text);
-                command = new CommandThread(tb_info, PathUtil.adb_path, ("-s " + cb_devices.Text + " pull " + file_path.Substring(0, file_path.Length - 1) + " " + repairSpace(PathUtil.desktop_path)));
+                command = new CommandThread(tb_info, PathUtil.adb_path, ("-s " + cb_devices.Text + " pull " + file_path.Substring(0, file_path.Length) + " " + repairSpace(PathUtil.desktop_path)));
                 Thread thread = new Thread(command.startTask);
                 thread.Start();
             }
@@ -486,26 +562,33 @@ namespace Android.adb
                 }
                 else
                 {
-
-                    if (files.Contains("Permission denied"))
+                    if (files.Contains("No such"))
                     {
                         tb_info.AppendText(files);
                     }
+                    
                     else
                     {
-                        String sdkVersion = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "shell getprop ro.build.version.sdk");
-                        if (Int16.Parse(sdkVersion) <= 23)
-                        {
-                            MessageBox.Show("6.0及其以下版本不支持");
-                            return;
-                        }
+                        //String sdkVersion = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "shell getprop ro.build.version.sdk");
+                        //if (Int16.Parse(sdkVersion) <= 23)
+                        //{
+                        //    MessageBox.Show("6.0及其以下版本不支持");
+                        //    return;
+                        //}
                         string[] values = files.Split('\n');
                         cb_file.Items.Clear();
                         for (int i = 0; i < values.Length; i++)
                         {
+                            if (values[i].Contains("Permission denied"))
+                            {
+                                continue;
+                            }
                             cb_file.Items.Add(values[i]);
                         }
-                        cb_file.SelectedIndex = 0;
+                        if (cb_file.Items.Count > 0)
+                        {
+                            cb_file.SelectedIndex = 0;
+                        }
                     }
                 }
 
@@ -519,25 +602,32 @@ namespace Android.adb
                 }
                 else
                 {
-                    if (files.Contains("Permission denied"))
+                    if (files.Contains("No such"))
                     {
                         tb_info.AppendText(files);
                     }
                     else
                     {
-                        String sdkVersion = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " shell getprop ro.build.version.sdk");
-                        if (Int16.Parse(sdkVersion) <= 23)
-                        {
-                            MessageBox.Show("6.0及其以下版本不支持");
-                            return;
-                        }
+                        //String sdkVersion = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " shell getprop ro.build.version.sdk");
+                        //if (Int16.Parse(sdkVersion) <= 23)
+                        //{
+                        //    MessageBox.Show("6.0及其以下版本不支持");
+                        //    return;
+                        //}
                         string[] values = files.Split('\n');
                         cb_file.Items.Clear();
                         for (int i = 0; i < values.Length; i++)
                         {
+                            if (values[i].Contains("Permission denied"))
+                            {
+                                continue;
+                            }
                             cb_file.Items.Add(values[i]);
                         }
-                        cb_file.SelectedIndex = 0;
+                        if (cb_file.Items.Count > 0)
+                        {
+                            cb_file.SelectedIndex = 0;
+                        }
                     }
                 }
             }
