@@ -694,6 +694,15 @@ namespace Android
             }
         }
 
+        private void textBox9_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label21_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     //private void apkDecoder_InfoParsed(ApkDecoder apkDecoder)
