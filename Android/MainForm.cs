@@ -5,6 +5,7 @@ using AndroidSmallTools.utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -18,6 +19,9 @@ namespace Android
         public MainForm()
         {
             InitializeComponent();
+
+            this.panel2.MouseWheel += new MouseEventHandler(MainForm_MouseWheel);   //鼠标滚动效果
+            this.panel2.Focus();    //聚焦
             this.Text = "安卓小工具"+Constans.APP_VERSION;
             System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
             //解压tools文件夹
@@ -218,6 +222,7 @@ namespace Android
             else if (tabControl1.SelectedTab.Name == "tabPage1")
             {
                 tb_info.Text = "";
+                this.panel2.Focus();
             }
         }
 
@@ -613,14 +618,82 @@ namespace Android
             }
             else
             {
-                tb_pull_path.Text = currentPath +"/"+ cb_file.Text;
+                tb_pull_path.Text = currentPath + "/" + cb_file.Text;
             }
         }
 
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
 
-        //ApkDecoder apkDecoder = new ApkDecoder(apkPath);
-        //apkDecoder.InfoParsedEvent += new Action<ApkDecoder>(apkDecoder_InfoParsed);
-        //apkDecoder.AaptNotFoundEvent += new MethodInvoker(apkDecoder_AaptNotFound);
+        }
+
+
+        void MainForm_MouseWheel(object sender, MouseEventArgs e)
+
+        {
+            //获取光标位置
+            Point mousePoint = new Point(e.X, e.Y);
+            //换算成相对本窗体的位置
+            mousePoint.Offset(this.Location.X, this.Location.Y);
+            //判断是否在panel内
+            if (this.panel2.RectangleToScreen(panel2.DisplayRectangle).Contains(mousePoint))
+            {
+                //滚动
+                panel2.AutoScrollPosition = new Point(0, panel2.VerticalScroll.Value - e.Delta);
+            }
+        }
+
+        private void panel2_Click(object sender, EventArgs e)
+        {
+            this.panel2.Focus();
+        }
+       
+
+        private void btn_time_Click(object sender, EventArgs e)
+        {
+            Command.getAllTimeCrash(isDevices(), cb_time_point, tb_info, cb_devices);
+
+        }
+
+        private void btn_collect_crash_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_collect_anr_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        /**
+         * 
+         *   模拟操作
+         * 
+         */
+        private void btn_simulator_get_devices_Click(object sender, EventArgs e)
+        {
+            Command.getDevices(tb_info, cb_simulator_devices);
+        }
+
+        private void btn_simulator_add_Click(object sender, EventArgs e)
+        {
+            cb_simulator_run_devices.Items.Add(cb_simulator_devices.Text);
+        }
+
+        private void btn_simulator_start_Click(object sender, EventArgs e)
+        {
+            if (btn_simulator_start.Text.Equals("开始"))
+            {
+                btn_simulator_start.Text = "停止";
+                Command.runSimulator(cb_simulator_run_devices.Text,true);
+            }
+            else {
+                btn_simulator_start.Text = "开始";
+                Command.runSimulator(cb_simulator_run_devices.Text, false);
+            }
+        }
+
     }
 
     //private void apkDecoder_InfoParsed(ApkDecoder apkDecoder)

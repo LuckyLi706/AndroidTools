@@ -32,6 +32,11 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btn_time = new System.Windows.Forms.Button();
+            this.cb_time_point = new System.Windows.Forms.ComboBox();
+            this.btn_collect_crash = new System.Windows.Forms.Button();
+            this.btn_collect_anr = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.btn_getinfo2 = new System.Windows.Forms.Button();
             this.cb_getInfo2 = new System.Windows.Forms.ComboBox();
@@ -67,6 +72,13 @@
             this.cb_ipport = new System.Windows.Forms.CheckBox();
             this.btn_connect = new System.Windows.Forms.Button();
             this.cb_emul = new System.Windows.Forms.ComboBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btn_simulator_start = new System.Windows.Forms.Button();
+            this.cb_simulator_run_devices = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btn_simulator_add = new System.Windows.Forms.Button();
+            this.cb_simulator_devices = new System.Windows.Forms.ComboBox();
+            this.btn_simulator_get_devices = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.btn_dex = new System.Windows.Forms.Button();
             this.btn_jiagu = new System.Windows.Forms.Button();
@@ -93,10 +105,12 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -104,13 +118,14 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(471, 12);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(319, 437);
+            this.tabControl1.Size = new System.Drawing.Size(321, 433);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -120,7 +135,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(311, 411);
+            this.tabPage1.Size = new System.Drawing.Size(313, 407);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "ADB命令";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -128,14 +143,67 @@
             // panel2
             // 
             this.panel2.AutoScroll = true;
+            this.panel2.Controls.Add(this.groupBox4);
             this.panel2.Controls.Add(this.groupBox7);
             this.panel2.Controls.Add(this.groupBox3);
             this.panel2.Controls.Add(this.groupBox2);
             this.panel2.Controls.Add(this.groupBox1);
             this.panel2.Location = new System.Drawing.Point(6, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(309, 405);
+            this.panel2.Size = new System.Drawing.Size(311, 400);
             this.panel2.TabIndex = 3;
+            this.panel2.Click += new System.EventHandler(this.panel2_Click);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.btn_time);
+            this.groupBox4.Controls.Add(this.cb_time_point);
+            this.groupBox4.Controls.Add(this.btn_collect_crash);
+            this.groupBox4.Controls.Add(this.btn_collect_anr);
+            this.groupBox4.Location = new System.Drawing.Point(7, 474);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(283, 112);
+            this.groupBox4.TabIndex = 16;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "anr/crash";
+            // 
+            // btn_time
+            // 
+            this.btn_time.Location = new System.Drawing.Point(209, 68);
+            this.btn_time.Name = "btn_time";
+            this.btn_time.Size = new System.Drawing.Size(60, 23);
+            this.btn_time.TabIndex = 3;
+            this.btn_time.Text = "时间点";
+            this.btn_time.UseVisualStyleBackColor = true;
+            this.btn_time.Click += new System.EventHandler(this.btn_time_Click);
+            // 
+            // cb_time_point
+            // 
+            this.cb_time_point.FormattingEnabled = true;
+            this.cb_time_point.Location = new System.Drawing.Point(7, 69);
+            this.cb_time_point.Name = "cb_time_point";
+            this.cb_time_point.Size = new System.Drawing.Size(191, 20);
+            this.cb_time_point.TabIndex = 2;
+            // 
+            // btn_collect_crash
+            // 
+            this.btn_collect_crash.Location = new System.Drawing.Point(123, 23);
+            this.btn_collect_crash.Name = "btn_collect_crash";
+            this.btn_collect_crash.Size = new System.Drawing.Size(75, 23);
+            this.btn_collect_crash.TabIndex = 1;
+            this.btn_collect_crash.Text = "收集crash";
+            this.btn_collect_crash.UseVisualStyleBackColor = true;
+            this.btn_collect_crash.Click += new System.EventHandler(this.btn_collect_crash_Click);
+            // 
+            // btn_collect_anr
+            // 
+            this.btn_collect_anr.Location = new System.Drawing.Point(6, 23);
+            this.btn_collect_anr.Name = "btn_collect_anr";
+            this.btn_collect_anr.Size = new System.Drawing.Size(75, 23);
+            this.btn_collect_anr.TabIndex = 0;
+            this.btn_collect_anr.Text = "收集anr";
+            this.btn_collect_anr.UseVisualStyleBackColor = true;
+            this.btn_collect_anr.Click += new System.EventHandler(this.btn_collect_anr_Click);
             // 
             // groupBox7
             // 
@@ -143,9 +211,9 @@
             this.groupBox7.Controls.Add(this.cb_getInfo2);
             this.groupBox7.Controls.Add(this.btn_getinfo);
             this.groupBox7.Controls.Add(this.cb_getinfo);
-            this.groupBox7.Location = new System.Drawing.Point(3, 467);
+            this.groupBox7.Location = new System.Drawing.Point(3, 592);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(287, 110);
+            this.groupBox7.Size = new System.Drawing.Size(287, 99);
             this.groupBox7.TabIndex = 11;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "其他信息获取";
@@ -349,6 +417,7 @@
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "基本命令";
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // cbox_devices
             // 
@@ -478,7 +547,7 @@
             this.groupBox1.Controls.Add(this.cb_emul);
             this.groupBox1.Location = new System.Drawing.Point(7, 177);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(292, 100);
+            this.groupBox1.Size = new System.Drawing.Size(283, 100);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "无线连接";
@@ -514,6 +583,7 @@
             // 
             // cb_emul
             // 
+            this.cb_emul.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_emul.FormattingEnabled = true;
             this.cb_emul.Items.AddRange(new object[] {
             "真机",
@@ -530,6 +600,80 @@
             this.cb_emul.Name = "cb_emul";
             this.cb_emul.Size = new System.Drawing.Size(175, 20);
             this.cb_emul.TabIndex = 0;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.btn_simulator_start);
+            this.tabPage2.Controls.Add(this.cb_simulator_run_devices);
+            this.tabPage2.Controls.Add(this.label10);
+            this.tabPage2.Controls.Add(this.btn_simulator_add);
+            this.tabPage2.Controls.Add(this.cb_simulator_devices);
+            this.tabPage2.Controls.Add(this.btn_simulator_get_devices);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(313, 407);
+            this.tabPage2.TabIndex = 3;
+            this.tabPage2.Text = "模拟操作";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btn_simulator_start
+            // 
+            this.btn_simulator_start.Location = new System.Drawing.Point(261, 37);
+            this.btn_simulator_start.Name = "btn_simulator_start";
+            this.btn_simulator_start.Size = new System.Drawing.Size(46, 23);
+            this.btn_simulator_start.TabIndex = 5;
+            this.btn_simulator_start.Text = "开始";
+            this.btn_simulator_start.UseVisualStyleBackColor = true;
+            this.btn_simulator_start.Click += new System.EventHandler(this.btn_simulator_start_Click);
+            // 
+            // cb_simulator_run_devices
+            // 
+            this.cb_simulator_run_devices.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_simulator_run_devices.FormattingEnabled = true;
+            this.cb_simulator_run_devices.Location = new System.Drawing.Point(89, 38);
+            this.cb_simulator_run_devices.Name = "cb_simulator_run_devices";
+            this.cb_simulator_run_devices.Size = new System.Drawing.Size(165, 20);
+            this.cb_simulator_run_devices.TabIndex = 4;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label10.Location = new System.Drawing.Point(7, 41);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(82, 14);
+            this.label10.TabIndex = 3;
+            this.label10.Text = "执行设备：";
+            // 
+            // btn_simulator_add
+            // 
+            this.btn_simulator_add.Location = new System.Drawing.Point(261, 4);
+            this.btn_simulator_add.Name = "btn_simulator_add";
+            this.btn_simulator_add.Size = new System.Drawing.Size(46, 23);
+            this.btn_simulator_add.TabIndex = 2;
+            this.btn_simulator_add.Text = "添加";
+            this.btn_simulator_add.UseVisualStyleBackColor = true;
+            this.btn_simulator_add.Click += new System.EventHandler(this.btn_simulator_add_Click);
+            // 
+            // cb_simulator_devices
+            // 
+            this.cb_simulator_devices.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_simulator_devices.FormattingEnabled = true;
+            this.cb_simulator_devices.Location = new System.Drawing.Point(89, 5);
+            this.cb_simulator_devices.Name = "cb_simulator_devices";
+            this.cb_simulator_devices.Size = new System.Drawing.Size(165, 20);
+            this.cb_simulator_devices.TabIndex = 1;
+            // 
+            // btn_simulator_get_devices
+            // 
+            this.btn_simulator_get_devices.Location = new System.Drawing.Point(7, 4);
+            this.btn_simulator_get_devices.Name = "btn_simulator_get_devices";
+            this.btn_simulator_get_devices.Size = new System.Drawing.Size(75, 23);
+            this.btn_simulator_get_devices.TabIndex = 0;
+            this.btn_simulator_get_devices.Text = "获取设备";
+            this.btn_simulator_get_devices.UseVisualStyleBackColor = true;
+            this.btn_simulator_get_devices.Click += new System.EventHandler(this.btn_simulator_get_devices_Click);
             // 
             // tabPage3
             // 
@@ -550,7 +694,7 @@
             this.tabPage3.Controls.Add(this.label4);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(311, 411);
+            this.tabPage3.Size = new System.Drawing.Size(313, 407);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "apk信息";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -701,7 +845,7 @@
             this.help});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(801, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(804, 25);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -747,7 +891,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(801, 456);
+            this.ClientSize = new System.Drawing.Size(804, 446);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.tb_info);
             this.Controls.Add(this.menuStrip1);
@@ -761,6 +905,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -768,6 +913,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -840,6 +987,18 @@
         private System.Windows.Forms.TextBox tb_jiagu;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btn_dex;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button btn_collect_anr;
+        private System.Windows.Forms.Button btn_collect_crash;
+        private System.Windows.Forms.Button btn_time;
+        private System.Windows.Forms.ComboBox cb_time_point;
+        private System.Windows.Forms.ComboBox cb_simulator_devices;
+        private System.Windows.Forms.Button btn_simulator_get_devices;
+        private System.Windows.Forms.Button btn_simulator_add;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox cb_simulator_run_devices;
+        private System.Windows.Forms.Button btn_simulator_start;
     }
 }
 

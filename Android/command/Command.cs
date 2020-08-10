@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Android.utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -203,18 +204,19 @@ namespace Android.adb
 
         public static void shotScreen(int validate_Device, TextBox tb_packagename, TextBox tb_info, ComboBox cb_devices)
         {
+            String screenshotName =TimeUtil.getCurrentMilliSeconds()+"";
             if (validate_Device == 1)
             {
-                string value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "shell /system/bin/screencap -p /sdcard/screenshot.png");
+                string value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "shell /system/bin/screencap -p /sdcard/"+ screenshotName+".png");
                 showInfo(tb_info, value);
-                string value1 = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "pull /sdcard/screenshot.png " + repairSpace(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)));
+                string value1 = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "pull /sdcard/" + screenshotName + ".png " + repairSpace(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)));
                 showInfo(tb_info, value1);
             }
             if (validate_Device == 2)
             {
-                string value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " shell /system/bin/screencap -p /sdcard/screenshot.png");
+                string value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " shell /system/bin/screencap -p /sdcard/" + screenshotName + ".png");
                 showInfo(tb_info, value);
-                string value1 = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " pull /sdcard/screenshot.png " + repairSpace(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)));
+                string value1 = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " pull /sdcard/" + screenshotName + ".png " + repairSpace(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)));
                 showInfo(tb_info, value1);
             }
             if (validate_Device == 3)
@@ -241,7 +243,7 @@ namespace Android.adb
 
                     String[] ips = value.Split(':');
                     String ip = ips[1].Split(' ')[0];
-                    command = "tcpip " + ip;
+                    command = "tcpip " + 5555;
                     value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " " + command);
                     showInfo(tb_info, value);
                     command = "connect " + ip + ":5555";
@@ -635,6 +637,60 @@ namespace Android.adb
             {
                 MessageBox.Show("请获取设备名");
                 return;
+            }
+        }
+
+
+        public static void getAllTimeCrash(int validate_Device, ComboBox cb_file, TextBox tb_info, ComboBox cb_devices) {
+            String values="";
+            if (validate_Device == 1)
+            {
+                values= CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, " shell dumpsys dropbox");
+            }
+            if (validate_Device == 2)
+            {
+                values=CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " shell dumpsys dropbox");
+            }
+            if (validate_Device == 3)
+            {
+                MessageBox.Show("请获取设备名");
+                return;
+            }
+            if (!values.Equals("")) {
+                String[] times = values.Split(' ');
+
+                for (int i = 0; i < times.Length; i++) {
+                    cb_file.Items.Add(times[i].Split('b')[0]);
+                }
+            }
+        }
+
+        private static String deviceName;
+        private static bool isRun=false;
+
+        public static void runSimulator(String device,bool state) {
+            if (state)
+            {
+                isRun = true;
+                deviceName = device;
+                Thread thread = new Thread(runCommand);
+                thread.Start();
+            }
+            else {
+                isRun = false;
+            }
+        }
+
+
+        private static void runCommand() {
+
+            while (isRun)
+            {
+                CommandImpl.getSyncInfo(null, PathUtil.adb_path, "-s " + deviceName + " shell input keyevent 4"); //后退
+
+                Random r = new Random(Guid.NewGuid().GetHashCode());
+                int random = r.Next(10000,13000);
+                Thread.Sleep(random);
             }
         }
 

@@ -30,17 +30,20 @@ namespace Android
             Process p = new Process();
             p.StartInfo.FileName = path;
             p.StartInfo.Arguments = command;
-            if (textbox.Text == null || textbox.Text.Equals(""))
+            if (textbox != null)
             {
-                textbox.AppendText(Environment.NewLine);
-                textbox.AppendText(">>>> 开始执行 " + Path.GetFileNameWithoutExtension(path) + " " + command);
-                // textbox.AppendText("\n");
-            }
-            else
-            {
-                textbox.AppendText(Environment.NewLine);
-                textbox.AppendText(">>>> 开始执行 " + Path.GetFileNameWithoutExtension(path) + " " + command);
-                //  textbox.AppendText("\n");
+                if (textbox.Text == null || textbox.Text.Equals(""))
+                {
+                    textbox.AppendText(Environment.NewLine);
+                    textbox.AppendText(">>>> 开始执行 " + Path.GetFileNameWithoutExtension(path) + " " + command);
+                    // textbox.AppendText("\n");
+                }
+                else
+                {
+                    textbox.AppendText(Environment.NewLine);
+                    textbox.AppendText(">>>> 开始执行 " + Path.GetFileNameWithoutExtension(path) + " " + command);
+                    //  textbox.AppendText("\n");
+                }
             }
             if (!workpath.Equals("1"))
             {
