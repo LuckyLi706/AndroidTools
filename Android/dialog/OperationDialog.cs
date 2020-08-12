@@ -12,16 +12,16 @@ using System.Windows.Forms;
 
 namespace Android.dialog
 {
-    public partial class OperationData : Form
+    public partial class OperationDialog : Form
     {
         private List<Operation> operationList;
         private String operateType;
-        public OperationData()
+        public OperationDialog()
         {
             InitializeComponent();
         }
 
-        public OperationData(List<Operation> operationList,String operateType) {
+        public OperationDialog(List<Operation> operationList,String operateType) {
             this.operationList = operationList;
             this.operateType = operateType;
 

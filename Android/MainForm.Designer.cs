@@ -112,6 +112,8 @@
             this.opencmd = new System.Windows.Forms.ToolStripMenuItem();
             this.help = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.path = new System.Windows.Forms.ToolStripMenuItem();
+            this.adb_path = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -429,7 +431,6 @@
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "基本命令";
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // cbox_devices
             // 
@@ -669,6 +670,7 @@
             // 
             // tb_simulator_times
             // 
+            this.tb_simulator_times.Enabled = false;
             this.tb_simulator_times.Location = new System.Drawing.Point(59, 169);
             this.tb_simulator_times.Name = "tb_simulator_times";
             this.tb_simulator_times.Size = new System.Drawing.Size(100, 21);
@@ -961,7 +963,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.其他功能ToolStripMenuItem,
-            this.help});
+            this.help,
+            this.path});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(797, 25);
@@ -1005,6 +1008,21 @@
             this.关于ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.关于ToolStripMenuItem.Text = "关于";
             this.关于ToolStripMenuItem.Click += new System.EventHandler(this.关于ToolStripMenuItem_Click);
+            // 
+            // path
+            // 
+            this.path.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.adb_path});
+            this.path.Name = "path";
+            this.path.Size = new System.Drawing.Size(44, 21);
+            this.path.Text = "路径";
+            // 
+            // adb_path
+            // 
+            this.adb_path.Name = "adb_path";
+            this.adb_path.Size = new System.Drawing.Size(180, 22);
+            this.adb_path.Text = "adb路径";
+            this.adb_path.Click += new System.EventHandler(this.adb_path_Click);
             // 
             // MainForm
             // 
@@ -1130,6 +1148,8 @@
         private System.Windows.Forms.Button btn_simulator_get_devices;
         private System.Windows.Forms.CheckBox cb_simulator_more_operations;
         private System.Windows.Forms.CheckBox cb_simulator_more_devices;
+        private System.Windows.Forms.ToolStripMenuItem path;
+        private System.Windows.Forms.ToolStripMenuItem adb_path;
     }
 }
 

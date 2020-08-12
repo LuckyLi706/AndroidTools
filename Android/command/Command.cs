@@ -1,4 +1,5 @@
-﻿using Android.utils;
+﻿using Android.model;
+using Android.utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -665,32 +666,97 @@ namespace Android.adb
             }
         }
 
-        private static String deviceName;
         private static bool isRun=false;
 
-        public static void runSimulator(String device,bool state) {
-            if (state)
-            {
-                isRun = true;
-                deviceName = device;
-                Thread thread = new Thread(runCommand);
-                thread.Start();
-            }
-            else {
-                isRun = false;
-            }
+        public static void startSimulator(String user,List<Operation> operationList,int command) {
+            isRun = true;
+            OperationThread operationThread = new OperationThread(user, operationList, command);
+            Thread thread = new Thread(operationThread.startTask);
+            thread.Start();
+        }
+
+        public static void closeSimulator() {
+            isRun = false;
         }
 
 
-        private static void runCommand() {
+        class OperationThread {
 
-            while (isRun)
+            private List<Operation> operationList;
+            private int command;
+            private String user;
+
+            public OperationThread(String user,List<Operation> operationList, int command) {
+
+                this.user = user;
+                this.operationList = operationList;
+                this.command = command;
+            }
+
+
+            public void startTask() {
+
+                while (isRun) {
+                    if (command == -1)
+                    {
+                        for (int i = 0; i < operationList.Count; i++) {
+                            runOperationCommand(user, operationList, i);
+                        }
+                    }
+                    else {
+                        runOperationCommand(user,operationList,command);
+                    }
+                }
+            }
+
+            private Random ra = new Random();
+
+            private void runOperationCommand(String user, List<Operation> operationList, int command)
             {
-                CommandImpl.getSyncInfo(null, PathUtil.adb_path, "-s " + deviceName + " shell input keyevent 4"); //后退
+                Operation operation = operationList[command];
+                if (operation.GetType().Equals(Constans.BACK))
+                {
+                    CommandImpl.getSyncInfo(null, PathUtil.adb_path, "-s " + user + " shell input keyevent 4"); //后退
+                    int time = operation.Time;
+                    Thread.Sleep(time);
+                }
+                else if (operation.GetType().Equals(Constans.CLICK))   //adb shell input tap x y
+                {
+                    int x_1 = operation.X1_1;
+                    int x_2 = operation.X1_2;
+                    int y_1 = operation.Y1_1;
+                    int y_2 = operation.Y1_2;
+                    int time = operation.Time;
+                    int x = ra.Next(x_1, x_2 + 1);
+                    int y = ra.Next(y_1, y_2 + 1);
+                    CommandImpl.getSyncInfo(null, PathUtil.adb_path, "-s " + user + " shell input tap " + x + " " + y);
+                    Thread.Sleep(time);
+                }
+                else if (operation.GetType().Equals(Constans.INPUT))
+                {
 
-                Random r = new Random(Guid.NewGuid().GetHashCode());
-                int random = r.Next(10000,13000);
-                Thread.Sleep(random);
+                }
+                else if (operation.GetType().Equals(Constans.SLIDE)) //adb shell input swipe 250 250 300 300 从屏幕(250, 250), 到屏幕(300, 300)
+                {
+                    int x1_1 = operation.X1_1;
+                    int x1_2 = operation.X1_2;
+                    int y1_1 = operation.Y1_1;
+                    int y1_2 = operation.Y1_2;
+
+                    int x2_1 = operation.X2_1;
+                    int x2_2 = operation.X2_2;
+                    int y2_1 = operation.Y2_1;
+                    int y2_2 = operation.Y2_2;
+
+                    int time = operation.Time;
+                    int x1 = ra.Next(x1_1, x1_2 + 1);
+                    int y1 = ra.Next(y1_1, y1_2 + 1);
+
+                    int x2 = ra.Next(x2_1, x2_2 + 1);
+                    int y2 = ra.Next(y2_1, y2_2 + 1);
+                    CommandImpl.getSyncInfo(null, PathUtil.adb_path, "-s " + user + " shell input swipe " + x1 + " " + y1 + " "+ x2 + " " + y2);
+                    Thread.Sleep(time);
+                }
             }
         }
 

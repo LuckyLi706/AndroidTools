@@ -1,6 +1,6 @@
 ﻿namespace Android.dialog
 {
-    partial class OperationData
+    partial class OperationDialog
     {
         /// <summary>
         /// Required designer variable.

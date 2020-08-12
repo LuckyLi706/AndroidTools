@@ -58,11 +58,17 @@
     <Compile Include="dialog\AboutDialog.Designer.cs">
       <DependentUpon>AboutDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="dialog\OperationData.cs">
+    <Compile Include="dialog\OperationDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dialog\OperationData.Designer.cs">
-      <DependentUpon>OperationData.cs</DependentUpon>
+    <Compile Include="dialog\OperationDialog.Designer.cs">
+      <DependentUpon>OperationDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialog\PathDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialog\PathDialog.Designer.cs">
+      <DependentUpon>PathDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -80,8 +86,11 @@
     <EmbeddedResource Include="dialog\AboutDialog.resx">
       <DependentUpon>AboutDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dialog\OperationData.resx">
-      <DependentUpon>OperationData.cs</DependentUpon>
+    <EmbeddedResource Include="dialog\OperationDialog.resx">
+      <DependentUpon>OperationDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialog\PathDialog.resx">
+      <DependentUpon>PathDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

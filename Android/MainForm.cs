@@ -21,6 +21,12 @@ namespace Android
         {
             InitializeComponent();
 
+            String path=FileUtil.readFile(FileUtil.CURRENT_DIR + "/path.txt");
+            if (!path.Equals("")) {
+                path = path.Replace("\r\n", "").Replace("\r\n","");
+                PathUtil.adb_path = path;
+            }
+
             this.panel2.MouseWheel += new MouseEventHandler(MainForm_MouseWheel);   //鼠标滚动效果
             this.panel2.Focus();    //聚焦
             this.Text = "安卓小工具"+Constans.APP_VERSION;
@@ -42,15 +48,17 @@ namespace Android
             cb_emul.SelectedIndex = 0;
             cb_getinfo.SelectedIndex = 0;
             cb_getInfo2.SelectedIndex = 0;
+
         }
 
+        
         private List<String> list=new List<String>();
         //第一个选项卡adb命令
 
         //获取所有设备名
         private void btn_getdevice_Click(object sender, EventArgs e)
         {
-            Command.getDevices(tb_info, cb_devices);
+           Command.getDevices(tb_info, cb_devices);
         }
 
         //获取包名
@@ -608,6 +616,13 @@ namespace Android
         }
 
 
+        private void adb_path_Click(object sender, EventArgs e)
+        {
+            PathDialog pathDialog = new PathDialog();
+            pathDialog.ShowDialog();
+        }
+
+
         private String currentPath;
 
         private void cb_file_SelectedIndexChanged(object sender, EventArgs e)
@@ -621,11 +636,6 @@ namespace Android
             {
                 tb_pull_path.Text = currentPath + "/" + cb_file.Text;
             }
-        }
-
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
         }
 
 
@@ -674,6 +684,7 @@ namespace Android
          */
 
         private List<Operation> operationList = new List<Operation>();   //存储所有模拟操作
+        private List<String> userList = new List<string>();
 
         //获取设备
         private void btn_simulator_get_devices_Click(object sender, EventArgs e)
@@ -687,11 +698,31 @@ namespace Android
             if (btn_simulator_start.Text.Equals("开始"))
             {
                 btn_simulator_start.Text = "停止";
-                Command.runSimulator(cb_simulator_run_devices.Text,true);
+                if (cb_simulator_more_devices.Checked && cb_simulator_more_operations.Checked)
+                {
+                    for (int i = 0; i < userList.Count; i++)
+                    {
+                        Command.startSimulator(userList[i], operationList, -1);
+                    }
+                }
+                else if (cb_simulator_more_devices.Checked)
+                {
+                    for (int i = 0; i < userList.Count; i++)
+                    {
+                        Command.startSimulator(userList[i], operationList, cb_simulator_run_operation.SelectedIndex);
+                    }
+                }
+                else if (cb_simulator_more_operations.Checked)
+                {
+                    Command.startSimulator(cb_simulator_run_devices.SelectedItem.ToString(), operationList, -1);
+                }
+                else {
+                    Command.startSimulator(cb_simulator_run_devices.SelectedItem.ToString(), operationList, cb_simulator_run_operation.SelectedIndex);
+                }
             }
             else {
                 btn_simulator_start.Text = "开始";
-                Command.runSimulator(cb_simulator_run_devices.Text, false);
+                Command.closeSimulator();
             }
         }
 
@@ -700,6 +731,10 @@ namespace Android
         {
             if (!cb_simulator_devices.SelectedItem.ToString().Equals(""))
             {
+                if (userList.Contains(cb_simulator_devices.Text)) {
+                    MessageBox.Show("请勿添加重复设备！");
+                }
+                userList.Add(cb_simulator_devices.Text);
                 cb_simulator_run_devices.Items.Add(cb_simulator_devices.Text);
             }
             else {
@@ -714,7 +749,7 @@ namespace Android
             {
                 MessageBox.Show("请先选择操作");
             }
-            OperationData operationData = new OperationData(operationList,cb_simulator_all_operation.SelectedItem.ToString());
+            OperationDialog operationData = new OperationDialog(operationList,cb_simulator_all_operation.SelectedItem.ToString());
             operationData.ShowDialog();
 
             cb_simulator_run_operation.Items.Clear();
@@ -722,7 +757,6 @@ namespace Android
                 cb_simulator_run_operation.Items.Add(operationList[i].GetType());
             }
         }
-
     }
 
     //private void apkDecoder_InfoParsed(ApkDecoder apkDecoder)

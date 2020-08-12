@@ -14,7 +14,7 @@ namespace Android
         //桌面路径
         public static string desktop_path= Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 
-        public static string adb_path = app_path + "adb//adb.exe";
+        public static string adb_path = app_path + "adb/adb.exe";
 
         public static string aapt_path = app_path + "adb//aapt.exe";
 
