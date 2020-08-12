@@ -58,6 +58,12 @@
     <Compile Include="dialog\AboutDialog.Designer.cs">
       <DependentUpon>AboutDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="dialog\OperationData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialog\OperationData.Designer.cs">
+      <DependentUpon>OperationData.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +79,9 @@
     <Compile Include="utils\TimeUtil.cs" />
     <EmbeddedResource Include="dialog\AboutDialog.resx">
       <DependentUpon>AboutDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialog\OperationData.resx">
+      <DependentUpon>OperationData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
