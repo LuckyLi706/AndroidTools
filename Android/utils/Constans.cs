@@ -9,5 +9,10 @@ namespace Android.utils
     class Constans
     {
         public const string APP_VERSION = "3.0.2";
+
+        public const string INPUT = "输入";
+        public const string CLICK = "点击";
+        public const string SLIDE = "滑动";
+        public const string BACK = "后退";
     }
 }

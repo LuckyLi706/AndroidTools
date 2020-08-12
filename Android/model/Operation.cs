@@ -32,7 +32,7 @@ namespace Android.model
 
         private String command;
 
-        private int type;
+        private String type;
 
         private int time;  //暂停时间
 
@@ -45,7 +45,7 @@ namespace Android.model
         public int Y2_1 { get => y2_1; set => y2_1 = value; }
         public int Y2_2 { get => y2_2; set => y2_2 = value; }
         public string Command { get => command; set => command = value; }
-        public int Type { get => type; set => type = value; }
+        public String Type { get => type; set => type = value; }
         public int Time { get => time; set => time = value; }
     }
 }

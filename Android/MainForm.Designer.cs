@@ -726,6 +726,7 @@
             // cb_simulator_all_operation
             // 
             this.cb_simulator_all_operation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_simulator_all_operation.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cb_simulator_all_operation.FormattingEnabled = true;
             this.cb_simulator_all_operation.Items.AddRange(new object[] {
             "输入",
@@ -734,7 +735,7 @@
             "后退"});
             this.cb_simulator_all_operation.Location = new System.Drawing.Point(83, 54);
             this.cb_simulator_all_operation.Name = "cb_simulator_all_operation";
-            this.cb_simulator_all_operation.Size = new System.Drawing.Size(165, 20);
+            this.cb_simulator_all_operation.Size = new System.Drawing.Size(121, 22);
             this.cb_simulator_all_operation.TabIndex = 25;
             // 
             // btn_simulator_start
@@ -752,7 +753,7 @@
             this.cb_simulator_run_devices.FormattingEnabled = true;
             this.cb_simulator_run_devices.Location = new System.Drawing.Point(83, 112);
             this.cb_simulator_run_devices.Name = "cb_simulator_run_devices";
-            this.cb_simulator_run_devices.Size = new System.Drawing.Size(165, 20);
+            this.cb_simulator_run_devices.Size = new System.Drawing.Size(121, 20);
             this.cb_simulator_run_devices.TabIndex = 23;
             // 
             // label10

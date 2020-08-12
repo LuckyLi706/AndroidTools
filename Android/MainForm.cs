@@ -673,7 +673,7 @@ namespace Android
          * 
          */
 
-        private List<Operation> operationsList = new List<Operation>();   //存储所有模拟操作
+        private List<Operation> operationList = new List<Operation>();   //存储所有模拟操作
 
         //获取设备
         private void btn_simulator_get_devices_Click(object sender, EventArgs e)
@@ -681,12 +681,7 @@ namespace Android
             Command.getDevices(tb_info, cb_simulator_devices);
         }
 
-        //
-        private void btn_simulator_add_Click(object sender, EventArgs e)
-        {
-            cb_simulator_run_devices.Items.Add(cb_simulator_devices.Text);
-        }
-
+        //开始任务
         private void btn_simulator_start_Click(object sender, EventArgs e)
         {
             if (btn_simulator_start.Text.Equals("开始"))
@@ -700,14 +695,32 @@ namespace Android
             }
         }
 
+        //添加设备
         private void btn_simulator_add_device_Click(object sender, EventArgs e)
         {
-
+            if (!cb_simulator_devices.SelectedItem.ToString().Equals(""))
+            {
+                cb_simulator_run_devices.Items.Add(cb_simulator_devices.Text);
+            }
+            else {
+                MessageBox.Show("当前无设备，请先获取设备");
+            }
         }
 
+        //添加操作
         private void btn_simulator_add_operation_Click(object sender, EventArgs e)
         {
+            if (cb_simulator_all_operation.SelectedItem.ToString().Equals(""))
+            {
+                MessageBox.Show("请先选择操作");
+            }
+            OperationData operationData = new OperationData(operationList,cb_simulator_all_operation.SelectedItem.ToString());
+            operationData.ShowDialog();
 
+            cb_simulator_run_operation.Items.Clear();
+            for (int i = 0; i < operationList.Count; i++) {
+                cb_simulator_run_operation.Items.Add(operationList[i].GetType());
+            }
         }
 
     }
