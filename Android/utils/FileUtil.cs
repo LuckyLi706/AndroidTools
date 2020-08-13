@@ -12,6 +12,8 @@ namespace AndroidSmallTools.utils
         public static String DESKTOP_DIR = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
         public static String CURRENT_DIR = Application.StartupPath;
 
+        public static String ADB_FOLDER_PATH = FileUtil.CURRENT_DIR + "/" + "path";
+
         //删除目录
         public static void deleteDirectory(String path)
         {
@@ -66,7 +68,7 @@ namespace AndroidSmallTools.utils
             if (File.Exists(path))
             {
                 String value = File.ReadAllText(path);
-                File.Delete(path);
+                //File.Delete(path);
                 return value;
             }
             return "";

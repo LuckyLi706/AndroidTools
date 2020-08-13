@@ -193,6 +193,7 @@
             // 
             // cb_time_point
             // 
+            this.cb_time_point.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_time_point.FormattingEnabled = true;
             this.cb_time_point.Location = new System.Drawing.Point(7, 69);
             this.cb_time_point.Name = "cb_time_point";
@@ -748,6 +749,7 @@
             this.btn_simulator_start.TabIndex = 24;
             this.btn_simulator_start.Text = "开始";
             this.btn_simulator_start.UseVisualStyleBackColor = true;
+            this.btn_simulator_start.Click += new System.EventHandler(this.btn_simulator_start_Click);
             // 
             // cb_simulator_run_devices
             // 
@@ -795,6 +797,7 @@
             this.btn_simulator_get_devices.TabIndex = 19;
             this.btn_simulator_get_devices.Text = "获取设备";
             this.btn_simulator_get_devices.UseVisualStyleBackColor = true;
+            this.btn_simulator_get_devices.Click += new System.EventHandler(this.btn_simulator_get_devices_Click);
             // 
             // tabPage3
             // 
@@ -1020,7 +1023,7 @@
             // adb_path
             // 
             this.adb_path.Name = "adb_path";
-            this.adb_path.Size = new System.Drawing.Size(180, 22);
+            this.adb_path.Size = new System.Drawing.Size(123, 22);
             this.adb_path.Text = "adb路径";
             this.adb_path.Click += new System.EventHandler(this.adb_path_Click);
             // 

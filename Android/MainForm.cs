@@ -21,7 +21,7 @@ namespace Android
         {
             InitializeComponent();
 
-            String path=FileUtil.readFile(FileUtil.CURRENT_DIR + "/path.txt");
+            String path=FileUtil.readFile(FileUtil.ADB_FOLDER_PATH + "/path.txt");
             if (!path.Equals("")) {
                 path = path.Replace("\r\n", "").Replace("\r\n","");
                 PathUtil.adb_path = path;
@@ -662,18 +662,18 @@ namespace Android
 
         private void btn_time_Click(object sender, EventArgs e)
         {
-            Command.getAllTimeCrash(isDevices(), cb_time_point, tb_info, cb_devices);
+            Command.getOneCrashReport(isDevices(), cb_time_point.SelectedItem.ToString(), tb_info, cb_devices);
 
         }
 
         private void btn_collect_crash_Click(object sender, EventArgs e)
         {
-
+            Command.getAllTimeCrash(isDevices(), cb_time_point, tb_info, cb_devices);
         }
 
         private void btn_collect_anr_Click(object sender, EventArgs e)
         {
-
+            Command.getOneAnrReport(isDevices(), tb_info, cb_devices);
         }
 
 
@@ -736,6 +736,7 @@ namespace Android
                 }
                 userList.Add(cb_simulator_devices.Text);
                 cb_simulator_run_devices.Items.Add(cb_simulator_devices.Text);
+                cb_simulator_run_devices.SelectedIndex = 0;
             }
             else {
                 MessageBox.Show("当前无设备，请先获取设备");
@@ -754,7 +755,10 @@ namespace Android
 
             cb_simulator_run_operation.Items.Clear();
             for (int i = 0; i < operationList.Count; i++) {
-                cb_simulator_run_operation.Items.Add(operationList[i].GetType());
+                cb_simulator_run_operation.Items.Add(operationList[i].Type);
+            }
+            if (cb_simulator_run_operation.Items.Count > 0) {
+                cb_simulator_run_operation.SelectedIndex = 0;
             }
         }
     }

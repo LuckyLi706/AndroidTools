@@ -54,6 +54,7 @@ namespace Android
             p.StartInfo.RedirectStandardInput = true;
             p.StartInfo.RedirectStandardError = true;
             p.StartInfo.CreateNoWindow = true;
+            p.StartInfo.StandardOutputEncoding = Encoding.UTF8;
             p.Start();
 
             string value = p.StandardOutput.ReadToEnd() + p.StandardError.ReadToEnd();
@@ -61,7 +62,7 @@ namespace Android
         }
 
 
-        private static string sortOutput = null;
+        private static string sortOutput = "";
         private static TextBox textBox;
         private static int numOutputLines = 0;
         public static void getAsynInfo(TextBox textbox, string path, string command, string workpath = "")
@@ -124,15 +125,16 @@ namespace Android
             sortProcess.StartInfo.RedirectStandardOutput = true;
             textBox = textbox;
             // sortOutput = new StringBuilder("");
-
+            
             // Set our event handler to asynchronously read the sort output.
             sortProcess.OutputDataReceived += new DataReceivedEventHandler(SortOutputHandler);
             sortProcess.ErrorDataReceived += new DataReceivedEventHandler(SortErrortHandler);
-
+            sortProcess.StartInfo.StandardOutputEncoding = Encoding.UTF8;
             // Redirect standard input as well.  This stream
             // is used synchronously.
             sortProcess.StartInfo.RedirectStandardInput = true;
             sortProcess.StartInfo.RedirectStandardError = true;
+            
             // Start the process.
             sortProcess.Start();
 
@@ -157,6 +159,10 @@ namespace Android
             // Collect the sort command output.
             if (!String.IsNullOrEmpty(outLine.Data))
             {
+                if (outLine.Data.Contains("Microsoft")) {
+                    return;
+                }
+                Console.WriteLine(sortOutput);
                 numOutputLines++;
                 // Add the text to the collected output.
                 sortOutput = (Environment.NewLine +
@@ -174,6 +180,10 @@ namespace Android
             // Collect the sort command output.
             if (!String.IsNullOrEmpty(outLine.Data))
             {
+                if (outLine.Data.Contains("Microsoft"))
+                {
+                    return;
+                }
                 numOutputLines++;
                 // Add the text to the collected output.
                 sortOutput = (">> " + Environment.NewLine +

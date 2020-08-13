@@ -1,5 +1,6 @@
 ﻿using Android.model;
 using Android.utils;
+using AndroidSmallTools.utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -257,7 +258,7 @@ namespace Android.adb
                     {
                         String ip = ip_port[0];
                         String port = ip_port[1];
-                        String command = "tcpip " + ip;
+                        String command = "tcpip " + port;
                         String value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " " + command);
                         showInfo(tb_info, value);
                         command = "connect " + ip + ":"+port;
@@ -294,7 +295,7 @@ namespace Android.adb
                     {
                         String ip = ip_port[0];
                         String port = ip_port[1];
-                        String command = "tcpip " + ip;
+                        String command = "tcpip " + port;
                         String value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, command);
                         showInfo(tb_info, value);
                         command = "connect " + ip + ":" + port;
@@ -540,7 +541,7 @@ namespace Android.adb
                 //    return;
                 //}
                 CommandThread command = null;
-                MessageBox.Show(cb_devices.Text);
+                
                 command = new CommandThread(tb_info, PathUtil.adb_path, ("-s " + cb_devices.Text + " pull " + file_path.Substring(0, file_path.Length) + " " + repairSpace(PathUtil.desktop_path)));
                 Thread thread = new Thread(command.startTask);
                 thread.Start();
@@ -646,23 +647,71 @@ namespace Android.adb
             String values="";
             if (validate_Device == 1)
             {
-                values= CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, " shell dumpsys dropbox");
+                values= CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, " shell dumpsys dropbox | grep crash");
             }
             if (validate_Device == 2)
             {
-                values=CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " shell dumpsys dropbox");
+                values=CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " shell dumpsys dropbox | grep crash");
             }
             if (validate_Device == 3)
             {
                 MessageBox.Show("请获取设备名");
                 return;
             }
+            cb_file.Items.Clear();
             if (!values.Equals("")) {
-                String[] times = values.Split(' ');
+                String[] times = values.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
 
                 for (int i = 0; i < times.Length; i++) {
-                    cb_file.Items.Add(times[i].Split('b')[0]);
+                    cb_file.Items.Add(times[i].Split('d')[0].Trim());
                 }
+
+                if (cb_file.Items.Count > 0) {
+                    cb_file.SelectedIndex = 0;
+                }
+            }
+        }
+
+        //adb shell dumpsys dropbox 2019-02-09 21:27:33 --print
+        public static void getOneCrashReport(int validate_Device, String cb_file, TextBox tb_info, ComboBox cb_devices) {
+            if (validate_Device == 1)
+            {
+                CommandImpl.getAsynInfo(tb_info, "", PathUtil.adb_path + " shell dumpsys dropbox " + cb_file + " --print >> "+TimeUtil.getCurrentSeconds() + ".txt", FileUtil.DESKTOP_DIR); ;
+            }
+            if (validate_Device == 2)
+            {
+                CommandImpl.getAsynInfo(tb_info, "", PathUtil.adb_path+ " -s " + cb_devices.Text + " shell dumpsys dropbox " + cb_file + " --print >>"+ TimeUtil.getCurrentSeconds() + ".txt",FileUtil.DESKTOP_DIR);
+               // CommandImpl.getAsynInfo(tb_info, "", value + " >> error.txt", FileUtil.DESKTOP_DIR);
+            }
+            if (validate_Device == 3)
+            {
+                MessageBox.Show("请获取设备名");
+                return;
+            }
+        }
+
+        public static void getOneAnrReport(int validate_Device, TextBox tb_info, ComboBox cb_devices)
+        {
+            if (validate_Device == 1)
+            {
+                CommandThread command = null;
+                command = new CommandThread(tb_info, "",PathUtil.adb_path+ " bugreport", FileUtil.DESKTOP_DIR);
+                Thread thread = new Thread(command.startTask);
+                thread.Start();
+            }
+            if (validate_Device == 2)
+            {
+                CommandThread command = null;
+                command = new CommandThread(tb_info, PathUtil.adb_path, " -s " + cb_devices.Text + " bugreport", FileUtil.DESKTOP_DIR);
+                Thread thread = new Thread(command.startTask);
+                thread.Start();
+                //CommandImpl.getAsynInfo(tb_info, "", PathUtil.adb_path + " -s " + cb_devices.Text + " bugreport", FileUtil.DESKTOP_DIR);
+                // CommandImpl.getAsynInfo(tb_info, "", value + " >> error.txt", FileUtil.DESKTOP_DIR);
+            }
+            if (validate_Device == 3)
+            {
+                MessageBox.Show("请获取设备名");
+                return;
             }
         }
 
@@ -714,13 +763,13 @@ namespace Android.adb
             private void runOperationCommand(String user, List<Operation> operationList, int command)
             {
                 Operation operation = operationList[command];
-                if (operation.GetType().Equals(Constans.BACK))
+                if (operation.Type.Equals(Constans.BACK))
                 {
                     CommandImpl.getSyncInfo(null, PathUtil.adb_path, "-s " + user + " shell input keyevent 4"); //后退
                     int time = operation.Time;
-                    Thread.Sleep(time);
+                    Thread.Sleep(time*1000);
                 }
-                else if (operation.GetType().Equals(Constans.CLICK))   //adb shell input tap x y
+                else if (operation.Type.Equals(Constans.CLICK))   //adb shell input tap x y
                 {
                     int x_1 = operation.X1_1;
                     int x_2 = operation.X1_2;
@@ -730,13 +779,13 @@ namespace Android.adb
                     int x = ra.Next(x_1, x_2 + 1);
                     int y = ra.Next(y_1, y_2 + 1);
                     CommandImpl.getSyncInfo(null, PathUtil.adb_path, "-s " + user + " shell input tap " + x + " " + y);
-                    Thread.Sleep(time);
+                    Thread.Sleep(time*1000);
                 }
-                else if (operation.GetType().Equals(Constans.INPUT))
+                else if (operation.Type.Equals(Constans.INPUT))
                 {
 
                 }
-                else if (operation.GetType().Equals(Constans.SLIDE)) //adb shell input swipe 250 250 300 300 从屏幕(250, 250), 到屏幕(300, 300)
+                else if (operation.Type.Equals(Constans.SLIDE)) //adb shell input swipe 250 250 300 300 从屏幕(250, 250), 到屏幕(300, 300)
                 {
                     int x1_1 = operation.X1_1;
                     int x1_2 = operation.X1_2;
@@ -755,7 +804,7 @@ namespace Android.adb
                     int x2 = ra.Next(x2_1, x2_2 + 1);
                     int y2 = ra.Next(y2_1, y2_2 + 1);
                     CommandImpl.getSyncInfo(null, PathUtil.adb_path, "-s " + user + " shell input swipe " + x1 + " " + y1 + " "+ x2 + " " + y2);
-                    Thread.Sleep(time);
+                    Thread.Sleep(time*1000);
                 }
             }
         }

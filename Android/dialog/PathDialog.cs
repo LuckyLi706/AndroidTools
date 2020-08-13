@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,7 +36,11 @@ namespace Android.dialog
 
         private void btn_path_confirm_Click(object sender, EventArgs e)
         {
-            FileUtil.writeFile(FileUtil.CURRENT_DIR+"/path.txt", tb_path.Text);
+            if (!Directory.Exists(FileUtil.ADB_FOLDER_PATH))
+            {
+                Directory.CreateDirectory(FileUtil.ADB_FOLDER_PATH);
+            }
+            FileUtil.writeFile(FileUtil.ADB_FOLDER_PATH + "/path.txt", tb_path.Text);
             PathUtil.adb_path = tb_path.Text;
             Close();
         }
