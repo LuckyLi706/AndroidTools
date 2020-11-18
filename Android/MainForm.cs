@@ -662,7 +662,13 @@ namespace Android
 
         private void btn_time_Click(object sender, EventArgs e)
         {
-            Command.getOneCrashReport(isDevices(), cb_time_point.SelectedItem.ToString(), tb_info, cb_devices);
+            if (cb_time_point.Items.Count > 0)
+            {
+                Command.getOneCrashReport(isDevices(), cb_time_point.SelectedItem.ToString(), tb_info, cb_devices);
+            }
+            else {
+                MessageBox.Show("请先获取所有crash报告时间点");
+            }
 
         }
 
