@@ -662,7 +662,7 @@ namespace Android.adb
             if (!values.Equals("")) {
                 String[] times = values.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
 
-                for (int i = 0; i < times.Length; i++) {
+                for (int i = times.Length-1; i >= 0; i--) {
                     cb_file.Items.Add(times[i].Split('d')[0].Trim());
                 }
 
