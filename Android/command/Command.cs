@@ -663,7 +663,7 @@ namespace Android.adb
                 String[] times = values.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
 
                 for (int i = times.Length-1; i >= 0; i--) {
-                    cb_file.Items.Add(times[i].Split('d')[0].Trim());
+                    cb_file.Items.Add(times[i].Split('d')[0].Trim().Split('(')[0].Trim());
                 }
 
                 if (cb_file.Items.Count > 0) {
