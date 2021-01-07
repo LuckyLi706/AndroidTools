@@ -131,7 +131,7 @@ namespace Android.adb
             }
             if (validate_Device == 1)
             {
-                CommandThread command = new CommandThread(tb_info, PathUtil.adb_path, "install " +repairSpace(path));
+                CommandThread command = new CommandThread(tb_info, PathUtil.adb_path, "install " + repairSpace(path));
                 Thread thread = new Thread(command.startTask);
                 thread.Start();
             }
@@ -206,10 +206,10 @@ namespace Android.adb
 
         public static void shotScreen(int validate_Device, TextBox tb_packagename, TextBox tb_info, ComboBox cb_devices)
         {
-            String screenshotName =TimeUtil.getCurrentMilliSeconds()+"";
+            String screenshotName = TimeUtil.getCurrentMilliSeconds() + "";
             if (validate_Device == 1)
             {
-                string value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "shell /system/bin/screencap -p /sdcard/"+ screenshotName+".png");
+                string value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "shell /system/bin/screencap -p /sdcard/" + screenshotName + ".png");
                 showInfo(tb_info, value);
                 string value1 = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "pull /sdcard/" + screenshotName + ".png " + repairSpace(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)));
                 showInfo(tb_info, value1);
@@ -231,10 +231,11 @@ namespace Android.adb
         public static void connect(TextBox tb_info, String ipport)
         {
             string value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "connect " + ipport);
-            showInfo(tb_info,value);
+            showInfo(tb_info, value);
         }
 
-        public static void wirelessConnect(int validate_Device, TextBox tb_info, int index, ComboBox cb_devices, String ipport) {
+        public static void wirelessConnect(int validate_Device, TextBox tb_info, int index, ComboBox cb_devices, String ipport)
+        {
             if (validate_Device == 2)
             {
                 if (ipport.Equals(""))
@@ -247,12 +248,18 @@ namespace Android.adb
                     String ip = ips[1].Split(' ')[0];
                     command = "tcpip " + 5555;
                     value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " " + command);
+                    if (value.Contains("error"))
+                    {
+                        showInfo(tb_info, value);
+                        return;
+                    }
                     showInfo(tb_info, value);
                     command = "connect " + ip + ":5555";
                     value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " " + command);
                     showInfo(tb_info, value);
                 }
-                else {
+                else
+                {
                     String[] ip_port = ipport.Split(':');
                     if (ip_port.Length == 2)
                     {
@@ -261,11 +268,12 @@ namespace Android.adb
                         String command = "tcpip " + port;
                         String value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " " + command);
                         showInfo(tb_info, value);
-                        command = "connect " + ip + ":"+port;
+                        command = "connect " + ip + ":" + port;
                         value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " " + command);
                         showInfo(tb_info, value);
                     }
-                    else {
+                    else
+                    {
                         MessageBox.Show("请输入格式为ip:port");
                     }
                 }
@@ -280,8 +288,13 @@ namespace Android.adb
 
                     String[] ips = value.Split(':');
                     String ip = ips[1].Split(' ')[0];
-                    command = "tcpip " + ip;
+                    command = "tcpip " + 5555;
                     value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, command);
+                    if (value.Contains("error"))
+                    {
+                        showInfo(tb_info, value);
+                        return;
+                    }
                     showInfo(tb_info, value);
                     command = "connect " + ip + ":5555";
                     value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, command);
@@ -299,7 +312,7 @@ namespace Android.adb
                         String value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, command);
                         showInfo(tb_info, value);
                         command = "connect " + ip + ":" + port;
-                        value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path,command);
+                        value = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, command);
                         showInfo(tb_info, value);
                     }
                     else
@@ -541,7 +554,7 @@ namespace Android.adb
                 //    return;
                 //}
                 CommandThread command = null;
-                
+
                 command = new CommandThread(tb_info, PathUtil.adb_path, ("-s " + cb_devices.Text + " pull " + file_path.Substring(0, file_path.Length) + " " + repairSpace(PathUtil.desktop_path)));
                 Thread thread = new Thread(command.startTask);
                 thread.Start();
@@ -558,7 +571,7 @@ namespace Android.adb
             //adb shell getprop ro.build.version.sdk
             if (validate_Device == 1)
             {
-                
+
                 String files = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "shell ls " + path);
                 if (files.Contains("error:"))
                 {
@@ -570,7 +583,7 @@ namespace Android.adb
                     {
                         tb_info.AppendText(files);
                     }
-                    
+
                     else
                     {
                         //String sdkVersion = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "shell getprop ro.build.version.sdk");
@@ -643,15 +656,16 @@ namespace Android.adb
         }
 
 
-        public static void getAllTimeCrash(int validate_Device, ComboBox cb_file, TextBox tb_info, ComboBox cb_devices) {
-            String values="";
+        public static void getAllTimeCrash(int validate_Device, ComboBox cb_file, TextBox tb_info, ComboBox cb_devices)
+        {
+            String values = "";
             if (validate_Device == 1)
             {
-                values= CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, " shell dumpsys dropbox | grep crash");
+                values = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, " shell dumpsys dropbox | grep crash");
             }
             if (validate_Device == 2)
             {
-                values=CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " shell dumpsys dropbox | grep crash");
+                values = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " shell dumpsys dropbox | grep crash");
             }
             if (validate_Device == 3)
             {
@@ -659,29 +673,33 @@ namespace Android.adb
                 return;
             }
             cb_file.Items.Clear();
-            if (!values.Equals("")) {
+            if (!values.Equals(""))
+            {
                 String[] times = values.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
 
-                for (int i = times.Length-1; i >= 0; i--) {
+                for (int i = times.Length - 1; i >= 0; i--)
+                {
                     cb_file.Items.Add(times[i].Split('d')[0].Trim().Split('(')[0].Trim());
                 }
 
-                if (cb_file.Items.Count > 0) {
+                if (cb_file.Items.Count > 0)
+                {
                     cb_file.SelectedIndex = 0;
                 }
             }
         }
 
         //adb shell dumpsys dropbox 2019-02-09 21:27:33 --print
-        public static void getOneCrashReport(int validate_Device, String cb_file, TextBox tb_info, ComboBox cb_devices) {
+        public static void getOneCrashReport(int validate_Device, String cb_file, TextBox tb_info, ComboBox cb_devices)
+        {
             if (validate_Device == 1)
             {
-                CommandImpl.getAsynInfo(tb_info, "", PathUtil.adb_path + " shell dumpsys dropbox " + cb_file + " --print >> "+TimeUtil.getCurrentSeconds() + ".txt", FileUtil.DESKTOP_DIR); ;
+                CommandImpl.getAsynInfo(tb_info, "", PathUtil.adb_path + " shell dumpsys dropbox " + cb_file + " --print >> " + TimeUtil.getCurrentSeconds() + ".txt", FileUtil.DESKTOP_DIR); ;
             }
             if (validate_Device == 2)
             {
-                CommandImpl.getAsynInfo(tb_info, "", PathUtil.adb_path+ " -s " + cb_devices.Text + " shell dumpsys dropbox " + cb_file + " --print >>"+ TimeUtil.getCurrentSeconds() + ".txt",FileUtil.DESKTOP_DIR);
-               // CommandImpl.getAsynInfo(tb_info, "", value + " >> error.txt", FileUtil.DESKTOP_DIR);
+                CommandImpl.getAsynInfo(tb_info, "", PathUtil.adb_path + " -s " + cb_devices.Text + " shell dumpsys dropbox " + cb_file + " --print >>" + TimeUtil.getCurrentSeconds() + ".txt", FileUtil.DESKTOP_DIR);
+                // CommandImpl.getAsynInfo(tb_info, "", value + " >> error.txt", FileUtil.DESKTOP_DIR);
             }
             if (validate_Device == 3)
             {
@@ -695,7 +713,7 @@ namespace Android.adb
             if (validate_Device == 1)
             {
                 CommandThread command = null;
-                command = new CommandThread(tb_info, "",PathUtil.adb_path+ " bugreport", FileUtil.DESKTOP_DIR);
+                command = new CommandThread(tb_info, "", PathUtil.adb_path + " bugreport", FileUtil.DESKTOP_DIR);
                 Thread thread = new Thread(command.startTask);
                 thread.Start();
             }
@@ -715,27 +733,31 @@ namespace Android.adb
             }
         }
 
-        private static bool isRun=false;
+        private static bool isRun = false;
 
-        public static void startSimulator(String user,List<Operation> operationList,int command) {
+        public static void startSimulator(String user, List<Operation> operationList, int command)
+        {
             isRun = true;
             OperationThread operationThread = new OperationThread(user, operationList, command);
             Thread thread = new Thread(operationThread.startTask);
             thread.Start();
         }
 
-        public static void closeSimulator() {
+        public static void closeSimulator()
+        {
             isRun = false;
         }
 
 
-        class OperationThread {
+        class OperationThread
+        {
 
             private List<Operation> operationList;
             private int command;
             private String user;
 
-            public OperationThread(String user,List<Operation> operationList, int command) {
+            public OperationThread(String user, List<Operation> operationList, int command)
+            {
 
                 this.user = user;
                 this.operationList = operationList;
@@ -743,17 +765,21 @@ namespace Android.adb
             }
 
 
-            public void startTask() {
+            public void startTask()
+            {
 
-                while (isRun) {
+                while (isRun)
+                {
                     if (command == -1)
                     {
-                        for (int i = 0; i < operationList.Count; i++) {
+                        for (int i = 0; i < operationList.Count; i++)
+                        {
                             runOperationCommand(user, operationList, i);
                         }
                     }
-                    else {
-                        runOperationCommand(user,operationList,command);
+                    else
+                    {
+                        runOperationCommand(user, operationList, command);
                     }
                 }
             }
@@ -767,7 +793,7 @@ namespace Android.adb
                 {
                     CommandImpl.getSyncInfo(null, PathUtil.adb_path, "-s " + user + " shell input keyevent 4"); //后退
                     int time = operation.Time;
-                    Thread.Sleep(time*1000);
+                    Thread.Sleep(time * 1000);
                 }
                 else if (operation.Type.Equals(Constans.CLICK))   //adb shell input tap x y
                 {
@@ -779,7 +805,7 @@ namespace Android.adb
                     int x = ra.Next(x_1, x_2 + 1);
                     int y = ra.Next(y_1, y_2 + 1);
                     CommandImpl.getSyncInfo(null, PathUtil.adb_path, "-s " + user + " shell input tap " + x + " " + y);
-                    Thread.Sleep(time*1000);
+                    Thread.Sleep(time * 1000);
                 }
                 else if (operation.Type.Equals(Constans.INPUT))
                 {
@@ -803,8 +829,8 @@ namespace Android.adb
 
                     int x2 = ra.Next(x2_1, x2_2 + 1);
                     int y2 = ra.Next(y2_1, y2_2 + 1);
-                    CommandImpl.getSyncInfo(null, PathUtil.adb_path, "-s " + user + " shell input swipe " + x1 + " " + y1 + " "+ x2 + " " + y2);
-                    Thread.Sleep(time*1000);
+                    CommandImpl.getSyncInfo(null, PathUtil.adb_path, "-s " + user + " shell input swipe " + x1 + " " + y1 + " " + x2 + " " + y2);
+                    Thread.Sleep(time * 1000);
                 }
             }
         }
@@ -818,7 +844,8 @@ namespace Android.adb
          *    处理路径中带有空格的问题
          *
          */
-        private static string repairSpace(string path) {
+        private static string repairSpace(string path)
+        {
             return "\"" + path + "\"";
         }
     }
