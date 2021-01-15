@@ -8,7 +8,7 @@ namespace Android.utils
 {
     class Constans
     {
-        public const string APP_VERSION = "3.0.2";
+        public const string APP_VERSION = "v4.0.0";
 
         public const string INPUT = "输入";
         public const string CLICK = "点击";

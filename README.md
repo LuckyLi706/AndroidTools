@@ -19,14 +19,19 @@ pull和push（某些目录可能会拿不到权限）：
 pull：从手机中拉取些文件到本地
 push：从本地向手机传输某些文件
 
+anr/crash：获取anr和crash信息
+
 其他信息获取：
 一些基本信息的获取
 
 ADB命令截图：
 
-![ADB命令截图](adb_1.png)
-![ADB命令截图](adb_2.png)
+![ADB命令截图](1.png)
+
+![ADB命令截图](2.png)
+
+![简单反编译](3.png)
 
 apk信息以及查壳截图（添加AndroidKiller多个dex不能定位到源码的问题）：
 
-![简单反编译](apkinfo.png)
+![简单反编译](4.png)

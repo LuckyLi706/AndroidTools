@@ -61,7 +61,7 @@ namespace Android
             }
 
             WriteLog(str);
-            MessageBox.Show("发生错误，请查看程序日志！", "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("发生错误，请查看程序日志并提交issues！", "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Environment.Exit(0);
         }
 
@@ -72,7 +72,7 @@ namespace Android
             var str = error != null ? string.Format(strDateInfo + "Application UnhandledException:{0};\n\r堆栈信息:{1}", error.Message, error.StackTrace) : string.Format("Application UnhandledError:{0}", e);
 
             WriteLog(str);
-            MessageBox.Show("发生错误，请查看程序日志！", "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("发生错误，请查看程序日志并提交issues！", "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Environment.Exit(0);
         }
 

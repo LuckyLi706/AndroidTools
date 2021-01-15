@@ -18,3 +18,37 @@
    在 Android.Program.Main() 位置 C:\Users\jacky\Desktop\AndroidTools\Android\Program.cs:行号 28
 
 ---------------------------------------------------------
+出现应用程序未处理的异常：2021/1/8 15:48:35
+异常类型：IndexOutOfRangeException
+异常消息：索引超出了数组界限。
+异常信息：   在 Android.adb.Command.wirelessConnect(Int32 validate_Device, TextBox tb_info, Int32 index, ComboBox cb_devices, String ipport) 位置 D:\VisualStudioProjects\AndroidTools\Android\command\Command.cs:行号 290
+   在 Android.MainForm.btn_connect_Click(Object sender, EventArgs e) 位置 D:\VisualStudioProjects\AndroidTools\Android\MainForm.cs:行号 379
+   在 System.Windows.Forms.Control.OnClick(EventArgs e)
+   在 System.Windows.Forms.Button.OnClick(EventArgs e)
+   在 System.Windows.Forms.Button.OnMouseUp(MouseEventArgs mevent)
+   在 System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   在 System.Windows.Forms.Control.WndProc(Message& m)
+   在 System.Windows.Forms.ButtonBase.WndProc(Message& m)
+   在 System.Windows.Forms.Button.WndProc(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+
+---------------------------------------------------------
+出现应用程序未处理的异常：2021/1/8 15:48:41
+异常类型：IndexOutOfRangeException
+异常消息：索引超出了数组界限。
+异常信息：   在 Android.adb.Command.wirelessConnect(Int32 validate_Device, TextBox tb_info, Int32 index, ComboBox cb_devices, String ipport) 位置 D:\VisualStudioProjects\AndroidTools\Android\command\Command.cs:行号 290
+   在 Android.MainForm.btn_connect_Click(Object sender, EventArgs e) 位置 D:\VisualStudioProjects\AndroidTools\Android\MainForm.cs:行号 379
+   在 System.Windows.Forms.Control.OnClick(EventArgs e)
+   在 System.Windows.Forms.Button.OnClick(EventArgs e)
+   在 System.Windows.Forms.Button.OnMouseUp(MouseEventArgs mevent)
+   在 System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   在 System.Windows.Forms.Control.WndProc(Message& m)
+   在 System.Windows.Forms.ButtonBase.WndProc(Message& m)
+   在 System.Windows.Forms.Button.WndProc(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+
+---------------------------------------------------------
