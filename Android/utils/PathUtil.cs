@@ -22,6 +22,13 @@ namespace Android
 
         public static string dex2jar_path = @app_path + "dex2jar//d2j-dex2jar.bat";
 
+        public static string apksigner_path = app_path + "apksigner//apksigner.bat";
+
+        public static string apksigner_jks_path = app_path + "apksigner//lijie.jks";
+
+        public static string apksigner_config_path = app_path + "apksigner//config.txt";
+
+
         //public static string projectsrc_path=@app_path+@"../projects/" + apkName + "/ProjectSrc";
     }
 }

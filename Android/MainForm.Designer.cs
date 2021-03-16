@@ -115,6 +115,7 @@
             this.path = new System.Windows.Forms.ToolStripMenuItem();
             this.adb_path = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.btn_sign = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -801,6 +802,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.btn_sign);
             this.tabPage3.Controls.Add(this.btn_dex);
             this.tabPage3.Controls.Add(this.btn_jiagu);
             this.tabPage3.Controls.Add(this.tb_jiagu);
@@ -1027,6 +1029,16 @@
             this.adb_path.Text = "adb路径";
             this.adb_path.Click += new System.EventHandler(this.adb_path_Click);
             // 
+            // btn_sign
+            // 
+            this.btn_sign.Location = new System.Drawing.Point(104, 235);
+            this.btn_sign.Name = "btn_sign";
+            this.btn_sign.Size = new System.Drawing.Size(75, 23);
+            this.btn_sign.TabIndex = 17;
+            this.btn_sign.Text = "签名";
+            this.btn_sign.UseVisualStyleBackColor = true;
+            this.btn_sign.Click += new System.EventHandler(this.btn_sign_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1153,6 +1165,7 @@
         private System.Windows.Forms.CheckBox cb_simulator_more_devices;
         private System.Windows.Forms.ToolStripMenuItem path;
         private System.Windows.Forms.ToolStripMenuItem adb_path;
+        private System.Windows.Forms.Button btn_sign;
     }
 }
 

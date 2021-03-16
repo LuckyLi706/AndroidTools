@@ -575,15 +575,17 @@ namespace Android.adb
                 String files = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "shell ls " + path);
                 if (files.Contains("error:"))
                 {
-                    tb_info.AppendText(files);
+                    showInfo(tb_info, files);
                 }
                 else
                 {
                     if (files.Contains("No such"))
                     {
-                        tb_info.AppendText(files);
+                        showInfo(tb_info, files);
                     }
-
+                    else if (files.Contains("no devices")) {
+                        showInfo(tb_info, files);
+                    }
                     else
                     {
                         //String sdkVersion = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "shell getprop ro.build.version.sdk");
@@ -615,13 +617,13 @@ namespace Android.adb
                 String files = CommandImpl.getSyncInfo(tb_info, PathUtil.adb_path, "-s " + cb_devices.Text + " shell ls " + path);
                 if (files.Contains("error"))
                 {
-                    tb_info.AppendText(files);
+                    showInfo(tb_info,files);
                 }
                 else
                 {
                     if (files.Contains("No such"))
                     {
-                        tb_info.AppendText(files);
+                        showInfo(tb_info, files);
                     }
                     else
                     {
@@ -731,6 +733,23 @@ namespace Android.adb
                 MessageBox.Show("请获取设备名");
                 return;
             }
+        }
+
+        public static void signed_Apk(string file,TextBox tb_info) {
+
+            string config=FileUtil.readFile(PathUtil.apksigner_config_path);
+            string[] configs = config.Split('\n');
+
+            string alias = configs[0].Trim();
+            string kspass = configs[1].Trim();
+            string keypass = configs[2].Trim();
+
+            string signCommand = PathUtil.apksigner_path + " sign --ks " + PathUtil.apksigner_jks_path + " --ks-key-alias " + alias
+                + " --ks-pass pass:" + kspass + " --key-pass pass:" + keypass + " -out "+ System.IO.Path.GetFileNameWithoutExtension(file)+"_signed.apk " + file;
+            CommandThread command = null;
+            command = new CommandThread(tb_info, "",signCommand, FileUtil.DESKTOP_DIR);
+            Thread thread = new Thread(command.startTask);
+            thread.Start();
         }
 
         private static bool isRun = false;

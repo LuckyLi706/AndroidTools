@@ -131,9 +131,33 @@ namespace Android
                 }
                 else
                 {
-                    Command.pull(isDevices(), tb_info, cb_devices, tb_pull_path.Text);
+                    string filePath = tb_pull_path.Text;
+                    string file;
+                    if (filePath.Equals("/"))
+                    {
+                        file = filePath + cb_file.Text.ToString();
+                    }
+                    else {
+                        file = filePath + "/"+ cb_file.Text.ToString();
+                    }
+                    Command.pull(isDevices(), tb_info, cb_devices, file.Trim());
                 }
             }
+        }
+
+        private String currentPath;
+
+        private void cb_file_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //currentPath = tb_pull_path.Text.ToString();
+            //if (currentPath != null && currentPath.Equals("/"))
+            //{
+            //    tb_pull_path.Text = currentPath + cb_file.Text;
+            //}
+            //else
+            //{
+            //    tb_pull_path.Text = currentPath + "/" + cb_file.Text;
+            //}
         }
 
         //用于给pull文件时搜索路径下的文件
@@ -145,6 +169,7 @@ namespace Android
             }
             else
             {
+                //currentPath = tb_pull_path.Text;
                 Command.getAllFile(isDevices(), tb_pull_path.Text, cb_file, tb_info, cb_devices);
             }
         }
@@ -623,22 +648,6 @@ namespace Android
         }
 
 
-        private String currentPath;
-
-        private void cb_file_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-            if (currentPath.Equals("/"))
-            {
-                tb_pull_path.Text = currentPath + cb_file.Text;
-            }
-            else
-            {
-                tb_pull_path.Text = currentPath + "/" + cb_file.Text;
-            }
-        }
-
-
         void MainForm_MouseWheel(object sender, MouseEventArgs e)
 
         {
@@ -765,6 +774,19 @@ namespace Android
             }
             if (cb_simulator_run_operation.Items.Count > 0) {
                 cb_simulator_run_operation.SelectedIndex = 0;
+            }
+        }
+
+        private void btn_sign_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Multiselect = false;//该值确定是否可以选择多个文件
+            dialog.Title = "请选择文件";
+            dialog.Filter = "所有文件(*.apk)|*.apk";
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string file = dialog.FileName;
+                Command.signed_Apk(file,tb_info);
             }
         }
     }

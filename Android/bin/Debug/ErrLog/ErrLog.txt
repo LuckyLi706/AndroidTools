@@ -52,3 +52,126 @@
    在 System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
 
 ---------------------------------------------------------
+出现应用程序未处理的异常：2021/1/27 17:24:28
+异常类型：IndexOutOfRangeException
+异常消息：索引超出了数组界限。
+异常信息：   在 Android.adb.Command.wirelessConnect(Int32 validate_Device, TextBox tb_info, Int32 index, ComboBox cb_devices, String ipport) 位置 D:\VisualStudioProjects\AndroidTools\Android\command\Command.cs:行号 248
+   在 Android.MainForm.btn_connect_Click(Object sender, EventArgs e) 位置 D:\VisualStudioProjects\AndroidTools\Android\MainForm.cs:行号 379
+   在 System.Windows.Forms.Control.OnClick(EventArgs e)
+   在 System.Windows.Forms.Button.OnClick(EventArgs e)
+   在 System.Windows.Forms.Button.OnMouseUp(MouseEventArgs mevent)
+   在 System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   在 System.Windows.Forms.Control.WndProc(Message& m)
+   在 System.Windows.Forms.ButtonBase.WndProc(Message& m)
+   在 System.Windows.Forms.Button.WndProc(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+
+---------------------------------------------------------
+出现应用程序未处理的异常：2021/1/27 17:24:37
+异常类型：IndexOutOfRangeException
+异常消息：索引超出了数组界限。
+异常信息：   在 Android.adb.Command.wirelessConnect(Int32 validate_Device, TextBox tb_info, Int32 index, ComboBox cb_devices, String ipport) 位置 D:\VisualStudioProjects\AndroidTools\Android\command\Command.cs:行号 248
+   在 Android.MainForm.btn_connect_Click(Object sender, EventArgs e) 位置 D:\VisualStudioProjects\AndroidTools\Android\MainForm.cs:行号 379
+   在 System.Windows.Forms.Control.OnClick(EventArgs e)
+   在 System.Windows.Forms.Button.OnClick(EventArgs e)
+   在 System.Windows.Forms.Button.OnMouseUp(MouseEventArgs mevent)
+   在 System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   在 System.Windows.Forms.Control.WndProc(Message& m)
+   在 System.Windows.Forms.ButtonBase.WndProc(Message& m)
+   在 System.Windows.Forms.Button.WndProc(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+
+---------------------------------------------------------
+出现应用程序未处理的异常：2021/2/18 16:31:44
+异常类型：IndexOutOfRangeException
+异常消息：索引超出了数组界限。
+异常信息：   在 Android.adb.Command.wirelessConnect(Int32 validate_Device, TextBox tb_info, Int32 index, ComboBox cb_devices, String ipport) 位置 D:\VisualStudioProjects\AndroidTools\Android\command\Command.cs:行号 290
+   在 Android.MainForm.btn_connect_Click(Object sender, EventArgs e) 位置 D:\VisualStudioProjects\AndroidTools\Android\MainForm.cs:行号 379
+   在 System.Windows.Forms.Control.OnClick(EventArgs e)
+   在 System.Windows.Forms.Button.OnClick(EventArgs e)
+   在 System.Windows.Forms.Button.OnMouseUp(MouseEventArgs mevent)
+   在 System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   在 System.Windows.Forms.Control.WndProc(Message& m)
+   在 System.Windows.Forms.ButtonBase.WndProc(Message& m)
+   在 System.Windows.Forms.Button.WndProc(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+
+---------------------------------------------------------
+出现应用程序未处理的异常：2021/3/16 11:33:32
+异常类型：NullReferenceException
+异常消息：未将对象引用设置到对象的实例。
+异常信息：   在 Android.MainForm.cb_file_SelectedIndexChanged(Object sender, EventArgs e) 位置 D:\VisualStudioProjects\AndroidTools\Android\MainForm.cs:行号 631
+   在 System.Windows.Forms.ComboBox.OnSelectedIndexChanged(EventArgs e)
+   在 System.Windows.Forms.ComboBox.set_SelectedIndex(Int32 value)
+   在 Android.adb.Command.getAllFile(Int32 validate_Device, String path, ComboBox cb_file, TextBox tb_info, ComboBox cb_devices) 位置 D:\VisualStudioProjects\AndroidTools\Android\command\Command.cs:行号 607
+   在 Android.MainForm.btn_search_path_Click(Object sender, EventArgs e) 位置 D:\VisualStudioProjects\AndroidTools\Android\MainForm.cs:行号 148
+   在 System.Windows.Forms.Control.OnClick(EventArgs e)
+   在 System.Windows.Forms.Button.OnClick(EventArgs e)
+   在 System.Windows.Forms.Button.OnMouseUp(MouseEventArgs mevent)
+   在 System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   在 System.Windows.Forms.Control.WndProc(Message& m)
+   在 System.Windows.Forms.ButtonBase.WndProc(Message& m)
+   在 System.Windows.Forms.Button.WndProc(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+
+---------------------------------------------------------
+出现应用程序未处理的异常：2021/3/16 14:23:40
+Application UnhandledException:无法访问已释放的对象。
+对象名:“TextBox”。;
+堆栈信息:   在 System.Windows.Forms.Control.CreateHandle()
+   在 System.Windows.Forms.TextBoxBase.CreateHandle()
+   在 System.Windows.Forms.TextBoxBase.SetSelectedTextInternal(String text, Boolean clearUndo)
+   在 System.Windows.Forms.TextBoxBase.set_SelectedText(String value)
+   在 System.Windows.Forms.TextBoxBase.AppendText(String text)
+   在 Android.CommandImpl.SortOutputHandler(Object sendingProcess, DataReceivedEventArgs outLine) 位置 D:\VisualStudioProjects\AndroidTools\Android\command\CommandImpl.cs:行号 170
+   在 System.Diagnostics.Process.OutputReadNotifyUser(String data)
+   在 System.Diagnostics.AsyncStreamReader.FlushMessageQueue()
+   在 System.Diagnostics.AsyncStreamReader.GetLinesFromStringBuilder()
+   在 System.Diagnostics.AsyncStreamReader.ReadBuffer(IAsyncResult ar)
+   在 System.IO.Stream.ReadWriteTask.InvokeAsyncCallback(Object completedTask)
+   在 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.IO.Stream.ReadWriteTask.System.Threading.Tasks.ITaskCompletionAction.Invoke(Task completingTask)
+   在 System.Threading.Tasks.Task.FinishContinuations()
+   在 System.Threading.Tasks.Task.FinishStageThree()
+   在 System.Threading.Tasks.Task.FinishStageTwo()
+   在 System.Threading.Tasks.Task.Finish(Boolean bUserDelegateExecuted)
+   在 System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+   在 System.Threading.Tasks.Task.ExecuteEntry(Boolean bPreventDoubleExecution)
+   在 System.Threading.Tasks.Task.System.Threading.IThreadPoolWorkItem.ExecuteWorkItem()
+   在 System.Threading.ThreadPoolWorkQueue.Dispatch()
+   在 System.Threading._ThreadPoolWaitCallback.PerformWaitCallback()
+---------------------------------------------------------
+出现应用程序未处理的异常：2021/3/16 17:22:04
+Application UnhandledException:路径中具有非法字符。;
+堆栈信息:   在 System.IO.Path.CheckInvalidPathChars(String path, Boolean checkAdditional)
+   在 System.IO.Path.GetFileName(String path)
+   在 System.IO.Path.GetFileNameWithoutExtension(String path)
+   在 Android.CommandImpl.getAsynInfo(TextBox textbox, String path, String command, String workpath) 位置 D:\VisualStudioProjects\AndroidTools\Android\command\CommandImpl.cs:行号 97
+   在 Android.CommandThread.startTask() 位置 D:\VisualStudioProjects\AndroidTools\Android\command\CommandThread.cs:行号 40
+   在 System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   在 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   在 System.Threading.ThreadHelper.ThreadStart()
+---------------------------------------------------------
+出现应用程序未处理的异常：2021/3/16 17:25:19
+Application UnhandledException:系统找不到指定的文件。;
+堆栈信息:   在 System.Diagnostics.Process.StartWithCreateProcess(ProcessStartInfo startInfo)
+   在 System.Diagnostics.Process.Start()
+   在 Android.CommandImpl.getAsynInfo(TextBox textbox, String path, String command, String workpath) 位置 D:\VisualStudioProjects\AndroidTools\Android\command\CommandImpl.cs:行号 139
+   在 Android.CommandThread.startTask() 位置 D:\VisualStudioProjects\AndroidTools\Android\command\CommandThread.cs:行号 40
+   在 System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   在 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   在 System.Threading.ThreadHelper.ThreadStart()
+---------------------------------------------------------
