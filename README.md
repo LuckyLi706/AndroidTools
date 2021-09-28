@@ -1,5 +1,6 @@
 # AndroidTools
-安卓的小工具，方便操作，就是一些简单的命令，用c#写的
+该库不在维护了,转移到flutter,可以开发（Windows、Macos、Linux）。见[flutter_mobile_command_tools](https://github.com/LuckyLi706/flutter_mobile_command_tools)
+
 
 ## 基本命令
 
