@@ -1,4 +1,4 @@
-# AndroidTools
+# ~~AndroidTools~~
 该库不在维护了,转移到flutter,可以开发（Windows、Macos、Linux）。见[flutter_mobile_command_tools](https://github.com/LuckyLi706/flutter_mobile_command_tools)
 
 
