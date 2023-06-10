@@ -1,5 +1,5 @@
 # ~~AndroidTools~~
-该库不在维护了,转移到flutter,适应多个桌面端。见全新版本[flutter_mobile_command_tools](https://github.com/LuckyLi706/flutter_mobile_command_tools)
+该软件不再维护了,转移到flutter,适应多个桌面端。见全新版本[flutter_mobile_command_tools](https://github.com/LuckyLi706/flutter_mobile_command_tools)
 
 
 ## 基本命令
